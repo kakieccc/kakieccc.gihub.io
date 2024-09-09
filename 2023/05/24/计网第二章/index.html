@@ -1,0 +1,967 @@
+
+  <!DOCTYPE html>
+  <html lang="zh"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <title>
+    计算机网络_应用层 |
+    
+    kakie の BLOG
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/regular.min.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/solid.min.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v5-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v4-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="/css/loader.css">
+
+  <meta name="description" content="计算机网络笔记第二章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络_应用层">
+<meta property="og:url" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/index.html">
+<meta property="og:site_name" content="kakie の BLOG">
+<meta property="og:description" content="计算机网络笔记第二章">
+<meta property="og:locale">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525154214518.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525165431866.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525192004917.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525192014300.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525193428341.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525193541424.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525192849035.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525194050200.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230606170604348.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230606165932718.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526103550387.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526140325350.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526131410860.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526132348933.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526132422022.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526142045250.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526142312853.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230606203046972.png">
+<meta property="article:published_time" content="2023-05-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-06T12:54:28.693Z">
+<meta property="article:author" content="kakie">
+<meta property="article:tag" content="基础课程">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525154214518.png">
+  
+    <link rel="alternate" href="/atom.xml" title="kakie の BLOG" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+  
+  
+  
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/wowjs@1.1.3/css/libs/animate.css">
+
+    
+<script src="https://npm.webcache.cn/wowjs@1.1.3/dist/wow.min.js"></script>
+
+    <script>
+      new WOW({
+        offset: 0,
+        mobile: true,
+        live: false
+      }).init();
+    </script>
+  
+  
+    <script src="/sw.js"></script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg"></div>
+    <div class="loading-right-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+          <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    const startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    const endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('load', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/friend">Friend</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="/images/banner.jpg" alt="计算机网络_应用层">
+  
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <div id="logo-wrap">
+        
+          
+          
+            <a href="/" id="logo">
+              <h1>计算机网络_应用层</h1>
+            </a>
+          
+        
+      </div>
+      
+        
+        <h2 id="subtitle-wrap">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="outer">
+          
+          <section id="main"><article id="post-计网第二章" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    <div class="article-meta">
+      <div class="article-date wow slideInLeft">
+  <a href="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/" class="article-date-link">
+    <time datetime="2023-05-23T16:00:00.000Z" itemprop="datePublished">2023-05-24</time>
+  </a>
+</div>
+
+      
+  <div class="article-category wow slideInLeft">
+    <a class="article-category-link" href="/categories/essay/">essay</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+
+<h2 id="应用层协议原理"><a href="#应用层协议原理" class="headerlink" title="应用层协议原理"></a>应用层协议原理</h2><p>应用程序体系结构是用应用程序开发设计的，它规定了在端系统上如何组织应用程序。两种常见的现代网络应用程序所采用的体系结构为：<strong>客户-服务器体系结构和对等体系结构</strong></p>
+<h3 id="网络应用程序体系结构"><a href="#网络应用程序体系结构" class="headerlink" title="网络应用程序体系结构"></a>网络应用程序体系结构</h3><ul>
+<li><p>CS体系结构（客户&#x2F;服务器体系结构）</p>
+<ul>
+<li>客户端向服务器发出请求、接收服务。（客户端是主动的）</li>
+<li>服务器首先运转，守候在相应的端口，等待客户端请求资源。（服务器是被动的）</li>
+<li>服务器具有固定的的地址</li>
+<li>客户端不可以直接与其他客户端通信</li>
+<li>CS模式是一种典型的<strong>主从模式</strong>，主是指的服务器，所有的资源都在服务器里，从指的是客户端，它请求的所有的资源都来自于服务器。</li>
+<li>CS模式的<strong>可拓展性差</strong>，随着服务器、客户端数量的增加，其载荷越来越大，能力逐渐下降。当达到阈值时会导致能力断崖式下降。</li>
+</ul>
+</li>
+<li><p>P2P体系结构 （对等体系结构）</p>
+<ul>
+<li>对于P2P模式来说，每个节点既是客户端，同时也是服务器。</li>
+<li>P2P模式没有主从一说，每一个节点都是对等体（peer）。任意两个端系统间可以直接互联</li>
+<li>P2P具有自扩展性</li>
+<li>P2P的通信是非连续的，其IP地址也可能改变</li>
+<li>几乎没有一直运行的服务器</li>
+</ul>
+</li>
+<li><p>混合模式</p>
+<p>混合模式将CS模式和P2P模式混合在一起使用，在一定程度上规避两者的缺点</p>
+</li>
+</ul>
+<h3 id="进程通信"><a href="#进程通信" class="headerlink" title="进程通信"></a>进程通信</h3><p>用操作系统的术语来讲，进行通信的实际上是进程而不是程序。一个进程可以被认为是运行在端系统中的一个程序。</p>
+<p>同一个主机内，进程使用进程间通信机制进行通信（由操作系统定义）；不同主机之间，进程通过跨越计算机网络交换报文来进行通信。</p>
+<ul>
+<li><p>客户进程和服务器进程</p>
+<p>网络应用程序由成对的进程组成，这些进程通过网络相互发送报文。</p>
+<p>对于每对通信进程，需要将这两个进程之一标识为<strong>客户</strong>，而另一个进程标识为<strong>服务器</strong>。在给定的一对进程之间，<strong>发起通信的进程被标记为客户进程，等待连接的进程被称为服务器进程</strong>。（P2P架构的应用也有客户和服务器之分）</p>
+</li>
+<li><p>socket套接字</p>
+<p>从一个进程向另一个进程发送报文必须经过下层的网络。进程通过<strong>套接字</strong>这个接口向网络发送报文和从网络接收报文。</p>
+<p>可以将进程类比为房子，socket类比为门。当一个进程想发送报文时，会将报文推出门。然后两栋房子之间的基础运输设施就会将报文运到另一栋房子的门前，然后通过接收进程这栋房子的门(socket)，对该报文进行处理。</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525154214518.png" class="" alt="image-20230525154214518">
+
+<p>套接字是同一台主机内应用层和运输层之间的接口。由于该套接字是建立网络应用程序的可编程接口，因此套接字也被称为应用程序和网络之间的应用编程接口（Application Programming Interface，API)。</p>
+<p>应用程序开发者可以控制套接字在应用层的一切内容，但是对于运输层的相关部分，几乎没有控制权，可以做的仅有：</p>
+<ul>
+<li>选择传输层协议和设定几个传输层参数，比如最大缓存和最长传输层报文长度</li>
+<li>选择传输层协议</li>
+</ul>
+</li>
+<li><p>进程寻址<br>为了向特定目的进程发送报文，发送进程需要知道接收进程（更为准确的说是接收进程对应的套接字）的标记。该标记由两部分组成：<strong>接收进程所在的主机地址</strong>和<strong>接收进程在该主机中的标识符</strong>。在因特网中，主机由IP地址标记，其中IP地址是一个32位（IPv4）标记；而接收进程使用端口号标记；一些常用的应用程序有着固定的端口号，比如Web服务器使用80端口、邮件服务器使用25端口等</p>
+</li>
+</ul>
+<h3 id="运输层协议可提供的服务"><a href="#运输层协议可提供的服务" class="headerlink" title="运输层协议可提供的服务"></a>运输层协议可提供的服务</h3><p>包括互联网在内的很多网络提供了不止一种运输层协议。当开发一个应用时必须选择一种可用的运输层协议。运输层协议的服务大致可以从以下四个方面进行分类：</p>
+<ul>
+<li><p>可靠运输传输</p>
+<p>如果一个协议可以<strong>确保应用程序一段发送的数据正确、完全地交付给接收数据的进程</strong>，就认为该协议提供了可靠数据传输。</p>
+<p>当一个运输层协议不提供可靠数据传输时，由发送方发送的数据就可能不能够完全一致地到达接收进程。可以承担一定量的数据损伤的应用被称为<strong>容忍丢失的应用</strong></p>
+</li>
+<li><p>吞吐量</p>
+<p>在一条网络路径上的两个进程之间的通信会话中，可用吞吐量是指能够向接收进程交付比特的速率</p>
+<p>因为会有其他会话共享该网络的路径的带宽，并且因为这些会话的到来和离开，可用吞吐量将发生变化</p>
+<p><strong>运输层协议能够提供确切的可用吞吐量</strong>。使用这种服务时，应用程序就能以明确的速度接收数据，并且运输层应当保证可用吞吐量必须总是至少为该速度</p>
+<p>对吞吐量有明确要求的应用程序被称为<strong>带宽敏感的应用</strong>；而<strong>弹性应用</strong>则对吞吐量没有严格的要求</p>
+</li>
+<li><p>定时</p>
+<p>定时和吞吐量都是关于速度的</p>
+<p>定时是对数据从发送到到达所需时间的要求，而吞吐量是对数据交付速度&#x2F;数量的要求</p>
+</li>
+<li><p>安全性</p>
+<p>运输层可以提供一些安全服务，以防止传输的数据以某种方式在这两个进程之间被察觉到</p>
+</li>
+</ul>
+<h3 id="互联网提供的运输层服务"><a href="#互联网提供的运输层服务" class="headerlink" title="互联网提供的运输层服务"></a>互联网提供的运输层服务</h3><p>上面所说的是计算机网络能够提供的通用运输层服务。现在我们进一步具体地讨论由互联网提供的运输层服务类型。</p>
+<p>互联网（更一般的是TCP&#x2F;IP网络）为应用程序提供了两个运输层协议，即<strong>UDP</strong>和<strong>TCP</strong>。每个协议对应用程序提供了不同服务的组合。</p>
+<ul>
+<li><p>TCP</p>
+<p>TCP服务包括了面向连接服务、可靠数据传输服务、拥塞控制和流量控制</p>
+<ul>
+<li>面向连接的服务：客户机&#x2F;服务器进程间需要建立连接（握手过程）。在握手阶段后，一个<strong>TCP连接</strong>就在两个进程的socket之间建立好了。这条连接是全双工的（双方进程可以在此连接上同时进行报文收发）。当应用程序结束报文发送后，必须拆除该连接</li>
+<li>可靠的数据传输：没有数据损失。无差错交付所有数据</li>
+<li>拥塞控制：当网络负载过重时能够限制发送方的发送速度，<strong>拥塞控制是检测链路拥塞程度</strong></li>
+<li>流量控制：发送方不会发送速度过快，超过接收方的处理能力，<strong>流量控制是检测发送方的发送速度</strong></li>
+</ul>
+</li>
+<li><p>UDP</p>
+<p>UDP仅提供最小服务</p>
+<ul>
+<li>无连接，不需要建立连接</li>
+<li>不可靠的数据传输</li>
+<li>不提供流量控制、拥塞控制</li>
+</ul>
+</li>
+</ul>
+<p>乍一看，UDP似乎一无是处，但实际上UDP拥有很多轻量级所带来的优点</p>
+<ul>
+<li><p>UDP优点</p>
+<ul>
+<li>能够区分不同的进程,而 IP服务不能</li>
+<li>在IP提供的主机到主机端到端功能的基础上区分了主机的应用进程</li>
+<li>无需建立连接,省去了建立连接时间,适合事务性的应用。例如实时多媒体应用等无法接受时间消耗代价的应用</li>
+<li>不做可靠性的检查工作,例如检错重发,适合那些对实时性要求比较高而对正确性要求不高的应用</li>
+<li>节约了为了实现可靠性(准确性、保序等)付出的时间代价(检错重发)</li>
+<li>没有拥塞控制和流量控制,应用能够按照设定的速度发送数据</li>
+</ul>
+</li>
+<li><p>安全性</p>
+<ul>
+<li>TCP与UDP都没有加密, 明文传输</li>
+<li>SSL: 在TCP上面实现加密TCP连接, 可以理解为从上层传输到下层的时候进行了一个<strong>打码操作</strong>。保证了私密性, 数据完整性, 提供端到端的鉴别</li>
+</ul>
+</li>
+</ul>
+<h3 id="应用层协议"><a href="#应用层协议" class="headerlink" title="应用层协议"></a>应用层协议</h3><p>应用层协议定义运行在不同端系统上的应用程序进程如何相互传递信息。涉及的内容包括：交换的报文类型（请求或者响应）、报文中包含哪些字段、字段如何被解释、一个进程何时收发报文并如何对报文进行响应等内容。本章介绍的应用层协议主要有HTTP、FTP、电子邮件相关的协议、DNS。</p>
+<h2 id="Web-and-HTTP"><a href="#Web-and-HTTP" class="headerlink" title="Web and HTTP"></a>Web and HTTP</h2><p>Web是一个应用，而HTTP是Web的应用层协议。</p>
+<p><strong>术语</strong></p>
+<ul>
+<li><p>Web页（网页）：由一些对象组成。这些对象可以是HTML、JPEG图像、音频视频文件等</p>
+</li>
+<li><p>基本HTML文件：Web页包含了一个基本的HTML文件，这个文件中包含了对若干对象的引用</p>
+</li>
+<li><p>URL（统一资源定位符）：通过URL实现对每个对象的访问。URL的基本格式为</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525165431866.png" class="" alt="image-20230525165431866">
+
+<p>口令和端口为可选项，因为大部分网站支持匿名访问且拥有默认端口</p>
+</li>
+<li><p>RRT(round-trip time) :一个小的分组从客户端到服务器,再回到客户端的时间(传输时间忽略)</p>
+</li>
+</ul>
+<h3 id="http概况"><a href="#http概况" class="headerlink" title="http概况"></a>http概况</h3><ul>
+<li><p>http<strong>（超文本传输协议）</strong>是Web的应用层协议</p>
+</li>
+<li><p><strong>采用C&#x2F;S模式</strong>: 客户和服务器交互的核心思想是客户发出请求报文，服务器收到该报文后将返回包含Web对象的HTTP响应报文。其中web服务器总是开着的</p>
+</li>
+<li><p><strong>采用TCP协议</strong></p>
+<ul>
+<li><p>服务器启动http服务, 在TCP80端口上添加一个守护进程(waiting socket)</p>
+</li>
+<li><p>客户发起一个默认为<strong>80端口</strong>的请求，有时还会遇见8080端口号</p>
+</li>
+<li><p>服务器接受客户请求, 新建一个Socket用于与客户机通信, 返回信息</p>
+</li>
+<li><p>客户浏览器与服务器互相交换http报文，直到TCP连接关闭</p>
+</li>
+</ul>
+</li>
+<li><p>http是<strong>无状态</strong>的：服务器并不维护关于客户的任何信息</p>
+</li>
+</ul>
+<h3 id="持续与非持续的http"><a href="#持续与非持续的http" class="headerlink" title="持续与非持续的http"></a>持续与非持续的http</h3><p>http在建立连接的时候要进行多次请求, 例如连接建立的请求, 请求多个数据的请求等。当通信使用TCP协议时，服务器端需要做出一个决定：这些请求是使用一个TCP连接完成还是通过独立的TCP连接完成。如果采取前一个方法，则称应用程序使用<strong>持续连接</strong>，如果使用后一种方式，则称为<strong>非持续连接</strong>。</p>
+<ul>
+<li><p>非持续的http</p>
+<p>每次TCP连接最多可以发送一个对象, 下载多个对象需要多个TCP连接, http1.0默认使用</p>
+<p>非持久化http请求一个对象需要消耗两个RRT</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525192004917.png" class="" alt="image-20230525192004917">
+
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525192014300.png" class="" alt="image-20230525192014300">
+</li>
+<li><p>持续化的http</p>
+<p>每次TCP连接可以发送多个对象, 下载多个对象可以只需要一个TCP连接, 持久化连接又分成流水线方式的持续化http(http1.1使用)与非流水线方式的持续化http</p>
+<ul>
+<li><p>非流水线的HTTP要求客户端在收到前一个响应后才可以发送新的请求</p>
+<p>非流水线的持续http建立需要一个RRT, 每次请求对象需要一个RRT</p>
+</li>
+<li><p>流水线方式的HTTP遇到一个引用对象就立马发送请求<strong>（HTTP默认使用）</strong></p>
+<p>流水线的持续http建立需要一个RRT, 请求所有对象最少只需要一个RRT</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="http报文格式"><a href="#http报文格式" class="headerlink" title="http报文格式"></a>http报文格式</h3><p>http报文有请求报文和响应报文两种格式</p>
+<ul>
+<li><p>请求报文</p>
+<p>一个请求报文具有至少一行的内容。请求报文的第一行称为<strong>请求行</strong>，其后继的各行被称为<strong>首部行</strong></p>
+<p>请求行包含三个内容：方法字段、URL字段、HTTP版本；其中方法字段可为：GET、POST、PUT、DELETE、HEAD等。</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525193428341.png" class="" alt="image-20230525193428341">
+
+<p>首部行用键值对的方式进行描述，服务端根据此获取客户端的信息。常见的请求头及作用如下</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525193541424.png" class="" alt="image-20230525193541424">
+
+<p>在首部行之后有一个空行，被称为<strong>结束行</strong>之后便是请求的“<strong>实体体</strong>”。实体体即为请求参数，通常为以键值对的形式数据。<strong>请求报文中通常没有实体体。</strong></p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525192849035.png" class="" alt="image-20230525192849035">
+</li>
+<li><p>响应报文</p>
+<p>响应报文总体上也分状态行、首部行、实体体三个部分。</p>
+<p>状态行包含HTTP版本、状态码以及状态信息等内容。版本通常为HTML1.1。</p>
+<p>首部行用于描述服务器的基本信息。也用键值对的形式表示。包含发送日期、服务器类型、上一次修改请求资源的时间、内容的类型等内容。</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230525194050200.png" class="" alt="image-20230525194050200">
+
+<p>实体体包含请求对象本身。</p>
+<p>常见状态码</p>
+<ul>
+<li><p>200：请求成功。</p>
+</li>
+<li><p>301：请求对象已被永久转移，新的地址在该报文后续的Header line 的Location字段中。</p>
+</li>
+<li><p>304：自上次访问以来，请求的资源未被修改。就是服务器告诉浏览器自最近一次访问该页面以来浏览器中缓存的资源没有被修改</p>
+</li>
+<li><p>400：一个通用差错代码，请求不能被服务器理解。</p>
+</li>
+<li><p>404：服务器上找不到请求的文档（对象）。</p>
+</li>
+<li><p>505：服务器不支持请求报文使用的http版本。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>HTTP是无状态协议，不维护关于客户的任何信息。但是Web站点为了识别用户身份，或者将用户访问的内容同用户身份相关联，使用了Cookie技术。</p>
+<p>Cookie技术包含4个组件</p>
+<ul>
+<li>HTTP响应报文里增加一个关于Cookie的首部行；</li>
+<li>HTTP请求报文里增加一个关于Cookie的首部行；</li>
+<li>用户端系统保留一个Cookie文件，由浏览器保存维护；</li>
+<li>Web站点有一个后端数据库</li>
+</ul>
+<p>Cookie工作过程：</p>
+<ol>
+<li>客户端在浏览器的地址栏中键入Web服务器的URL，浏览器发送读取网页的请求。</li>
+<li>服务器接收到请求后，产生一个Set-Cookie报头，放在HTTP报文中一起回传客户端，发起一次会话。</li>
+<li>客户端收到应答后，若要继续该次会话，则将Set-Cookie中的内容取出，形成一个Cookie.txt文件储存在客户端计算机里。</li>
+<li>当客户端再次向服务器发出请求时，浏览器先在电脑里寻找对应该网站的Cookie.txt文件。如果找到，则根据此Cookie.txt产生Cookie报头，放在HTTP请求报文中发给服务器。</li>
+<li>服务器接收到包含Cookie报头的请求，检索其Cookie中与用户有关的信息，生成一个客户端所请示的页面应答传递给客户端。 浏览器的每一次网页请求，都可以传递已存在的Cookie文件，例如浏览器的打开或刷新网页操作。</li>
+</ol>
+<p>虽然Cookie的使用方便了用户也方便了服务端，但是它的使用存在争议，使用Cookie被认为是对用户隐私的一种侵犯，因为Web站点可以通过Cookie得到很多用户的信息，并有可能将这部分信息卖给第三方等</p>
+<h3 id="web缓存（Cache）"><a href="#web缓存（Cache）" class="headerlink" title="web缓存（Cache）"></a>web缓存（Cache）</h3><p>Web缓存器也被称为代理服务器，它代表初始web服务器来满足HTTP请求。它有自己的存储空间，并在存储空间里保持有最近请求过的对象的副本；可以通过配置浏览器将所有指向初始服务器的请求首先指向代理服务器。</p>
+<p>Cache工作流程：</p>
+<p>当代理服务器收到一个HTTP请求后，它将检查本地是否缓存过该对象，如果缓存过该对象，将检查是否过期，如果没有过期，则直接将该对象返回给浏览器；如果本地不存在或者存在已过期，则代理服务器将根据请求报文里的Host首部行以及请求行里的URL字段向初始服务器发出请求，然后将响应对象返回给浏览器并缓存在本地。</p>
+<p>Cache优点：</p>
+<p>通常，代理服务器与客户端的通信速度要快于初始服务器与客户端的连接速度；Web代理服务器可以极大减少对客户请求的响应时间；而且，缓存器能从整体上大大降低因特网上的web流量，从而有助于提高所有应用程序的性能；互联网大量采用了缓存，使得较弱的ICP也可以很好的提供内容。</p>
+<p>Web缓存即是客户又是服务器</p>
+<h3 id="条件性GET方法"><a href="#条件性GET方法" class="headerlink" title="条件性GET方法"></a>条件性GET方法</h3><p>尽管缓存可以减少用户感知到的响应时间，但是缓存引入了一个新的问题: 存储在cache中的对象可能是陈旧的, 自从对象的副本被缓存到这个cache, 存储在web服务器端的对象可能被修改过</p>
+<p>HTTP提供了条件性GET(conditional GET)机制，这个机制使得cache能够确认它的对象是最新的</p>
+<p>使用条件GET方法只需在使用GET方法的时候，增加一个If-Modified-Since首部行，其对应的内容是一个时间，如果所请求的资源在指定日期后被修改了，那么服务器将返回新的对象，否则服务器将返回一个包含空实体体的报文。这样代理服务器就可以确认缓存是否过期了。</p>
+<h2 id="FTP"><a href="#FTP" class="headerlink" title="FTP"></a>FTP</h2><p>FTP：<strong>文件传输协议</strong>。用于文件的分发</p>
+<p>在一个典型的FTP应用中，用户通过FTP代理和FTP交互。用户首先提供远程主机的主机名，使得FTP用户代理建立一个到远程主机的TCP连接，之后需要用户提供用户名和密码，它们作为FTP命令的一部分在TCP连接上传输；一旦服务器授权，用户便可以和服务器进行文件传输了。</p>
+<p><strong>HTTP和FTP都是应用层协议，它们都运行在TCP协议之上</strong>，但是它们之间也有一些重要区别，其中一个就是FTP使用两个并行的TCP连接来传输数据，一个TCP连接被称为控制连接，用来传输FTP命令；另一个连接被称为数据连接，用于传输文件数据。<strong>TCP控制连接端口为21，数据连接端口为20</strong></p>
+<p>因为FTP协议内，控制信息是通过一个独立的TCP连接传输，所以我们称FTP的控制信息是<strong>带外传送</strong>的；如果控制信息和数据信息通过同一个TCP传输，则称为带内传送。</p>
+<p>需要注意的是，FTP中控制连接贯穿整个会话，但是数据连接会在一个文件开始传输的时候建立，在传输结束后关闭；所以每次传输一个新的文件时，都会新建一个数据连接；</p>
+<p>同时，FTP需要在整个会话期间，保留用户的状态，也就是说<strong>FTP是有状态的</strong></p>
+<h2 id="Email"><a href="#Email" class="headerlink" title="Email"></a>Email</h2><p>互联网电子邮件系统有三个组成部分：<strong>用户代理</strong>（user agent）、 <strong>邮件服务器</strong> （mail server）和<strong>简单邮件传输协议</strong>（Simple Mail Transfer Protocol，SMTP）</p>
+<p><strong>一个典型的电子邮件收发过程为：</strong></p>
+<p>发送方通过用户代理将邮件传送到发送方的邮件服务器，然后再传输到接收方的邮件服务器，然后邮件被分发到接收方的邮箱里；接收方从邮件服务器里获取自己的邮件时需要通过邮件服务器的验证。如果发送端不能将邮件发送给接收端的服务器，发送端的邮件服务器会在一个报文队列中保持该报文并在以后尝试再次发送。</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230606170604348.png" class="" alt="image-20230606170604348">
+
+<p><strong>SMTP</strong>是因特网中电子邮件的主要应用层协议，它使用<strong>TCP可靠数据传输</strong>服务。在每台邮件服务器上同时运行SMTP服务器和SMTP客户端。当邮件服务器接收其他邮件服务器的邮件时，它表现为SMTP服务器，当邮件服务器向其他邮件服务器发送邮件时，表现为SMTP客户端。</p>
+<h3 id="SMTP"><a href="#SMTP" class="headerlink" title="SMTP"></a>SMTP</h3><p><strong>传输的三个阶段</strong>：握手、传输、关闭连接</p>
+<p>SMTP使用<strong>25号端口</strong>。SMTP是<strong>持续连接</strong>的。对每一报文，客户使用一个新的<code>MAIL FROM：crepes.fr</code>开始。当所有报文发送完后才断开连接。SMTP出现在因特网之前，有些陈旧的特征，比如限制邮件报文的所有部分只能使用7比特的ASCII表示，这就导致二进制多媒体文件需要编码为ASCII，在接收方需要解码。</p>
+<p>SMTP报文<strong>一般不使用中间邮件服务器发送报文</strong>，即邮件不会在中间某个邮件服务器保留，直接在两个主机间建立连接。</p>
+<h3 id="SMTP与HTTP对比"><a href="#SMTP与HTTP对比" class="headerlink" title="SMTP与HTTP对比"></a>SMTP与HTTP对比</h3><p><strong>HTTP和SMTP都是用TCP协议</strong>；持续的HTTP和SMTP都是用<strong>持续连接</strong>；但是两者也有区别。</p>
+<ul>
+<li>HTTP被设计为一个Pull协议而SMTP被设计为一个Push协议。即用户通过HTTP主动向服务器请求内容，而SMTP则是客户将内容推向服务器端</li>
+<li>HTTP传输的数据不一定是用ASCII字符，但是SMTP只能使用ASCII字符</li>
+<li>对于既包含文本又包含图形或其他媒体类型的文档，HTTP将每个对象封装在自己的响应报文里，而SMTP则将所有的报文对象放到一个报文之中</li>
+</ul>
+<h3 id="邮件报文格式和MIME（多媒体邮件扩展）"><a href="#邮件报文格式和MIME（多媒体邮件扩展）" class="headerlink" title="邮件报文格式和MIME（多媒体邮件扩展）"></a>邮件报文格式和MIME（多媒体邮件扩展）</h3><p>报文由两部分组成：首部行和报文体。用空行分开。</p>
+<p>首部行的格式为键值对的形式，每个首部必须包含一个From和To首部行。首部也可以包含其它信息，比如Subject等。首部行包含了环境信息</p>
+<p>报文体则是邮件的主题内容，用ASCII码表示</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230606165932718.png" class="" alt="image-20230606165932718">
+
+<p>由于SMTP只能传送一定长度的ASCII码，因此提出了MIME，通过在邮件头部增加额外的行以声明MIME的内容类型</p>
+<p>MIME并未改动SMTP或取代它，MIME的意图是继续使用目前的格式，但增加了邮件主体的结构，并定义了传送非ASCII码的编码规则</p>
+<p>MIME主要包括以下三部分内容:</p>
+<ul>
+<li><p>5个新的邮件首部字段，包括MIME版本、内容 描述、内容标识、内容传送编码和内容类型</p>
+</li>
+<li><p>定义了许多邮件内容的格式，对多媒体电子邮件的表示方法进行了标准化</p>
+</li>
+<li><p>定义了传送编码，可对任何内容格式进行转换，而不会被邮件系统改变</p>
+</li>
+</ul>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526103550387.png" class="" alt="image-20230526103550387">
+
+<h3 id="邮件访问协议"><a href="#邮件访问协议" class="headerlink" title="邮件访问协议"></a>邮件访问协议</h3><p>SMTP是邮件服务器之间<strong>发送邮件报文的协议</strong>，用户代理使用邮件访问协议来从邮件服务器上获取邮件信息；目前常用的邮件访问协议有<strong>POP3（Post Office Protocol-Version 3，邮局协议第三版）</strong>、<strong>因特网邮件访问协议（IMAP，Internet Mail Access protocol）</strong>和<strong>HTTP（基于网络的电子邮件）</strong></p>
+<ul>
+<li><p>POP3<br>POP3功能有限，使用<strong>端口110</strong>来建立<strong>TCP连接</strong>；POP3按照三个阶段进行工作：<strong>特许、事务处理和更新</strong>。</p>
+<p>特许阶段，用户代理发送密码和用户名，进行身份鉴别；事务处理阶段用户代理取回报文，同时还可以做删除、取消删除等标记或者统计邮件信息；更新阶段是在用户退出后POP3结束会话，删除被标记的邮件</p>
+<p>POP3用户代理可以使用两种事务处理模式：一种是<strong>下载并删除</strong>，另一种是<strong>下载保留</strong>。下载并删除的方法是如果用户在一台设备上查看了邮件后，邮件将被删除，那么在其他设备上将无法查看邮件。使用下载保存方式则用户下载邮件后，邮件还在服务器上。</p>
+<p>在用户代理与邮箱服务器会话期间，该POP3服务器保留了一些状态信息。但是POP3服务器并不在POP3会话过程中携带状态信息<strong>（POP3是无状态的）</strong>。</p>
+</li>
+<li><p>IMAP<br>POP3协议无法为用户提供<strong>邮件分类管理</strong>的功能。为了解决这一问题，IMAP诞生了。</p>
+<p>IMAP允许用户在不同文件夹里移动邮件并且查询邮件。值得注意的是，IMAP服务器维护了IMAP会话的用户状态信息<strong>（IMAP是有状态的）</strong>，但是POP3并不；IMAP协议还允许用户代理获取报文组件而不是报文整体。</p>
+<p>IMAP<strong>将所有的报文都保留在了邮件服务器上</strong></p>
+</li>
+<li><p>基于Web的电子邮件（HTTP）<br>这种方式主要是指用户使用HTTP协议和邮件服务器通信。用户代理就是普通的浏览器，但是，邮件服务器之间还是使用SMTP协议</p>
+</li>
+</ul>
+<h2 id="DNS"><a href="#DNS" class="headerlink" title="DNS"></a>DNS</h2><h3 id="DNS提供的服务"><a href="#DNS提供的服务" class="headerlink" title="DNS提供的服务"></a>DNS提供的服务</h3><p>互联网上的主机和人一样，可以使用多种方式标识。我们通过<strong>IP地址</strong>来标记某一时刻网络中唯一的主机。为了方便记忆，我们通过为主机提供一个便于记忆的主机名来标志主机，比如<code>www.baidu.com</code>、<code>www.google.com</code>等等。这样主机之间的通信就变得方便了。但是，同时也就引入一个问题：<strong>主机名和IP地址的转换问题</strong></p>
+<p>DNS（Domain Name System，域名系统）起到的作用就是把主机名转换成IP地址。</p>
+<p>DNS主要思路</p>
+<ul>
+<li>DNS由一个由分层的DNS服务器组成的<strong>分布式数据库</strong>和一个使得主机可以查询分布式数据库的<strong>应用层协议</strong>组成</li>
+<li>DNS采用<strong>CS模式，其协议运行在UDP之上，使用53号端口</strong></li>
+<li>分层的、基于域的命名机制</li>
+</ul>
+<p>DNS主要目的</p>
+<ul>
+<li>实现主机名-IP地址的转换</li>
+<li>主机别名：虽然主机名比起IP地址好记多了，但是有时候我们的主机名仍然很长，很不好记忆，所以我们还可以为主机名再起一个名字，这就是主机别名，DNS不但提供主机名到IP地址的转换服务，还提供主机名与主机别名的转换。邮件服务器也可以取别名。原主机名被称为规范主机名。</li>
+<li>负载均衡：在冗余的服务器之间分配负载</li>
+</ul>
+<h3 id="DNS工作机理"><a href="#DNS工作机理" class="headerlink" title="DNS工作机理"></a>DNS工作机理</h3><h4 id="分布式层次的数据库"><a href="#分布式层次的数据库" class="headerlink" title="分布式层次的数据库"></a>分布式层次的数据库</h4><p><strong>单一的DNS服务器面临无法解决单点故障、无法保证通信容量以及无法临近所有的查询主机和维护困难</strong>等问题。所以DNS服务器采用<strong>层次式组织</strong>。</p>
+<p>一个服务器所负责管辖的范围称为<strong>区域</strong>，各单位根据具体情况来划分自己管辖范围的区，但在一个区中的所有结点必须是能够连通的，每个区设置相应的权限域名服务器，用来保存该区中的所有主机的域名到IP地址的映射</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526140325350.png" class="" alt="image-20230526140325350">
+
+<p>大致有4种类型的域名服务器：<strong>根域名服务器、顶级域名服务器、权威域名服务器、本地域名服务器</strong></p>
+<ul>
+<li>根域名服务器：互联网上有13个根DNS服务器，大部分在北美洲 </li>
+<li>顶级域服务器（TLD）：负责顶级域名，如<code>com</code>，<code>org</code>，<code>net</code>，<code>edu</code>，<code>gov</code>以及各个国家的顶级域名的转换</li>
+<li>权威DNS服务器：组织的域名解析服务器，提供组织内部服务器的解析服务。组织负责维护</li>
+<li>本地域名解析服务器：本地域名解析服务器不严格属于层级体系。每个ISP都提供一台本地DNS服务器，亦称之为“默认域名服务器”。当查询DNS时，请求首先被发送到本地域名服务，若本地缓存中有域名-地址的解析，则直接返回结果；否则请求域名服务器层级结构</li>
+</ul>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526131410860.png" class="" alt="image-20230526131410860">
+
+<p>举例说明，假定一个客户要获取主机名<code>www.amazon.com</code>的 IP 地址。</p>
+<ol>
+<li><p>客户端查询根服务器，找到<code>com</code>域名解析服务器</p>
+</li>
+<li><p>客户端查询<code>com</code>域名解析服务器，找到<code>amazon.com</code>域名解析服务器</p>
+</li>
+<li><p>客户端查询<code>amazon.com</code>域名解析服务器，获得<code>www.amazon.com</code>的IP地址</p>
+</li>
+</ol>
+<h4 id="域名结构"><a href="#域名结构" class="headerlink" title="域名结构"></a>域名结构</h4><p>如果在一个层面命名设备，很容易出现重名。所以DNS采取层次树状结构的命名方法。任何一个连接在因特网上的主机或路由器，都有一个唯一的层次结构的名字，即域名(domain name)。</p>
+<p> 域(domain)是名字空间中一个可被管理的划分,从语法上讲，每一个域名都是由标号(label)序列组成，而各标号之间用点隔开</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526132348933.png" class="" alt="image-20230526132348933">
+
+<p><strong>级别最低的域名写在最左边，级别最高的顶级域名写在最右边</strong></p>
+<p>在域名系统中，每个域分别由不同的组织进行管理。每个组织都可以将它的域再分成一定数目的子域，并将这些子域委托给其他组织去管理</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526132422022.png" class="" alt="image-20230526132422022">
+
+
+
+<h4 id="域名解析过程"><a href="#域名解析过程" class="headerlink" title="域名解析过程"></a>域名解析过程</h4><p>域名解析有两种方式:<strong>递归查询</strong>和<strong>迭代查询</strong></p>
+<p>实践中，查询通常满足这样的模式：<strong>从请求主机到本地DNS服务器的查询是递归的，其余查询是迭代的</strong>。</p>
+<ul>
+<li><p>递归查询</p>
+<p>如果主机所询问的本地域名服务器不知道被查询的域名的IP地址，那么本地域名服务器就以DNS客户的身份向其它根域名服务器继续发出查询请求报文(即替主机继续查询)，而不是让主机自己进行下一步查询。</p>
+<p>也就是说，在递归查询中，一定要给请求者想要的答案。要么查询到对应的IP地址，要么返回报错。讲究一个<strong>亲力亲为</strong></p>
+</li>
+<li><p>迭代查询</p>
+<p>当根域名服务器收到本地域名服务器发出的迭代查询请求报文时，要么给出所要查询的IP地址，要么告诉本地服务器：“你下一步应当向哪一个域名服务器进行查询”。也就是我自己不查，但我告诉你去哪查，<strong>踢皮球</strong></p>
+</li>
+</ul>
+<h3 id="DNS缓存"><a href="#DNS缓存" class="headerlink" title="DNS缓存"></a>DNS缓存</h3><p>DNS缓存是为了改善时延并减少在因特网上传输的DNS报文数量而引入的。</p>
+<p>每当DNS服务器发出请求后收到回答时，就将回答的内容缓存在它自己的主机空间上。这样，如果有相同的请求到达时，就不需要再去发出请求，直接使用缓存即可</p>
+<p>因为有了缓存，本地DNS就可以直接提供一些经常被访问的主机名所对应的IP地址，而不需要询问根DNS服务器了。</p>
+<p>需要注意的是，如果缓存过时而未得到更新，那么就会导致一些请求失败。</p>
+<p><strong>缓存技术就是一种典型的使用空间换时间的策略</strong></p>
+<h3 id="DNS记录和报文"><a href="#DNS记录和报文" class="headerlink" title="DNS记录和报文"></a>DNS记录和报文</h3><p>DNS 数据库由 DNS 服务器使用的一个或多个区域文件组成，每个区域都保存着一组结构化资源记录RR。RR提供了主机名到IP地址的映射信息；一条RR是具有一下字段的4元组：（name, value, type, TTL）；其中TTL是指该记录的生存时间，它决定了该条记录何时被删除。</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526142045250.png" class="" alt="image-20230526142045250">
+
+<p>DNS报文有两种，即<strong>查询报文</strong>和<strong>回答报文</strong>，并且两种报文有着相同的结构：</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230526142312853.png" class="" alt="image-20230526142312853">
+
+<blockquote>
+<p>前12字节为首部区域。标识符是一个用来标记该查询的16比特数。该标志符会被复制到相应的回答报文里，以便匹配请求和回答；<br>标志字段有若干标志，用来指出报文的类型（请求还是响应）、查询类型（递归还是迭代）、是否是所请求名字的权威DNS服务器、以及4个有关数量的字段，用来指示4类数据区域出现的数量；<br>问题区域包含了正在进行的查询信息，包括名字字段、查询类型；<br>回答区域包含了对最初请求的名字的资源记录，回答报文的回答区域可以包含多条RR，因此一个主机名能有多个IP地址；<br>权威区域包含了其他权威服务器的信息；<br>附加区域包含了其它有帮助的记录，比如在对于一个MX类型的请求回答报文里，回答区域里指出了邮件服务器的规范主机名，而附加区域里就有可能包含一个类型为A的关于该规范主机名的的IP地址；</p>
+</blockquote>
+<h2 id="P2P应用"><a href="#P2P应用" class="headerlink" title="P2P应用"></a>P2P应用</h2><p>要理解P2P应用的优势，首先从CS模式与P2P模式的对比讲起。</p>
+<p>来看以下场景：</p>
+<p>假设要将文件从服务器分发到N个节点，需要多少时间？</p>
+<p>假设服务器的上传能力为<code>u</code>，客户端的下载能力为<code>d</code>，文件的大小为<code>F</code>。当客户端用作服务器时其上传能力为<code>u&#39;</code></p>
+<p>那么服务器发送一份文件所需要的时间就是<code>F/u</code>，N份的时间就是<code>NF/u</code></p>
+<p>客户端下载的时间就是<code>F/d</code>。多个客户端的<code>d</code>可能是不同的，最长的客户端下载时间就是<code>F/dmin</code></p>
+<p>采用P2P模式时，总文件大小为<code>NF</code>，其上传能力为<code>u+Σu&#39;</code>。即<code>上载带宽 = 服务器上载带宽+客户端上载带宽之和</code>。那么上传的总时间就是<code>NF/u+Σu&#39;</code></p>
+<p>我们知道，文件的传输时间取决于慢的那一个，快的必须得等慢的一方完成了才能叫做完成了文件传输。</p>
+<p>若采用C-S模式，那么其分发时间<code>D &gt;= max&#123;服务器上传时间，客户端最长下载时间&#125;</code>。当N增大时，总时长是基本呈线性增大的</p>
+<p>但是采用P2P模式，其分发时间<code>D&#39; &gt;= max&#123;服务器上传时间，客户端最长下载时间，服务器与客户端上传总时间&#125;</code>。当N增大时，其总时长是缓慢增加的。</p>
+<img src="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/image-20230606203046972.png" class="" alt="image-20230606203046972">
+
+<p><strong>总的来说，随着文件大小的增加，P2P模式耗费的时间比CS模式小得多</strong></p>
+<h3 id="P2P文件分发（BitTorrent"><a href="#P2P文件分发（BitTorrent" class="headerlink" title="P2P文件分发（BitTorrent)"></a>P2P文件分发（BitTorrent)</h3><ul>
+<li><p>非结构化P2P：节点之间随机构成邻居关系，覆盖网。<strong>互通有无</strong></p>
+<ul>
+<li><p><strong>集中化目录模式</strong>: 拥有一个集中化的目录服务器用来维护节点。用户上线时通知服务器，提交自己的资源信息，用户需要资源的时候请求目录服务器，目录服务器返回拥有资源的节点</p>
+</li>
+<li><p><strong>完全分布式</strong>: 节点间构建起覆盖网，使用<strong>泛洪</strong>的方式发起查询。拥有资源的节点给出应答</p>
+</li>
+<li><p><strong>利用不匀称性的混合型</strong>: 每个节点要么是组长, 要么是一个组长的节点, 组内使用集中化目录, 组长之间完全分布式, 请求信息的时候组内有就用组内, 组内没有则组长向全网请求</p>
+</li>
+</ul>
+</li>
+<li><p>DHT(结构化)P2P：节点之间构成一个有序的覆盖网(例如构成一个环、树的关系)</p>
+</li>
+</ul>
+<p>泛洪：一个节点向所有邻居发起查询，邻居再向它的所有邻居发起查询</p>
+<p><strong>BT文件分发协议</strong></p>
+<ul>
+<li><p>非结构化P2P</p>
+</li>
+<li><p>将文件按顺序切割成256KB的块, 用户交流拥有信息的时候只需要传输一个数据, 第<code>i</code>位为<code>1/0</code>代表用户拥有&#x2F;不拥有文件的第<code>i</code>个块</p>
+</li>
+<li><p>用户上线后将自己拥有文件的信息进行<strong>泛洪</strong></p>
+</li>
+<li><p><strong>稀缺优先</strong>: 用户请求文件的时候, 对于拥有文件的节点, 优先请求副本数量最少的块，使该文件块迅速分发</p>
+</li>
+<li><p><strong>利他主义</strong>: 节点优先向经常向他提供服务的人服务, 过一段时间之后再随机选一个进行评估</p>
+</li>
+<li><p><strong>文件请求的时候通过带外的方式下载文件描述信息</strong></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kakieccc.github.io/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/" data-id="cm0ucluwq0008ecfi1mtvcvm5" data-title="计算机网络_应用层" class="article-share-link">Share</a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B/" rel="tag">基础课程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" class="wow fadeInUp">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/banner.jpg" data-sizes="auto" alt="计算机网络_传输层" class="lazyload">
+          
+        
+        <a href="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            计算机网络_传输层
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="计算机网络_绪论" class="lazyload">
+        
+      
+      <a href="/2023/05/22/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%80%E7%AB%A0/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          计算机网络_绪论
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrap wow fadeInRight wrap-sticky">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">应用层协议原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">网络应用程序体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="toc-number">1.2.</span> <span class="toc-text">进程通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%8F%AF%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.3.</span> <span class="toc-text">运输层协议可提供的服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E6%8F%90%E4%BE%9B%E7%9A%84%E8%BF%90%E8%BE%93%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.4.</span> <span class="toc-text">互联网提供的运输层服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.</span> <span class="toc-text">应用层协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-and-HTTP"><span class="toc-number">2.</span> <span class="toc-text">Web and HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E6%A6%82%E5%86%B5"><span class="toc-number">2.1.</span> <span class="toc-text">http概况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E4%B8%8E%E9%9D%9E%E6%8C%81%E7%BB%AD%E7%9A%84http"><span class="toc-number">2.2.</span> <span class="toc-text">持续与非持续的http</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">http报文格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie"><span class="toc-number">2.4.</span> <span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web%E7%BC%93%E5%AD%98%EF%BC%88Cache%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">web缓存（Cache）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%80%A7GET%E6%96%B9%E6%B3%95"><span class="toc-number">2.6.</span> <span class="toc-text">条件性GET方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP"><span class="toc-number">3.</span> <span class="toc-text">FTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Email"><span class="toc-number">4.</span> <span class="toc-text">Email</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SMTP"><span class="toc-number">4.1.</span> <span class="toc-text">SMTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMTP%E4%B8%8EHTTP%E5%AF%B9%E6%AF%94"><span class="toc-number">4.2.</span> <span class="toc-text">SMTP与HTTP对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%AE%E4%BB%B6%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F%E5%92%8CMIME%EF%BC%88%E5%A4%9A%E5%AA%92%E4%BD%93%E9%82%AE%E4%BB%B6%E6%89%A9%E5%B1%95%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">邮件报文格式和MIME（多媒体邮件扩展）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%AE%E4%BB%B6%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.4.</span> <span class="toc-text">邮件访问协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">5.</span> <span class="toc-text">DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="toc-number">5.1.</span> <span class="toc-text">DNS提供的服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E5%B7%A5%E4%BD%9C%E6%9C%BA%E7%90%86"><span class="toc-number">5.2.</span> <span class="toc-text">DNS工作机理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%B1%82%E6%AC%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">5.2.1.</span> <span class="toc-text">分布式层次的数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E7%BB%93%E6%9E%84"><span class="toc-number">5.2.2.</span> <span class="toc-text">域名结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="toc-number">5.2.3.</span> <span class="toc-text">域名解析过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E7%BC%93%E5%AD%98"><span class="toc-number">5.3.</span> <span class="toc-text">DNS缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E8%AE%B0%E5%BD%95%E5%92%8C%E6%8A%A5%E6%96%87"><span class="toc-number">5.4.</span> <span class="toc-text">DNS记录和报文</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#P2P%E5%BA%94%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">P2P应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#P2P%E6%96%87%E4%BB%B6%E5%88%86%E5%8F%91%EF%BC%88BitTorrent"><span class="toc-number">6.1.</span> <span class="toc-text">P2P文件分发（BitTorrent)</span></a></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+    
+      <div class="sidebar-btn-wrapper" style="position:static">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer" class="wow fadeInUp">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      <div>
+        <span class="icon-copyright"></span>
+        2020-2024
+        <span class="footer-info-sep"></span>
+        kakie
+      </div>
+      
+        <div>
+          Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+          Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+        </div>
+      
+      
+        <div>
+          <span class="icon-brush"></span>
+          36.5k
+          &nbsp;|&nbsp;
+          <span class="icon-coffee"></span>
+          02:05
+        </div>
+      
+      
+        <div>
+          <span class="icon-eye"></span>
+          <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+          &nbsp;|&nbsp;
+          <span class="icon-user"></span>
+          <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+        </div>
+      
+    </div>
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">应用层协议原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">网络应用程序体系结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1"><span class="toc-number">1.2.</span> <span class="toc-text">进程通信</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%BE%93%E5%B1%82%E5%8D%8F%E8%AE%AE%E5%8F%AF%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.3.</span> <span class="toc-text">运输层协议可提供的服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E6%8F%90%E4%BE%9B%E7%9A%84%E8%BF%90%E8%BE%93%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.4.</span> <span class="toc-text">互联网提供的运输层服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.</span> <span class="toc-text">应用层协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-and-HTTP"><span class="toc-number">2.</span> <span class="toc-text">Web and HTTP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E6%A6%82%E5%86%B5"><span class="toc-number">2.1.</span> <span class="toc-text">http概况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E4%B8%8E%E9%9D%9E%E6%8C%81%E7%BB%AD%E7%9A%84http"><span class="toc-number">2.2.</span> <span class="toc-text">持续与非持续的http</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">http报文格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cookie"><span class="toc-number">2.4.</span> <span class="toc-text">Cookie</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#web%E7%BC%93%E5%AD%98%EF%BC%88Cache%EF%BC%89"><span class="toc-number">2.5.</span> <span class="toc-text">web缓存（Cache）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%80%A7GET%E6%96%B9%E6%B3%95"><span class="toc-number">2.6.</span> <span class="toc-text">条件性GET方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FTP"><span class="toc-number">3.</span> <span class="toc-text">FTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Email"><span class="toc-number">4.</span> <span class="toc-text">Email</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SMTP"><span class="toc-number">4.1.</span> <span class="toc-text">SMTP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SMTP%E4%B8%8EHTTP%E5%AF%B9%E6%AF%94"><span class="toc-number">4.2.</span> <span class="toc-text">SMTP与HTTP对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%AE%E4%BB%B6%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F%E5%92%8CMIME%EF%BC%88%E5%A4%9A%E5%AA%92%E4%BD%93%E9%82%AE%E4%BB%B6%E6%89%A9%E5%B1%95%EF%BC%89"><span class="toc-number">4.3.</span> <span class="toc-text">邮件报文格式和MIME（多媒体邮件扩展）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%AE%E4%BB%B6%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE"><span class="toc-number">4.4.</span> <span class="toc-text">邮件访问协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DNS"><span class="toc-number">5.</span> <span class="toc-text">DNS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1"><span class="toc-number">5.1.</span> <span class="toc-text">DNS提供的服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E5%B7%A5%E4%BD%9C%E6%9C%BA%E7%90%86"><span class="toc-number">5.2.</span> <span class="toc-text">DNS工作机理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E5%B1%82%E6%AC%A1%E7%9A%84%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">5.2.1.</span> <span class="toc-text">分布式层次的数据库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E7%BB%93%E6%9E%84"><span class="toc-number">5.2.2.</span> <span class="toc-text">域名结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E8%BF%87%E7%A8%8B"><span class="toc-number">5.2.3.</span> <span class="toc-text">域名解析过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E7%BC%93%E5%AD%98"><span class="toc-number">5.3.</span> <span class="toc-text">DNS缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E8%AE%B0%E5%BD%95%E5%92%8C%E6%8A%A5%E6%96%87"><span class="toc-number">5.4.</span> <span class="toc-text">DNS记录和报文</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#P2P%E5%BA%94%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">P2P应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#P2P%E6%96%87%E4%BB%B6%E5%88%86%E5%8F%91%EF%BC%88BitTorrent"><span class="toc-number">6.1.</span> <span class="toc-text">P2P文件分发（BitTorrent)</span></a></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    <div class="site-search">
+      <div class="reimu-popup popup">
+        <div class="reimu-search">
+          <span class="reimu-search-input-icon"></span>
+          <div class="reimu-search-input" id="reimu-search-input"></div>
+        </div>
+        <div class="reimu-results">
+          <div id="reimu-stats"></div>
+          <div id="reimu-hits"></div>
+          <div id="reimu-pagination" class="reimu-pagination"></div>
+        </div>
+        <span class="popup-btn-close"></span>
+      </div>
+    </div>
+    
+<script src="https://npm.webcache.cn/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    firework(JSON.parse('{"excludeElements":["a"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.1.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+

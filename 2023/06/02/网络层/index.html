@@ -1,0 +1,1049 @@
+
+  <!DOCTYPE html>
+  <html lang="zh"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <title>
+    计算机网络_网络层 |
+    
+    kakie の BLOG
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/regular.min.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/solid.min.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v5-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v4-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="/css/loader.css">
+
+  <meta name="description" content="计算机网络笔记第四章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络_网络层">
+<meta property="og:url" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/index.html">
+<meta property="og:site_name" content="kakie の BLOG">
+<meta property="og:description" content="计算机网络笔记第四章">
+<meta property="og:locale">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609102958328.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609175828598.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609175656790.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609141530043.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATGl1a2FpcnVp,size_20,color_FFFFFF,t_70,g_se,x_16.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609193838410.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609194108465.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609200051425.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609200136682.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609200229496.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATGl1a2FpcnVp,size_15,color_FFFFFF,t_70,g_se,x_16.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230601202406333.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230601202424308.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230601202455293.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230601202521503.png">
+<meta property="article:published_time" content="2023-06-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-06T06:18:25.014Z">
+<meta property="article:author" content="kakie">
+<meta property="article:tag" content="基础课程">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609102958328.png">
+  
+    <link rel="alternate" href="/atom.xml" title="kakie の BLOG" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+  
+  
+  
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/wowjs@1.1.3/css/libs/animate.css">
+
+    
+<script src="https://npm.webcache.cn/wowjs@1.1.3/dist/wow.min.js"></script>
+
+    <script>
+      new WOW({
+        offset: 0,
+        mobile: true,
+        live: false
+      }).init();
+    </script>
+  
+  
+    <script src="/sw.js"></script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg"></div>
+    <div class="loading-right-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+          <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    const startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    const endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('load', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/friend">Friend</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="/images/banner.jpg" alt="计算机网络_网络层">
+  
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <div id="logo-wrap">
+        
+          
+          
+            <a href="/" id="logo">
+              <h1>计算机网络_网络层</h1>
+            </a>
+          
+        
+      </div>
+      
+        
+        <h2 id="subtitle-wrap">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="outer">
+          
+          <section id="main"><article id="post-网络层" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    <div class="article-meta">
+      <div class="article-date wow slideInLeft">
+  <a href="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/" class="article-date-link">
+    <time datetime="2023-06-01T16:00:00.000Z" itemprop="datePublished">2023-06-02</time>
+  </a>
+</div>
+
+      
+  <div class="article-category wow slideInLeft">
+    <a class="article-category-link" href="/categories/essay/">essay</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="网络层-数据平面"><a href="#网络层-数据平面" class="headerlink" title="网络层 数据平面"></a>网络层 数据平面</h2><h3 id="网络层概述"><a href="#网络层概述" class="headerlink" title="网络层概述"></a>网络层概述</h3><p>前面的应用层、传输层主要涉及的都是端系统，在网络边缘，现在我们需要进一步深入到<strong>网络核心</strong>，来了解网络交换节点路由器和网络层。</p>
+<p>网络层的作用：将分组从发送主机移动到接收主机</p>
+<p>网络层涉及到了主机和路由器，请注意，<strong>路由器具有截断的协议栈，因为它并不涉及网络层以上的层次</strong></p>
+<h4 id="数据平面与控制平面"><a href="#数据平面与控制平面" class="headerlink" title="数据平面与控制平面"></a>数据平面与控制平面</h4><p>网络层能够被分解为两个相互作用的部分，分别是数据平面与控制平面：</p>
+<ul>
+<li><p>数据平面功能: 每台路由器的功能，进行局部的<strong>转发</strong></p>
+<p><strong>转发</strong>：路由器将数据报从输入链路转发到输出链路的过程，是路由器本地动作，发生的时间很短（通常为几纳秒），用硬件实现。</p>
+</li>
+<li><p>控制平面功能: 网络范围的逻辑，控制数据报的路由方式，进行全局的<strong>路由</strong></p>
+<p><strong>路由（选择）</strong>：使用路由算法来决定分组发送的路径，是网络范围过程，发生的时间长的多（通常为几秒），用软件实现。</p>
+</li>
+</ul>
+<p>举个例子，就像是开车从北京到上海，转发相当于在某个路口选择某一条岔路，路由选择相当于规划从北京到上海所有线路并选出一条最优线路的过程。转发和路由将在后面详细讲解，这里先做一个概述。</p>
+<h4 id="网络服务模型"><a href="#网络服务模型" class="headerlink" title="网络服务模型"></a>网络服务模型</h4><p>网络服务模型定义了分组在发送与接收端系统之间的<strong>端到端运输特性、服务</strong></p>
+<p>网络层可能提供的服务：</p>
+<ul>
+<li>确保交付</li>
+<li>具有时延上界的确保交付</li>
+<li>有序分组交付</li>
+<li>确保最小带宽</li>
+<li>确保最大时延抖动</li>
+<li>安全性服务</li>
+<li>…</li>
+</ul>
+<p>❗请注意，因特网的IP协议<strong>并没有提供这些服务</strong>。它提供的是单一服务，称为<strong>尽力而为服务</strong>，无带宽保证，无丢包保证，无顺序保证，不定时，无拥塞指示。<strong>尽力而为服务看起来是根本无服务的一种委婉说法</strong></p>
+<h3 id="网络层提供的服务：虚电路与数据报网络"><a href="#网络层提供的服务：虚电路与数据报网络" class="headerlink" title="网络层提供的服务：虚电路与数据报网络"></a>网络层提供的服务：虚电路与数据报网络</h3><p>网络层提供了两种服务，分别是面向连接的虚电路服务和无连接的数据报服务</p>
+<h4 id="虚电路服务"><a href="#虚电路服务" class="headerlink" title="虚电路服务"></a>虚电路服务</h4><ul>
+<li>虚电路服务认为可靠通信由网络来保证</li>
+<li>首先建立网络层的连接：<strong>虚电路VC</strong>，通信双方就沿着已建立的虚电路发送分组</li>
+<li>目的主机的完整地址仅在建立连接时使用，虚电路建立好后分组的首部只需要携带一条<strong>虚电路的编号</strong></li>
+<li>虚电路服务是<strong>可靠传输的</strong>，不丢失不乱序不出差</li>
+<li>在通信结束以后需要释放建立的虚电路</li>
+<li>❗请注意，虚电路是一条抽象的链路，并不是物理意义上真正的链路，这一点与电路交换有所不同，其他可类比电路交换</li>
+<li>很多广域分组交换网使用的是虚电路，例如帧中继FR、异步传输模式ATM等</li>
+</ul>
+<h4 id="数据报服务"><a href="#数据报服务" class="headerlink" title="数据报服务"></a>数据报服务</h4><ul>
+<li>数据报服务认为可靠通信由用户主机来保证（所以数据报服务是<strong>不可靠的</strong>）</li>
+<li>不需要建立连接</li>
+<li>每个分组<strong>可走不同的路径</strong>，所以分组的首部必须要携带<strong>目的主机的完整地址</strong>，不然分组就不知道该发向哪了</li>
+<li>数据报服务是<strong>不可靠的</strong>，会乱序、丢失、错误。</li>
+<li>由于不提供可靠传输服务，所以路由器可以做的比较<strong>简单</strong>,把可靠传输这种难题丢给网络边缘中的主机和运输层；将相对简单的分组交付功能置于网络核心</li>
+<li>因特网所采用的<strong>IP协议</strong>使用的就是数据报服务</li>
+</ul>
+<h3 id="数据平面的主要功能：转发"><a href="#数据平面的主要功能：转发" class="headerlink" title="数据平面的主要功能：转发"></a>数据平面的主要功能：转发</h3><p>转发是一个局部的概念。一个路由器将发来的数据报选择一个路径发送到输出端口的过程叫转发。为了确定输出端口，需要用到<strong>转发表</strong></p>
+<p><strong>转发表</strong>：转发表是指路由器或交换机中维护的一张表格，用于指示数据报应该从哪个端口转发。通常情况是路由器检查到来的数据报的<strong>首部字段</strong>，使用这些首部值在转发表中<strong>索引</strong>，这些值对应了存储在转发表中的值，指出了该数据报将被转发的路由器的输出链路</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609102958328.png" class="" alt="image-20230609102958328">
+
+<p>简单来讲，转发表中存储了一系列首部值和对应的输出端口，假设现在到来一个分组，其首部值为0111，路由器通过查询自己维护的转发表，就知道应该把它转发到对应的二号端口。</p>
+<p>转发的方式有两种，分别是传统方式和SDN方式：</p>
+<ul>
+<li>传统方式<ul>
+<li>由<strong>控制平面</strong>计算出路由表，数据平面通过查询路由表获取转发位置进行转发。</li>
+<li><strong>传统方式数据平面查询的只有IP，进行的动作也只有转发</strong></li>
+<li>控制平面和数据平面是紧耦合的</li>
+<li><strong>整个网络是无法修改的</strong></li>
+</ul>
+</li>
+<li>SDN（软件定义网络）方式<ul>
+<li>数据平面根据端口号、IP地址、MAC地址等信息查询流表，获取下一步动作（转发、阻止、泛洪等）</li>
+<li><strong>SDN方式查询的信息有很多种，进行的动作也有很多，灵活性很高</strong></li>
+<li>SDN控制器在控制平面上集中式计算流表，数据平面通过南向接口获取流表</li>
+<li><strong>网络是可编程的</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="路由器工作原理"><a href="#路由器工作原理" class="headerlink" title="路由器工作原理"></a>路由器工作原理</h3><p>转发依靠于路由器，所以有必要理解路由器的工作原理</p>
+<p>路由器总体结构如下图：</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609175828598.png" class="" alt="image-20230609175828598">
+
+<p>从上图可以知道路由器大致被分为四个组件：</p>
+<ul>
+<li><p>输入&#x2F;输出端口</p>
+<p>输入输出端口包含了三个模块</p>
+<ul>
+<li><p>线路端接：物理层的模块，用于接收比特数据</p>
+</li>
+<li><p>数据链路处理：链路层的模块，进行封装&#x2F;解封装</p>
+</li>
+<li><p>查找，转发，队列：网络层的实体，根据IP数据报通过交换结构进行转发。设置了缓存队列对数据进行缓存</p>
+<p>缓存队列：交换实体的处理速度应该大于所有端口的速度和，但是可能出现<strong>头端阻塞</strong>(多个输入口向一个输出口发送数据, 输出口满载或者输入速度过大, 数据要在输入口等待。导致接收端缓冲区已满)。所以要设计缓存队列。缓存队列不需要过大，队列缓存区用完会直接丢弃</p>
+</li>
+</ul>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609175656790.png" class="" alt="image-20230609175656790">
+</li>
+<li><p>交换结构（fabric）</p>
+<p>任何一种交换结构的交换实体处理速度应该大于所有端口IO速度和</p>
+<p> 三种交换结构：</p>
+<ul>
+<li><p>经内存交换（memory）</p>
+<p>将分组传入Memory, 软件判断转发端口, 发出</p>
+</li>
+<li><p>经总线交换（bus）</p>
+<p>将分组传入总线, 总线连接所有的输出端口, 分组到达所有的数据端口, 输出端口匹配是不是要自己发出的分组</p>
+</li>
+<li><p>互联交换（crossbar）</p>
+<p>设计Banyan(榕树)网络, 将输入输出端口之间两两连接, 要把数据从输入口发到输出口只需要短接对应链路即可</p>
+<p>例如某分组到达端口A，需要转发到Y，交换机控制器闭合总线A和Y的交叉点，A在其总线上发送分组，仅由Y接收；同时B也能发分组到X，因为没有公用总线。纵横式网络能并行转发多个分组。但是如果两个不同输入端口的两个分组的目标是同一个输出端口。则一个分组必须在输入端等待。</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609141530043.png" class="" alt="image-20230609141530043"></li>
+</ul>
+</li>
+<li><p>路由选择处理器</p>
+<p>执行路由选择协议</p>
+<p>维护路由选择表、连接的链路状态信息，为路由器计算转发表</p>
+</li>
+</ul>
+<p>❗请注意，虽然在逻辑上分为了输入端口和输出端口，但是一般情况下一个端口既是输入端口也是输出端口</p>
+<h4 id="调度算法"><a href="#调度算法" class="headerlink" title="调度算法"></a>调度算法</h4><p><strong>输入输出端口缓存队列调度规则</strong></p>
+<ul>
+<li><p>丢弃规则</p>
+<ul>
+<li>tail drop 丢弃最后来的</li>
+<li>priority 根据优先权丢弃</li>
+<li>random 随机丢弃分组</li>
+</ul>
+</li>
+<li><p>调度规则</p>
+<ul>
+<li>FIFO(first in first out) 按照分组到来的次序服务</li>
+<li>优先权调度: 按照分组的优先级调度, 优先级可能是依赖于头部字段等, 低优先级的FIFO传输</li>
+<li>RR <strong>轮询调度</strong>: 一个接口传一个</li>
+<li>WFQ(weight fair queuing) 加权公平队列调度: 在一段时间中一个队列被服务的时间权重是队列中分组的个数</li>
+</ul>
+</li>
+</ul>
+<h3 id="IP协议"><a href="#IP协议" class="headerlink" title="IP协议"></a>IP协议</h3><p>IP协议主要是实现了数据平面的路由转发功能，IP协议主要有地址，分组的处理等</p>
+<h4 id="IPv4数据报"><a href="#IPv4数据报" class="headerlink" title="IPv4数据报"></a>IPv4数据报</h4><p><strong>IP数据报格式</strong></p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATGl1a2FpcnVp,size_20,color_FFFFFF,t_70,g_se,x_16.png" class="" alt="请添加图片描述">
+
+<p>前6行是IP数据报的头部, 一般是20字节(如果没有选项的话)</p>
+<blockquote>
+<p>ver: 版本号: 4bit, IPv4的值就是0100<br>head len: 头部的长度，单位4字节<br>Type of service: 分组类型, 方便网络, 目前基本不用<br>length: 数据报总长<br>16-bit identifier: 16bit的标识符<br>flags: more flag标志位<br>fragment offset: 偏移量 单位8Byte<br>TTL: 分组存活的跳数<br>upper layer 上层协议(TCP&#x2F;UDP…)<br>Internet checksum: 分组头部校验和<br>32 bit source IP address: 32位源IP<br>32 bit destination IP address: 32位目标IP<br>Option: 选项部分</p>
+</blockquote>
+<p><strong>分片和重组</strong></p>
+<p>不同种类的网络MTU(最大传输单元)不同, 要将数据在不同的网络之间传输就需要分片和重组</p>
+<p>分片的时候需要为每一个分片添加相关的属性, 有</p>
+<ul>
+<li>20字节 的头部<ul>
+<li><code>16-bit identifier</code>: 同一个分组的分片id是相同的</li>
+<li><code>fragment offset</code>: 数据体与原数据相比偏移量</li>
+<li><code>flags</code>: more flag标志位(告诉你这是不是最后一个分片)</li>
+</ul>
+</li>
+<li>MTU - 20字节 的数据体部分</li>
+</ul>
+<p><strong>IPv4地址</strong></p>
+<p>IP地址是用来标注接入设备的点的, IPv4是一个32位的串, 在一个子网中, IP之间应该是一跳可达的。</p>
+<p>我们先来看看IP地址的组成：</p>
+<p>IPv4由32位二进制组成，这显然是很难记忆的，所以采用点分十进制表示方式以方便用户使用。</p>
+<p>基本做法是八个为一组进行划分，中间用点隔开</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609193838410.png" class="" alt="image-20230609193838410">
+
+<p>IPv4编址方法经历了三个时间段，分别是分类编址、划分子网和无分类编址。</p>
+<p><strong>分类编址</strong></p>
+<p>分类编制将IPv4分为了两部分，分别是网络号和主机号。通过网络号的位数将IPv4分为了五类。分别是A~E五类。</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609194108465.png" class="" alt="image-20230609194108465">
+
+<ul>
+<li><strong>A类地址</strong>: 首二进制位为0, 第一个字节代表网络号, 后面是主机名</li>
+<li><strong>B类地址</strong>: 二进制地址前两位是10, 前两个字节是网络号</li>
+<li><strong>C类地址</strong>: 二进制地址前三位是110，前3字节为网络号</li>
+<li><strong>D类地址</strong>: 二进制地址前四位是1110</li>
+<li><strong>E类地址</strong>: 二进制地址前四位是1111</li>
+</ul>
+<p>🔵如何区分这五类：看第一个字节，0<del>127为A类，128</del>191为B类，192~223为C类</p>
+<p>❗只有A、B、C类地址可以分配给网络中的主机或路由器的各接口</p>
+<p>此外，我们还做出了以下约定：</p>
+<ul>
+<li><p>A类地址网络号0和127会保留不指派。127会作为</p>
+</li>
+<li><p>主机号部分全0表示网络地址，保留不分配</p>
+</li>
+<li><p>主机号部分全1表示广播地址，保留不分配</p>
+</li>
+</ul>
+<p>🔵由此，A类地址可指派的网络数量为<code>2^(8-1) - 2 = 126</code>，其中<code>2^(8-1)</code>的意思是A类网络号第一位恒为0，剩下7位可变，共<code>2^7</code>种。<code>-2</code>是因为A类地址很特别，网络号0和127这两种还要排除在外不指派</p>
+<p>A类地址中每个网络中可分配的IP地址为<code>2^24 - 2</code>种，因为共24位主机号，除去全0和全1两种情况</p>
+<p>B类，C类和A类稍有不同，因为不用考虑网络号的特殊情况，他们可指派的网络数量分别为<code>2^(16) - 2 </code>和<code>2^(24) - 3</code>种。每个网络中可分配的IP地址分别为<code>2^16 - 2</code>和<code>2^8 - 2</code>种</p>
+<p>本地环回测试地址<code>127.x.x.x</code>：意思是不论什么请求, 只要到达网络层, 网络层会立即反转向上发回</p>
+<p>专用地址：在不同种类的地址中都抽一部分作为内网专用地址, 永远不会作为公网地址</p>
+<ul>
+<li>A类中的专用地址<code>10.0.0.0 - 10.255.255.255/8</code></li>
+<li>B类中的专用地址<code>172.16.0.0 - 172.31.255.255/16</code></li>
+<li>C类中的专用地址<code>192.168.0.0 - 192.168.255.255/24</code></li>
+</ul>
+<p><strong>划分子网:</strong></p>
+<p>子网的提出是为了解决IP地址浪费的问题。</p>
+<p>子网掩码：子网掩码通过连续的比特1对应网络号和子网号；使用连续的比特0对应主机号。将IPv4地址和对应的子网掩码进行与运算就可以得到所在子网的网络地址。</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609200051425.png" class="" alt="image-20230609200051425">
+
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609200136682.png" class="" alt="image-20230609200136682">
+
+<p>默认子网掩码：在未划分子网的情况下使用的子网掩码</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230609200229496.png" class="" alt="image-20230609200229496">
+
+
+
+<p><strong>无类域间路由CIDR:</strong> 将IP划分为类可能无法准确满足需求, 可以根据需求指定子网掩码, 为一个机构分配合理的子网号, 寻址的时候做一个按位与就获得了网络号,路由只需要对比目标IP&amp;mask &#x3D;&#x3D;&#x3D; distination就可以了, 如果 都没有匹配到就发送到路由表中的默认出口(一般是向公网的出口)</p>
+<h4 id="DHCP"><a href="#DHCP" class="headerlink" title="DHCP"></a>DHCP</h4><p>我们可以通过设置让机器具有一个静态IP&#x2F;掩码&#x2F;网关&#x2F;DNS地址. 也可以使用DHCP从服务器动态获得一个IP…</p>
+<ul>
+<li>特性<ul>
+<li>DHCP允许主机在上线的时候动态获取IP地址</li>
+<li>允许在IP过期后续租</li>
+<li>允许重新登陆后使用之前使用的IP</li>
+<li>支持移动用户短期在网</li>
+<li>使用UDP通信</li>
+</ul>
+</li>
+<li>工作方式<ul>
+<li>主机登陆后使用<code>0.0.0.0</code>向<code>255,255,255,255</code>广播”DHCP discover”</li>
+<li>DHCP服务器使用<code>DHCP offer</code>返回IP响应</li>
+<li>主机请求IP地址, 发送<code>DHCP request</code>请求</li>
+<li>DHCP服务器发送IP地址<code>DHCP ack</code>响应</li>
+</ul>
+</li>
+</ul>
+<h4 id="路由通告与聚合"><a href="#路由通告与聚合" class="headerlink" title="路由通告与聚合"></a>路由通告与聚合</h4><p>路由之间要相互进行通告, 自己是哪个子网的路由器(XXX网段的数据包都交给我来转发), 这样相互之间才可以相互组网, 路由器还可以对通告聚合, 如果路由发现他拥有某个网段的所有子网,他可以合并向外通告</p>
+<p>路由器会匹配最长的前缀进行转发</p>
+<h4 id="NAT网络地址转换"><a href="#NAT网络地址转换" class="headerlink" title="NAT网络地址转换"></a>NAT网络地址转换</h4><p>内网中的设备使用的内网IP无法在外网上通信, 路由器上拥有公网IP, 那么</p>
+<ul>
+<li>在内网设备访问外网的时候: 在出路由的时候如果路由器看到数据报的源IP是一个内网地址就会将地址与端口替换为自己的公网地址与一个空闲的端口号, 在收到数据的时候将目标地址和端口号替换为内网的内网地址&#x2F;端口</li>
+<li>在外网设备主动访问内网的时候会出现访问失败. 想访问就必须设置NAT穿越</li>
+<li>NAT穿越:<ul>
+<li>可以在网关配置<code>公网IP:无用端口</code>永远对应<code>内网IP:目标端口</code></li>
+<li>UPnP&#x2F;IGD协议: 允许动态修改NAT转化的表象</li>
+<li>可以使用中继连接, 内网永远与中继连接, 外网与中继连接</li>
+</ul>
+</li>
+</ul>
+<h4 id="IPv6"><a href="#IPv6" class="headerlink" title="IPv6"></a>IPv6</h4><ul>
+<li><p>特性</p>
+<ul>
+<li>IPv6头部是40Byte</li>
+<li>不允许分片(遇到大分组会直接返回报错, 否则这么大的头很难做分片)</li>
+<li>IP地址从32bit变为64bit</li>
+</ul>
+</li>
+<li><p>结构</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/watermark,type_d3F5LXplbmhlaQ,shadow_50,text_Q1NETiBATGl1a2FpcnVp,size_15,color_FFFFFF,t_70,g_se,x_16.png" class="" alt="请添加图片描述"></li>
+</ul>
+<blockquote>
+<p>​    priority用来标注流中数据包的优先级<br>​	flow Label 未明确定义<br>​	Nextheader 上层协议或者是IPv4的Option(遵循TLV格式: Type Length Value)<br>​	checksum 被移除<br>​	Option 整合到Nextheader<br>​	增加Packet too big响应</p>
+</blockquote>
+<ul>
+<li><p>IPv4过渡到IPv6</p>
+<p>在IPv6网内部使用IPv6通信</p>
+<p>使用双栈协议(隧道技术)处理IPv4与IPv6的通信, 将IPv6的数据报整体封装成IPv4的数据报进行通讯</p>
+</li>
+</ul>
+<h3 id="通用转发与SDN"><a href="#通用转发与SDN" class="headerlink" title="通用转发与SDN"></a>通用转发与SDN</h3><p>数据平面完成数据转发, 控制平面计算路由表</p>
+<ul>
+<li><p>传统方式</p>
+<p>实现这两大功能采用的是垂直集成的方式: 每个路由器自己计算路由表, 进行路由通告, 交给IP实体进行转发</p>
+<p>设备只能按照规范模式工作, 无法升级功能&#x2F;协议. 对于功能不同的网络设备(防火墙, 负载均衡服务器), 需要单独部署协议与功能</p>
+<p>硬件, 操作系统, 软件都是是私有的, 品牌间互不兼容</p>
+<p>根据IP进行转发, 不能将一个IP的请求分成多路发送</p>
+</li>
+<li><p>SDN</p>
+<p>远程控制器与CA(控制代理)交互, 控制器决定分组的转发逻辑(可编程), CA所在设备执行逻辑</p>
+<p>分组交换机具有相同接口, 不同操作之间可以相互兼容</p>
+<p>根据IP等字段进行转发, 可以将一个IP的请求分成多路发送</p>
+</li>
+</ul>
+<p><strong>通用流表</strong></p>
+<ul>
+<li>流: 由分组头部字段定义</li>
+<li>通用转发: 简单的分组处理规则<ul>
+<li><code>模式</code>: 将头部字段与流表进行匹配</li>
+<li><code>行动</code>: 将匹配上的分组进行丢弃&#x2F; 转发&#x2F; 修改</li>
+<li><code>优先权</code>: 匹配到多个结果后决定使用哪一个</li>
+<li><code>计数器</code>: 对匹配的分组计数</li>
+</ul>
+</li>
+<li>通过流表变成可以让路由器具有路由器, 交换机, 防火墙…功能呢个</li>
+</ul>
+<h2 id="网络层-控制平面"><a href="#网络层-控制平面" class="headerlink" title="网络层 控制平面"></a>网络层 控制平面</h2><h3 id="路由选择算法"><a href="#路由选择算法" class="headerlink" title="路由选择算法"></a>路由选择算法</h3><p>有<code>link state</code>链路状态算法和<code>distance vector</code>距离矢量算法</p>
+<p><strong>路由</strong>: 路由指的是按照某种指标(跳数, 延迟, 花费…的加权平均)在一个网状网中找到一条较好的子网到子网的路径</p>
+<p><strong>输入</strong>: 网络拓扑, 边的代价</p>
+<p><strong>输出</strong>: 汇集树(sink tree), 就是单源节点到其他所有节点最优路径形成的树, 路由选择算法是为所有的节点找到自己的汇集树, 一个节点的汇集树不一定是另一个节点的汇集树</p>
+<p><strong>路由选择原则</strong></p>
+<ul>
+<li>正确性</li>
+<li>简单性: 没有必要为了最优解进行复杂计算</li>
+<li>健壮性: 可以适应网络拓扑的变化</li>
+<li>稳定性</li>
+<li>公平性</li>
+<li>最有性: 没有必要为了结果最优耗费大量代价</li>
+</ul>
+<p><strong>路由选择算法</strong>:</p>
+<p>可以分为有全局算法和分布式算法</p>
+<ul>
+<li>全局式算法: 拥有上帝视角, 可以看到所有边的代价, 直接算出最优路径</li>
+<li>分布式算法: 我只知道自己邻接节点的信息, 通过相互通告计算到目标节点的最短路径与转发方式(转发到哪个邻居)</li>
+</ul>
+<p>可以分为静态算法与动态算法</p>
+<h4 id="Link-State-LS-算法"><a href="#Link-State-LS-算法" class="headerlink" title="Link State(LS) 算法"></a>Link State(LS) 算法</h4><p>实际上就是dijkstra算法</p>
+<ul>
+<li><p>通过各种渠道(泛洪等)获得<strong>整个网络</strong>的拓扑与代价</p>
+<ul>
+<li><p>发现相邻节点(发送Hello分组)获取对方网络地址</p>
+</li>
+<li><p>测量相邻节点之间的代价(延迟, 开销…)</p>
+</li>
+<li><p>每个节点组装一个LS分组描述这个节点到其他路由器的代价</p>
+</li>
+<li><p>将LS分组泛洪到周边路由器(为了防止泛洪造成的网络风暴: LS分组有TTL, LS分组有版本号, 如果收到老版本的LS分组就不做处理), 同时这个泛洪是有确认的, 收到LS分组后要返回接受成功响应</p>
+</li>
+</ul>
+</li>
+<li><p>使用LS路由算法计算本节点到其他节点的最优路径(汇集树)</p>
+</li>
+<li><p>按照路由表进行转发</p>
+</li>
+<li><p>应用: OSPF协议, IS-IS协议</p>
+</li>
+</ul>
+<h4 id="Distance-Vector-Routing-DV-距离矢量路由算法"><a href="#Distance-Vector-Routing-DV-距离矢量路由算法" class="headerlink" title="Distance Vector Routing (DV)距离矢量路由算法"></a>Distance Vector Routing (DV)距离矢量路由算法</h4><p>基本思想:</p>
+<p>每个节点维护一张路由表, 包含</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230601202406333.png" class="" alt="image-20230601202406333">
+
+<p>相邻两个邻居互相交换距离<strong>矢量</strong></p>
+<p>节点收到路由表, 测量与邻居的距离<strong>矢量</strong>, 计算经过这个邻居到目标节点的距离矢量</p>
+<p>更新最小值</p>
+<ul>
+<li><p>递归方程</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230601202424308.png" class="" alt="image-20230601202424308">
+
+<p>其中<code>d_x(y)</code>是x到y的矢量距离, 当然, 存在<code>v=x</code></p>
+</li>
+<li><p>特点</p>
+<ul>
+<li>好消息传的快(迭代后代价减少, 下次通告的时候会带上这个消息)</li>
+<li>坏消息传的慢(迭代后代价变大, 这个通告的结果不会影响路由表 直到TTL)</li>
+</ul>
+</li>
+<li><p>水平分裂算法&#x2F;毒性逆转算法 (用来防止坏消息传的慢)</p>
+<p>有如下链的时候</p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230601202455293.png" class="" alt="image-20230601202455293"></li>
+</ul>
+<p>LS算法可以一次性算出全局路由表, 但是DV是迭代算法(异步)</p>
+<p><strong>两种算法的对比</strong></p>
+<img src="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/image-20230601202521503.png" class="" alt="image-20230601202521503">
+
+<p>局部故障时:</p>
+<ul>
+<li>LS算法会通告不正确的代价&#x2F; 节点只计算自己的汇集树&#x2F; 错误信息只会影响局部(经过他的节点)</li>
+<li>DV算法会通告全网不正确代价&#x2F; 错误会扩散到所有节点</li>
+</ul>
+<h3 id="自治系统的内部路由选择协议"><a href="#自治系统的内部路由选择协议" class="headerlink" title="自治系统的内部路由选择协议"></a>自治系统的内部路由选择协议</h3><h4 id="RIP协议"><a href="#RIP协议" class="headerlink" title="RIP协议"></a>RIP协议</h4><ul>
+<li>采用DV算法</li>
+<li>将跳数作为距离矢量(代价)</li>
+<li>每隔30s&#x2F; 在对方请求的时候进行一次通告</li>
+<li>每个通告最多包含25个目标子网</li>
+<li>适合小型网络(因为只能包括25个目标子网)</li>
+</ul>
+<p><strong>链路失效和恢复</strong></p>
+<ul>
+<li>180s没有收到通告就认为路由失效</li>
+<li>发现路由失效后立刻发出通告</li>
+<li>使用毒性逆转算法</li>
+<li>链路代价大于16就认为节点不可达</li>
+</ul>
+<p><strong>RIP进程处理</strong></p>
+<ul>
+<li>RIP协议以应用进程的方式实现</li>
+<li>采用<strong>UDP</strong>协议将通告进行周期性传播</li>
+<li>RIP是网络层协议, 使用了传输层的服务, 以应用实体的方式实现</li>
+</ul>
+<h4 id="OSPF协议"><a href="#OSPF协议" class="headerlink" title="OSPF协议"></a>OSPF协议</h4><p>OSPF开放路径优先协议</p>
+<ul>
+<li>使用LS算法</li>
+<li>将通告通过链路在全网泛洪</li>
+</ul>
+<p>OSPF通告信息中:</p>
+<ul>
+<li>每一个邻居路由器一个表项</li>
+<li>直接采用IP数据报传输通告(而不是UDP)</li>
+</ul>
+<p><strong>高级特性</strong></p>
+<ul>
+<li>所有报文都是经过认证的, 确保了安全性</li>
+<li>允许多个代价相同的路径存在(RIP只允许一个)</li>
+<li>对于每一条链路允许对不同的TOS(区分服务)有多重代价矩阵(对于卫星链路采用时间做代价, 光纤的可以用跳数做代价)</li>
+<li>支持单播&#x2F;多播</li>
+<li>在大型网络中支持层次化, 支持在大型网中分区, 区域间的传输必须借助边界路由器, 这使得泛洪的时候只在边界中进行泛洪</li>
+</ul>
+<p><strong>层次性的OSPF路由</strong></p>
+<ul>
+<li>2个级别的层次性: 本地, 骨干<ul>
+<li>链路状态通告仅仅在本地区域Area范围内进行</li>
+<li>每一个节点拥有本地区域的拓扑信息:<br>关于其他区域,知道去它的方向,通过区域边界路由器(最短路径)</li>
+</ul>
+</li>
+<li>区域边界路由器: “汇总(聚集)”到自己区域内网络的距离, 向其它区域边界路由器通告.</li>
+<li>骨干路由器: 仅仅在骨干区域内,运行OSPF路由</li>
+<li>边界路由器: 连接其它的AS’s.</li>
+</ul>
+<p>还有一个ISIS路由协议几乎与OSPF一样</p>
+<h3 id="IPS之间的路由选择协议"><a href="#IPS之间的路由选择协议" class="headerlink" title="IPS之间的路由选择协议"></a>IPS之间的路由选择协议</h3><h4 id="层次路由"><a href="#层次路由" class="headerlink" title="层次路由"></a>层次路由</h4><p>之前的RIP&#x2F;OSPF是子网内部的协议, 默认所有的节点在一个子网下</p>
+<p><strong>平面的路由</strong>:</p>
+<ul>
+<li>所有节点地位一样</li>
+<li>使用LS&#x2F;DV进行路由</li>
+<li>所有路由器在一个平面</li>
+</ul>
+<p><strong>节点放在一个平面路由的问题</strong></p>
+<ul>
+<li>规模问题: 数据量大导致<br>LV是O(n^2)算法, 无法做这么多节点的泛洪, 时间无法接受<br>DV是迭代算法, 无法收敛</li>
+<li>管理问题: 内网拓扑变透明, 无法向外隐藏, 内网无法进行定制化管理</li>
+</ul>
+<p><strong>节点分层后</strong></p>
+<ul>
+<li>在一个层次中的节点划分为多个自治区(AS)</li>
+<li>区域内部节点少可以采用RIP&#x2F;OSPF进行路由(甚至可以采用自定义的协议)</li>
+<li>区域之间通过通告聚合暴露更少的通告, 由于使用的协议不同, 要使用新的协议在区域间进行路由</li>
+<li>解决了规模问题, 管理问题</li>
+</ul>
+<h4 id="BGP边界网关协议"><a href="#BGP边界网关协议" class="headerlink" title="BGP边界网关协议"></a>BGP边界网关协议</h4><p>用来解决IPS之间的路由问题, 将一个个自治区域(AS)连在一起</p>
+<p><strong>BGP协议为AS(自治区域)提供的方法</strong></p>
+<ul>
+<li>明确: AS之间的通信都是通过两个AS的网关进行的, AS的网关也是AS的设备, 可以使用RIP&#x2F;OSPF协议获得AS内部的路由信息</li>
+<li><code>eBGP</code>方法: 网关收集AS的路由信息, 使用eBGP方法发送通告到其他AS网关(XXX网段的IP的信息都可以把我作为下一跳)</li>
+<li>rBGP方法: 网关获得其他AS的路由通告, 使用rBGP方法通过TCP连接告诉AS内部设备(包括内部其他网关)其他AS的路由信息(也会告诉其他AS的网关, 要去XXX网段先跳到我)</li>
+<li>整体流程: 网关参与内部子网运算, 通告eBGP通告, 网关收到通告, 使用rBGP通告内部网关, 进行转发</li>
+</ul>
+<p><strong>BGP路由信息计算方法</strong></p>
+<ul>
+<li>上一层通过路由信息决定AS之间通信的”好”的路径</li>
+<li>路由计算使用的是改进的路径矢量算法, 在传递矢量信息的时候传递经过的路径以判环</li>
+</ul>
+<p><strong>BGP会话</strong>: 两个BGP路由开机时建立BGP连接, 这是一个半永久的<strong>TCP</strong>连接, 用于交换报文(包含距离矢量和路径方便判环)</p>
+<p><strong>BGP路径选择策略</strong>:</p>
+<p>在AS内部, 机器一般是一个机构的, 使用LS&#x2F;DV算法直接计算网络, 目的就是相互低代价可达(更加关注性能)</p>
+<p>在AS之间的路由一般是跨机构的路由, 不仅要考虑低代价, 还要考虑经济, 政治等因素, 路由选择可以使用以下方式优先排序</p>
+<ul>
+<li>本地策略值</li>
+<li>最短AS-PATH: 经过的AS跳数</li>
+<li>最近的NEXT-HOP路由器(热土豆路由): 选择离我最近的AS发送(传热土豆的时候传给最近的人)</li>
+<li>附加判据: BGP标识</li>
+<li>一个前缀对应多个路径, 应该之保留一条路径</li>
+</ul>
+<p><strong>BGP&amp;OSPF实现跨AS通信</strong></p>
+<ul>
+<li>有AB两个AS, 当A新增路由器X</li>
+<li>A的网关使用OSPF计算X到达网关的代价</li>
+<li>A的网关使用eBGP发送通告, B的网关接受通告, 使用rBGP向内网发送OSPF通告, 向内部说: 到X路由器的IP报全部发给B的网关</li>
+<li>B区域设备使用OSPF计算到X结果</li>
+</ul>
+<h3 id="SDN"><a href="#SDN" class="headerlink" title="SDN"></a>SDN</h3><ul>
+<li>在SDN的方式下可以通告匹配不同的字段实现流量控制, 多路通信</li>
+<li>SDN是匹配-行动模式</li>
+</ul>
+<p><strong>在SDN模式下</strong></p>
+<ul>
+<li>SDN控制器分布式运行, 向外暴露一个整体</li>
+<li>SDN具有通信层(南向接口), 网络状态管理层(分布式数据库), 网络应用界面层</li>
+<li>路由器可以由简单的数据平面交换机进行基于硬件进行替代, 控制器通过南向接口下发流表, 控制器与数据平面交换机使用OpenFlow协议进行交换</li>
+<li>网络应用(指的是实现各种功能的网络设备,例如防火墙)通过北向接口获取接口, 上报请求</li>
+</ul>
+<p><strong>OpenFlow协议</strong></p>
+<p>控制器与SDN交换机之间的协议, 使用TCP协议交换报文, 报文有</p>
+<ul>
+<li><code>特性</code>: 控制器查询交换机特性</li>
+<li><code>配置</code>: 控制器查询&#x2F;配置交换机参数</li>
+<li><code>修改状态</code>: 分组交换机要增删改OverFlow中的流表时要进行上报</li>
+<li><code>packet-out</code>: 对于流表中没有的分组, 分组交换机上报, 控制器指定分组通过特定端口发出</li>
+</ul>
+<p>简而言之就是控制器通告协议配置交换机, 下发流表, 分组交换机通过协议修改流表, 异常上报</p>
+<p><strong>挑战</strong></p>
+<ul>
+<li>集中式带来的可靠性问题</li>
+<li>控制器性能问题</li>
+<li>可信性待解决</li>
+</ul>
+<h3 id="ICMP协议与SNMP协议"><a href="#ICMP协议与SNMP协议" class="headerlink" title="ICMP协议与SNMP协议"></a>ICMP协议与SNMP协议</h3><p><strong>ICMP因特网控制报文协议</strong></p>
+<p>用来在主机与路由器之间进行沟通, 被广泛用于差错报告(例如TTL为0被销毁了)、</p>
+<p>ICMP协议一般被认为是IP的一部分, 但是实际上是运行在IP协议之上的, 也就是说IP数据报中包含了ICMP报文</p>
+<p>ICMP数据报包含有类型字段与编码字段, 包含了被生成时IP报的头部与前8字节</p>
+<ul>
+<li>Ping就是向目标IP发送类型8编码0的字节</li>
+<li>Traceroute就是通过不断增加TTL, 接收4类型ICMP实现的(4类本身是用来实现数据链路层拥塞控制定义的, 但是现在有了TCP的拥塞控制这个就无用了)</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kakieccc.github.io/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/" data-id="cm0ucluwo0005ecfi20y9acxr" data-title="计算机网络_网络层" class="article-share-link">Share</a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B/" rel="tag">基础课程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" class="wow fadeInUp">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/banner.jpg" data-sizes="auto" alt="计算机网络_链路层" class="lazyload">
+          
+        
+        <a href="/2023/06/08/%E9%93%BE%E8%B7%AF%E5%B1%82/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            计算机网络_链路层
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="计算机网络_传输层" class="lazyload">
+        
+      
+      <a href="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          计算机网络_传输层
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrap wow fadeInRight wrap-sticky">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">网络层 数据平面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">网络层概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="toc-number">1.1.1.</span> <span class="toc-text">数据平面与控制平面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">网络服务模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1%EF%BC%9A%E8%99%9A%E7%94%B5%E8%B7%AF%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%BD%91%E7%BB%9C"><span class="toc-number">1.2.</span> <span class="toc-text">网络层提供的服务：虚电路与数据报网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E7%94%B5%E8%B7%AF%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.1.</span> <span class="toc-text">虚电路服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.2.</span> <span class="toc-text">数据报服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%EF%BC%9A%E8%BD%AC%E5%8F%91"><span class="toc-number">1.3.</span> <span class="toc-text">数据平面的主要功能：转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.</span> <span class="toc-text">路由器工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">1.4.1.</span> <span class="toc-text">调度算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.</span> <span class="toc-text">IP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IPv4%E6%95%B0%E6%8D%AE%E6%8A%A5"><span class="toc-number">1.5.1.</span> <span class="toc-text">IPv4数据报</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DHCP"><span class="toc-number">1.5.2.</span> <span class="toc-text">DHCP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%9A%E5%91%8A%E4%B8%8E%E8%81%9A%E5%90%88"><span class="toc-number">1.5.3.</span> <span class="toc-text">路由通告与聚合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAT%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.5.4.</span> <span class="toc-text">NAT网络地址转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IPv6"><span class="toc-number">1.5.5.</span> <span class="toc-text">IPv6</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E8%BD%AC%E5%8F%91%E4%B8%8ESDN"><span class="toc-number">1.6.</span> <span class="toc-text">通用转发与SDN</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="toc-number">2.</span> <span class="toc-text">网络层 控制平面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">路由选择算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Link-State-LS-%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.1.</span> <span class="toc-text">Link State(LS) 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Distance-Vector-Routing-DV-%E8%B7%9D%E7%A6%BB%E7%9F%A2%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">Distance Vector Routing (DV)距离矢量路由算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E9%83%A8%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.2.</span> <span class="toc-text">自治系统的内部路由选择协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RIP%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.2.1.</span> <span class="toc-text">RIP协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSPF%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.2.2.</span> <span class="toc-text">OSPF协议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPS%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.</span> <span class="toc-text">IPS之间的路由选择协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E8%B7%AF%E7%94%B1"><span class="toc-number">2.3.1.</span> <span class="toc-text">层次路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BGP%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.2.</span> <span class="toc-text">BGP边界网关协议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SDN"><span class="toc-number">2.4.</span> <span class="toc-text">SDN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICMP%E5%8D%8F%E8%AE%AE%E4%B8%8ESNMP%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.5.</span> <span class="toc-text">ICMP协议与SNMP协议</span></a></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+    
+      <div class="sidebar-btn-wrapper" style="position:static">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer" class="wow fadeInUp">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      <div>
+        <span class="icon-copyright"></span>
+        2020-2024
+        <span class="footer-info-sep"></span>
+        kakie
+      </div>
+      
+        <div>
+          Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+          Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+        </div>
+      
+      
+        <div>
+          <span class="icon-brush"></span>
+          36.5k
+          &nbsp;|&nbsp;
+          <span class="icon-coffee"></span>
+          02:05
+        </div>
+      
+      
+        <div>
+          <span class="icon-eye"></span>
+          <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+          &nbsp;|&nbsp;
+          <span class="icon-user"></span>
+          <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+        </div>
+      
+    </div>
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2"><span class="toc-number">1.</span> <span class="toc-text">网络层 数据平面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.</span> <span class="toc-text">网络层概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2%E4%B8%8E%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="toc-number">1.1.1.</span> <span class="toc-text">数据平面与控制平面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">网络服务模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%8F%90%E4%BE%9B%E7%9A%84%E6%9C%8D%E5%8A%A1%EF%BC%9A%E8%99%9A%E7%94%B5%E8%B7%AF%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%8A%A5%E7%BD%91%E7%BB%9C"><span class="toc-number">1.2.</span> <span class="toc-text">网络层提供的服务：虚电路与数据报网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%99%9A%E7%94%B5%E8%B7%AF%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.1.</span> <span class="toc-text">虚电路服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.2.2.</span> <span class="toc-text">数据报服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B3%E9%9D%A2%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD%EF%BC%9A%E8%BD%AC%E5%8F%91"><span class="toc-number">1.3.</span> <span class="toc-text">数据平面的主要功能：转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.4.</span> <span class="toc-text">路由器工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B0%83%E5%BA%A6%E7%AE%97%E6%B3%95"><span class="toc-number">1.4.1.</span> <span class="toc-text">调度算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.5.</span> <span class="toc-text">IP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#IPv4%E6%95%B0%E6%8D%AE%E6%8A%A5"><span class="toc-number">1.5.1.</span> <span class="toc-text">IPv4数据报</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DHCP"><span class="toc-number">1.5.2.</span> <span class="toc-text">DHCP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%9A%E5%91%8A%E4%B8%8E%E8%81%9A%E5%90%88"><span class="toc-number">1.5.3.</span> <span class="toc-text">路由通告与聚合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAT%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.5.4.</span> <span class="toc-text">NAT网络地址转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IPv6"><span class="toc-number">1.5.5.</span> <span class="toc-text">IPv6</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E8%BD%AC%E5%8F%91%E4%B8%8ESDN"><span class="toc-number">1.6.</span> <span class="toc-text">通用转发与SDN</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2"><span class="toc-number">2.</span> <span class="toc-text">网络层 控制平面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.</span> <span class="toc-text">路由选择算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Link-State-LS-%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.1.</span> <span class="toc-text">Link State(LS) 算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Distance-Vector-Routing-DV-%E8%B7%9D%E7%A6%BB%E7%9F%A2%E9%87%8F%E8%B7%AF%E7%94%B1%E7%AE%97%E6%B3%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">Distance Vector Routing (DV)距离矢量路由算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E6%B2%BB%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%86%85%E9%83%A8%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.2.</span> <span class="toc-text">自治系统的内部路由选择协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RIP%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.2.1.</span> <span class="toc-text">RIP协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#OSPF%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.2.2.</span> <span class="toc-text">OSPF协议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IPS%E4%B9%8B%E9%97%B4%E7%9A%84%E8%B7%AF%E7%94%B1%E9%80%89%E6%8B%A9%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.</span> <span class="toc-text">IPS之间的路由选择协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%82%E6%AC%A1%E8%B7%AF%E7%94%B1"><span class="toc-number">2.3.1.</span> <span class="toc-text">层次路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BGP%E8%BE%B9%E7%95%8C%E7%BD%91%E5%85%B3%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.3.2.</span> <span class="toc-text">BGP边界网关协议</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SDN"><span class="toc-number">2.4.</span> <span class="toc-text">SDN</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ICMP%E5%8D%8F%E8%AE%AE%E4%B8%8ESNMP%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.5.</span> <span class="toc-text">ICMP协议与SNMP协议</span></a></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    <div class="site-search">
+      <div class="reimu-popup popup">
+        <div class="reimu-search">
+          <span class="reimu-search-input-icon"></span>
+          <div class="reimu-search-input" id="reimu-search-input"></div>
+        </div>
+        <div class="reimu-results">
+          <div id="reimu-stats"></div>
+          <div id="reimu-hits"></div>
+          <div id="reimu-pagination" class="reimu-pagination"></div>
+        </div>
+        <span class="popup-btn-close"></span>
+      </div>
+    </div>
+    
+<script src="https://npm.webcache.cn/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    firework(JSON.parse('{"excludeElements":["a"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.1.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+

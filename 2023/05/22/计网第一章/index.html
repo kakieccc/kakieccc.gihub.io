@@ -1,0 +1,789 @@
+
+  <!DOCTYPE html>
+  <html lang="zh"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <title>
+    计算机网络_绪论 |
+    
+    kakie の BLOG
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/regular.min.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/solid.min.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v5-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v4-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="/css/loader.css">
+
+  <meta name="description" content="计算机网络笔记第一章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络_绪论">
+<meta property="og:url" content="https://kakieccc.github.io/2023/05/22/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%80%E7%AB%A0/index.html">
+<meta property="og:site_name" content="kakie の BLOG">
+<meta property="og:description" content="计算机网络笔记第一章">
+<meta property="og:locale">
+<meta property="article:published_time" content="2023-05-21T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-12T12:20:16.833Z">
+<meta property="article:author" content="kakie">
+<meta property="article:tag" content="基础课程">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="kakie の BLOG" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+  
+  
+  
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/wowjs@1.1.3/css/libs/animate.css">
+
+    
+<script src="https://npm.webcache.cn/wowjs@1.1.3/dist/wow.min.js"></script>
+
+    <script>
+      new WOW({
+        offset: 0,
+        mobile: true,
+        live: false
+      }).init();
+    </script>
+  
+  
+    <script src="/sw.js"></script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg"></div>
+    <div class="loading-right-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+          <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    const startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    const endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('load', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/friend">Friend</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="/images/banner.jpg" alt="计算机网络_绪论">
+  
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <div id="logo-wrap">
+        
+          
+          
+            <a href="/" id="logo">
+              <h1>计算机网络_绪论</h1>
+            </a>
+          
+        
+      </div>
+      
+        
+        <h2 id="subtitle-wrap">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="outer">
+          
+          <section id="main"><article id="post-计网第一章" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    <div class="article-meta">
+      <div class="article-date wow slideInLeft">
+  <a href="/2023/05/22/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%80%E7%AB%A0/" class="article-date-link">
+    <time datetime="2023-05-21T16:00:00.000Z" itemprop="datePublished">2023-05-22</time>
+  </a>
+</div>
+
+      
+  <div class="article-category wow slideInLeft">
+    <a class="article-category-link" href="/categories/essay/">essay</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <!-- toc -->
+
+<h2 id="什么是网络"><a href="#什么是网络" class="headerlink" title="什么是网络"></a>什么是网络</h2><p>我们可以从两个角度来回答这个问题：第一种角度，是从它的结构来描述，第二种角度是从它的功能来描述。</p>
+<h3 id="从具体构成角度"><a href="#从具体构成角度" class="headerlink" title="从具体构成角度"></a>从具体构成角度</h3><p><strong>网络</strong>：节点与边之间的关系，与大小、形状等无关。即网状结构。例如蜘蛛网、关系网等等。</p>
+<p><strong>计算机网络</strong>：联网的计算机所构成的系统。</p>
+<p><strong>互联网&#x2F;因特网（Internet）</strong>：以TCP&#x2F;IP协议为主的一簇协议来支撑其工作的计算机网络。互联网是一堆的网络连在一起的，这些网络通过一系列网络交换节点，能够互联互通。</p>
+<blockquote>
+<p>计算机网络的节点包括了主机节点和数据交换节点。边就是通信链路，包括了接入链路和骨干链路。</p>
+<p>下面以互联网为例介绍互联网当中的节点与链路</p>
+<ul>
+<li><p><strong>节点</strong></p>
+<p>主机节点（端节点）</p>
+<ul>
+<li>每一个连接互联网的设备都被称作**主机(host)<strong>或者</strong>端系统(end system)**，二者是同一个概念的不同说法。例如传统设备(桌面PC、Linux工作站、服务器)和非传统设备(家电、平板等)都是主机&#x2F;端系统。</li>
+<li>主机节点是数据的源，也是数据的目标。</li>
+</ul>
+</li>
+</ul>
+<p> 数据交换节点</p>
+<ul>
+<li><p>数据交换节点既不是源，也不是目标。它起到中转转发的作用</p>
+</li>
+<li><p>数据交换节点按照工作层次的不同可以分为交换机、路由器等。他们只是工作层次和作用不同。</p>
+</li>
+<li><p><strong>通信链路</strong></p>
+</li>
+</ul>
+<p> 接入链路</p>
+<ul>
+<li>只要与主机有关的链路，就是接入链路</li>
+</ul>
+<p>  骨干链路</p>
+<ul>
+<li>骨干链路是路由器和路由器之间，交换机和路由器之间的连接</li>
+<li><strong>即骨干链路的两边的节点都是数据交换节点</strong></li>
+</ul>
+</blockquote>
+<p><strong>带宽</strong>：带宽是通信链路的一个非常重要的指标，表示链路的传输速率。其单位为bps，表示每秒可以传输的字节。</p>
+<p><strong>协议</strong>：互联网的构成除了节点与边，还有协议。协议是支撑互联网工作的最重要的一些标准。</p>
+<ul>
+<li>协议是对等层实体在通信过程中应该遵守的规则的集合，规定了<strong>格式、时序、动作</strong>。</li>
+<li>协议的三要素为<strong>语义、语法、时序</strong></li>
+<li>网络中存在着许多协议，接收方和发送方使用的协议必须一致，否则一方将无法识别另一方发出的信息。</li>
+<li>协议可以按照它的层次不同，分为不同层的协议，比如物理层、链路层、网络层、传输层实体和应用层协议，而且每一层的协议他要分成若干种。比如传输层的TCP、UDP，网络层的 IP，还有一些路由选择协议等等。</li>
+<li><strong>TCP</strong>和<strong>IP</strong>是因特网中两个最为重要的协议。</li>
+</ul>
+<p><strong>ISP</strong>：互联网服务提供商（Internet Service Provider），指的是向广大用户综合提供互联网接入业务、信息业务和增值业务的电信运营商。<strong>端系统通过ISP接入互联网</strong>。</p>
+<p><strong>Internet标准</strong>：互联网的标准是以 IETF （Internet Engineering Task Force，互联网工程任务组）发布的 RFC （Request for comments，请求评述）的文档的形式。</p>
+<h3 id="从服务角度"><a href="#从服务角度" class="headerlink" title="从服务角度"></a>从服务角度</h3><p>从服务的角度来看，互联网是分布式的应用进程以及为分布式应用进程提供通信服务的基础设施。</p>
+<p>基础设施是指应用层以下的所有的协议实体以及所有的网络。可以认为除了应用，其他都是基础设施。 </p>
+<p>基础设施向应用进程提供服务的方式有两种，一种是面向连接的服务，例如TCP；另外一种叫无连接的服务，例如UDP。</p>
+<hr>
+<p>从结构的角度分析互联网，可以将其分为三个部分。</p>
+<ul>
+<li>网络边缘：包含端系统和应用程序</li>
+<li>接入网、物理媒体：有线或者无线通信链路</li>
+<li>网络核心：互连着的路由器 、网络的网络</li>
+</ul>
+<p>网络边缘通过接入网接入到网络核心，网络核心实现数据交换，把所有的边缘节点接在一起，从而使得任意两个端系统之间得以通信。</p>
+<p>下面依次讲解这三个部分</p>
+<h2 id="网络边缘"><a href="#网络边缘" class="headerlink" title="网络边缘"></a>网络边缘</h2><p>互联网上的所有主机&#x2F;端系统处在互联网的边缘部分。主机可以细分为<strong>客户端（client）</strong>和<strong>服务器（server）</strong>。</p>
+<ul>
+<li>客户端：客户端是服务和信息资源的使用者</li>
+<li>服务器：服务器是服务和信息资源的提供者</li>
+</ul>
+<h2 id="接入网和物理媒体"><a href="#接入网和物理媒体" class="headerlink" title="接入网和物理媒体"></a>接入网和物理媒体</h2><p>网络边缘的端系统通过接入网接入到网络核心。这样网络核心就能够完成数据交换的功能，从而在源主机和目标主机之间能够实现通信。</p>
+<h3 id="接入网"><a href="#接入网" class="headerlink" title="接入网"></a>接入网</h3><p><strong>家庭接入</strong></p>
+<ul>
+<li><p>DSL（数字用户线路）</p>
+<p>早期，为每家每户铺上专网是不现实的，为了将更多的用户接入网络，人们想到了利用现有的网络资源，即电话线。</p>
+<p>DSL是一种<strong>以铜制电话双绞线为物理媒体</strong>的传输技术，是一种宽带接入技术。</p>
+<p>DSL利用家庭里原有的电话网，将数据通过调制解调器(modem)调制解调。从PC发出的数据是数字信号，经过Modem调制成高频模拟信号，再在分离器处与语音的低频信号混合。</p>
+<p>所有的DSL都是<strong>独享</strong>的</p>
+</li>
+<li><p>ADSL（非对称数字用户线路）</p>
+<p>A是指Asymmetric，异步的。所谓异步就是指上行下行的速率不一致。ADSL特点是下行速率（可达10Mbps）远大于上行速率（1Mbps），支持数据和普通语音信号同传，适合普通用户上网接入。</p>
+</li>
+<li><p>HFC（混合光纤同轴）</p>
+<p>本地电信公司有现成的电话线可以用，同样的，有线电视公司也有类似的资源，靠着每家每户装电视时的同轴电缆将用户接入网络。</p>
+<p>HFC是<strong>以光纤和同轴电缆为物理媒体</strong>的传输技术，是另外一种宽带住宅接入方式。</p>
+<p>用户使用电缆调制解调器通过同轴电缆与光纤结点相连，光纤结点通过光缆与电缆头端相连，而电缆头端接入了因特网。</p>
+<p>HFC是<strong>共享的</strong>，可以简单理解为头端接入了互联网，另外一端是千家万户。上行的数据是千家万户通过modom接入来协调使用上行的带宽；下行的数据是头端通过互联网向千家万户发送数据。</p>
+<p>HFC也是非对称的，其下行速率最高可达30Mbps，上行速率只有2Mbps</p>
+
+</li>
+<li><p>FTTH（光纤到户）</p>
+<p>随着时间发展，给每一户铺上专网成为可能。光纤到户 (FTTH)就是从中心点直接安装和使用光纤到住宅、公寓楼和企业等各个建筑物，以提供高速互联网接入，其速度可达100Mbps</p>
+<p>FTTH是<strong>以光纤作为物理媒体</strong>的传输技术。</p>
+<p>大规模实施 FTTH 成本高昂，因为需要解决“<strong>最后一公里</strong>”的问题。一般来讲，从中心局出来的每根光纤实际上由许多家庭共享，直到快接近这些家庭时，该光纤才分成每户一根光纤。由此，在<strong>最后一公里</strong>需要安装新的电缆组才能实现光纤到家。</p>
+<p>FTTH有两种光线分布方案，分别是AON（主动光纤网络）和PON（被动光纤网络）。</p>
+<p>AON 使用电动交换设备将信号主动引导到特定用户，PON使用分光器，这意味着PON用户只需要网络接收端的电动设备。</p>
+<p>大多数 FTTH 实施都使用 <strong>PON</strong>，因为它们的<strong>安装成本更低且性能更高</strong>。</p>
+</li>
+</ul>
+<p><strong>企业接入</strong></p>
+<ul>
+<li><p>以太网（Ethernet）</p>
+<p>直白来讲，以太网接入就是通过网线接入。用户使用双绞线与以太网交换机相连，从而接入因特网；接入以太网交换机的速度可达100Mbps。</p>
+</li>
+<li><p>通过移动互联的方式接入</p>
+<p>无线网又可以分为无线局域网（WLAN）和无线广域网（蜂窝网，就是移动数据）。其区别就是用户和基站间的距离。在无线LAN中，用户需要在一个接入点的几十米范围之内；而与WLAN不同的是，广域网要求用户仅需要位于基站的数万米范围之内即可。</p>
+</li>
+</ul>
+<h3 id="物理媒体"><a href="#物理媒体" class="headerlink" title="物理媒体"></a>物理媒体</h3><p>物理媒体通常可以分为导引性媒体（有线）和非导引性媒体（无线）；其中导引性媒体指信号沿着固体前行；而非导引性媒体中电波在空气或外层空间中传播</p>
+<ul>
+<li><p>导引性媒体</p>
+<ul>
+<li><p>双绞线</p>
+<p>最便宜的引导性传输媒体，由两条相互螺旋缠绕的铜线组成。目前局域网中的双绞线数据传输速率在10Mbps到10Gbps之间，所能达到的数据传输速率取决于线的粗细以及传输距离</p>
+</li>
+<li><p>同轴电缆</p>
+<p>也由两个铜导体构成，但是它们是同心的，而非并行的；借助特殊的结构和绝缘层，同轴电缆可得到较高的数据传输速率（数十Mbps）；在电视系统中应用广泛</p>
+</li>
+<li><p>光纤</p>
+<p>一种细而柔软、能导引光脉冲的媒体，其最大传输速率能支持数十甚至数百Gbps</p>
+</li>
+</ul>
+</li>
+<li><p>非导引性媒体</p>
+<ul>
+<li><p>陆地无线电信道</p>
+</li>
+<li><p>卫星无线电信道</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="网络核心"><a href="#网络核心" class="headerlink" title="网络核心"></a>网络核心</h2><p>网络核心是数据交换的功能源。主机把数据发出去，并且正确地传达到目标主机。</p>
+<p>实现数据交换有两种方式，分别是<strong>电路交换（circuit switch）</strong>和<strong>分组交换（packet switch）</strong></p>
+<p>互联网和几乎所有的网络采用的都是分组交换，电路交换基本用于电话网。</p>
+<h3 id="电路交换"><a href="#电路交换" class="headerlink" title="电路交换"></a>电路交换</h3><p>两个主机在通讯之前，需要先建立起连接。靠信令系统建立起一项<strong>独享的</strong>线路之后，双方就可以进行一个双向的通信了。独享可以保障性能，同时会造成资源的浪费。</p>
+<p><strong>片</strong></p>
+<ul>
+<li><p>电路交换通过将链路&#x2F;网络资源（如带宽）划分为<strong>片（piece）</strong>，达到提高效率的目的。在通信时，将片分配给各路呼叫（calls），每一路呼叫会独占分配到的片进行通信。当各路“呼叫”不释放资源，且不呼叫时，片就造成了闲置。</p>
+</li>
+<li><p>计算：<code>每一片的带宽 = 链路总带宽/片数</code> 。例如链路总带宽为1.536Mbps，共24片，那么每一片带宽就为1.536M&#x2F;24&#x3D;64Kbps</p>
+</li>
+<li><p>常见的片划分方式有**频分( Frequency division multiplexing) <strong>、</strong>时分(Time- division multiplexing)<strong>、</strong>波分(Wave- division multiplexing)**。</p>
+<ul>
+<li><p>频分FDM：按频率将链路划分为若干小片，两个主机在通讯之前，在每一条链路上找到空闲的一片频率，从而进行通信。</p>
+</li>
+<li><p>时分TDM：按照时间来分，把节点的通信能力分解为一个个的以时间为单位的周期。然后，每个周期的第一片被第一个用户所使用，每个周期的第二片被第二个用户所使用，依次类推。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="分组交换"><a href="#分组交换" class="headerlink" title="分组交换"></a>分组交换</h3><p>分组交换不再划分片，通信时直接使用全部的带宽。</p>
+<p><strong>分组</strong></p>
+<ul>
+<li>主机之间传输的数据被分为一个个的分组（packet）。</li>
+<li>分组每次移动一跳（hop），每一个节点都会先将数据<strong>全部存储下来之后再转发。</strong></li>
+<li>如果某条链路的最大传输速率为R，分组长度为L，则该链路传输该分组的时间为<code>R/L</code>；这个时间也就是传输时延</li>
+<li>在每个交换节点当中，耽误的时间延迟比电路交换要多的多，但是换取了<strong>共享性</strong>的好处。</li>
+</ul>
+<p><strong>排队时延和丢失</strong></p>
+<p>如果<code>分组到达的速率 &gt; 链路的输出速率</code>，分组将会排队等待传输，产生<strong>排队延迟</strong>；如果路由器的缓存用完了，分组将会被抛弃，发生<strong>分组丢失</strong>。</p>
+<p><strong>分组交换是时分的多路复用</strong></p>
+
+
+<p>如上图，A 和 B 两个相邻的节点，把链路上的时间资源分成一个个的周期，每个周期分成若干个小片，每个周期绿色的给 A，蓝色的给 B 用。</p>
+<p>只不过划分时间片的方式不是固定的，我们把这种多路复用的方式，称之为统计多路复用(statistical multiplexing)</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p><strong>电路交换缺点</strong></p>
+<ul>
+<li><p>电路交换会构成端与端之间独享的线路，即使双方没有发生通信，这条链路也会一直被占用。这样的话资源浪费情况比较多。</p>
+</li>
+<li><p>在主机通信之前，要先建立呼叫连接。两个主机要耗费一个线路建立的时间，这对于通话来说是可以忍受的，因为连接时间的占比很小。但是对于计算机来说，可能发生“采用了 2 秒的连接时间， 1 秒就搞定了通信”的情况，即通信具有突发性。</p>
+</li>
+<li><p>一个线路连接的交换机，要维护很多片和片之间的映射的关系。通常在核心的网络交换设备当中，会达到 10 万级别以上的一个关系维护，一旦宕机了后果非常严重，可靠性不高。</p>
+</li>
+</ul>
+<p><strong>分组交换优点</strong></p>
+<ul>
+<li>提供了比电路交换更好的带宽共享</li>
+<li>比电路交换更简单、更有效、实现成本更低</li>
+<li>分组交换在应对突发业务方面使带宽利用率得到大幅提升</li>
+</ul>
+<h2 id="互联网结构和ISP"><a href="#互联网结构和ISP" class="headerlink" title="互联网结构和ISP"></a>互联网结构和ISP</h2><p>互联网从具体构成可以划分为主机与链路, 其中主机节点构成的子系统叫网络边缘, 交换节点与链路构成了网络核心, 通过接入网将两者连起来。这是之前提到过的。</p>
+<p>除此之外，我们需要一个模型来刻画因特网的结构。</p>
+<p>端系统是通过ISP接入因特网的，为了实现端系统的互联，ISP也必须互联，其实网络模型结构就是用来表达ISP和端系统以及ISP之间的结构的抽象。</p>
+<ul>
+<li>网络结构1：存在唯一的全球承载ISP互联所有的接入ISP。这是指全球ISP是一个由路由器和通信链路构成的网络，该网络跨越全球，其他的接入ISP都至少和一个它的路由器相连；</li>
+<li>网络结构2：存在多个全球承载ISP，它们分别于一部分的接入ISP互联；为了实现端系统的互联，这多个全球ISP也必须互联；网络结构是一个两层结构，其中全球承载ISP位于顶层，接入ISP处于底层；</li>
+<li>网络结构3：顶层全球承载ISP基本上已经定型，但是接入ISP现在还很混乱，而网络结构3中，接入ISP也是分层的：较小区域中的ISP连入较大区域的ISP，而不是直接与顶层ISP相连</li>
+<li>网络结构4：是在网络结构3的基础上，增加了以下特点而形成的结构：存在点（Point of Presence，PoP）、多宿、对等、因特网交换点（Internet exchange point，IXP）。</li>
+<li>网络结构5：网络结构5是在网络结构4的基础上增加了内容提供商网络而构成。内容提供商网络构建自己的网络，并且通过与较低层ISP对等而“绕过”较高层因特网ISP，而且内容提供商网络对端用户也有了更多的控制。</li>
+</ul>
+<p>总体来说，今天的因特网是一个<strong>“网络的网络”</strong>，其结构复杂，由十多个顶层ISP和数十万个较低层ISP构成。近年来，主要的内容提供商创建自己的网络，直接在可能的地方与较低层ISP互联</p>
+<h2 id="分组延时、丢失和吞吐量"><a href="#分组延时、丢失和吞吐量" class="headerlink" title="分组延时、丢失和吞吐量"></a>分组延时、丢失和吞吐量</h2><p>计算机网络必定要限制在端系统之间的吞吐量，故在端系统之间存在时延、丢包</p>
+<p><strong>四种延迟</strong></p>
+<ul>
+<li><p>传输延迟：从发送数据帧的第一个比特算起, 到该帧的最后一个比特发送完毕所需的时间。实际的传输时延通常在毫秒到微秒数量级。</p>
+<p><code>传输时延=分组长度L(bits) /链路带宽R(bps)</code></p>
+</li>
+<li><p>传播延迟：比特进入链路后，从该链路的起点到下一个结点所用的时间，广域网中，传播时延一般是毫秒级的。</p>
+<p>传播时延&#x3D;<code>物理链路长度d(m)/链路的传播速率s(m/s)</code></p>
+</li>
+<li><p>处理延迟：主机或路由器处理所收到的分组(查路由表, 检错)的时间。</p>
+<p>处理时延通常在微秒或者更低数量级</p>
+</li>
+<li><p>排队延迟: 分组在输入队列中排队等待处理，在输出队列中等待转发，就形成了排队时延。</p>
+<p>一般来说，排队时延是到达该队列的流量强度和性质的函数。通常可以达到毫秒级到微秒级</p>
+
+</li>
+<li><p>总时延 &#x3D; 传输延迟+传播延迟+处理延迟+排队延迟</p>
+</li>
+<li><p>当考虑端到端的时延时，应假设网络是无拥塞的，因此排队时延可以忽略不计</p>
+</li>
+</ul>
+<p><strong>丢包</strong></p>
+<p>到达的分组发现一个满的队列。由于没有地方存储这个分组，路由器将丢弃该分组，该分组将会丢失，当<strong>流量强度</strong>持续大于1时，就将出现丢包现象。</p>
+<p><strong>吞吐量</strong></p>
+<p>吞吐量实际上是一个速度指标，它描述了比特经过某个节点的速度，分为<strong>瞬间吞吐量</strong>和<strong>平均吞吐量</strong></p>
+<ul>
+<li><p>瞬间吞吐量：主机B接受到该文件的当前速率</p>
+</li>
+<li><p>平均吞吐量：如果该文件由F比特组成，主机B接受到所有比特用去T秒，则文件的平均吞吐量为<code>F/T</code>bps</p>
+</li>
+</ul>
+<p>对于某条路径上的结点来说，和该结点有关的速度有接收数据的速度和发送数据的速度，而该结点的吞吐量是这两个速度中<strong>较小的一个</strong></p>
+<p>吞吐量取决于数据链路中速率最低的链路, 也叫<strong>瓶颈链路</strong></p>
+<p>在实际网络中, 瓶颈链路的速率可能并不低, 但是共享人数过多造成速率较低。在今天，因特网对吞吐率的限制因素通常是接入网。</p>
+<h2 id="协议层次和服务模型"><a href="#协议层次和服务模型" class="headerlink" title="协议层次和服务模型"></a>协议层次和服务模型</h2><p>网络是一个复杂的系统，通过分层的方式实现。一个层次可以通过层间接口调用下层的服务实现一个功能。每一层的功能可以通过接口向上层提供服务。</p>
+<p><strong>协议栈</strong></p>
+<p>各层的所有协议组合起来，称为协议栈。</p>
+<p>因特网的协议栈有5个层次组成<strong>：应用层、传输层、网络层、链路层、物理层</strong></p>
+<ul>
+<li>应用层: 应用层协议分布在多个<strong>端系统</strong>，端系统中的应用程序使用协议与另一个端系统中的应用程序通信。处于应用层的分组称为<strong>报文</strong></li>
+<li>传输层: 传输层在应<strong>用程序端点之间</strong>传输应用层报文，因特网中有两个传输层协议：TCP和UDP。处于传输层的分组称为<strong>报文段</strong>。</li>
+<li>网络层: 在<strong>主机之间</strong>传输以<strong>数据报</strong>为单位的端到端的数据。网络层协议包含著名的IP协议以及其他一些路由选择协议。处于网络层的分组称为<strong>数据报</strong></li>
+<li>链路层: 在链路的相邻两节点间把名为<strong>帧</strong>的链路层分组从一个结点移动到路径上的另一个端点。一个帧可能被沿途不同链路上的不同链路层协议处理。链路层中的分组称为<strong>帧</strong></li>
+<li>物理层: 将<strong>帧</strong>中的比特从一个结点移动到下一个节点</li>
+</ul>
+<p><strong>OSI参考模型</strong></p>
+<p>国际化标准组织<strong>ISO</strong>制定了一个开放系统互联模型<strong>OSI</strong></p>
+<p>OSI比五层协议多两层。从上至下分别为</p>
+<ul>
+<li><p>应用 </p>
+</li>
+<li><p>表示层: 允许应用解释传输的数据，例如加密,压缩,机器相关的表示转换</p>
+</li>
+<li><p>会话层: 数据交换的同步,检查点,恢复</p>
+</li>
+<li><p>传输 </p>
+</li>
+<li><p>网络 </p>
+</li>
+<li><p>链路</p>
+</li>
+<li><p>物理</p>
+</li>
+</ul>
+<p><strong>封装与解封装</strong></p>
+<p>源主机向目标主机发送请求, 在逻辑上是直接通信, 实际上需要进行多次的存储转发, 在转发时, 遇到交换机(二层交换机)要进行解封装到数据链路层进行转发与重封装, 遇到路由器(三层路由器)要进行解封装到网络层进行转发与重封装</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kakieccc.github.io/2023/05/22/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%80%E7%AB%A0/" data-id="cm0ucluws000becfi942ufwsu" data-title="计算机网络_绪论" class="article-share-link">Share</a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B/" rel="tag">基础课程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" class="wow fadeInUp">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/banner.jpg" data-sizes="auto" alt="计算机网络_应用层" class="lazyload">
+          
+        
+        <a href="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            计算机网络_应用层
+          
+        </h3>
+      </div>
+    
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrap wow fadeInRight wrap-sticky">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BD%91%E7%BB%9C"><span class="toc-number">1.</span> <span class="toc-text">什么是网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%85%B7%E4%BD%93%E6%9E%84%E6%88%90%E8%A7%92%E5%BA%A6"><span class="toc-number">1.1.</span> <span class="toc-text">从具体构成角度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%9C%8D%E5%8A%A1%E8%A7%92%E5%BA%A6"><span class="toc-number">1.2.</span> <span class="toc-text">从服务角度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%BE%B9%E7%BC%98"><span class="toc-number">2.</span> <span class="toc-text">网络边缘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E7%BD%91%E5%92%8C%E7%89%A9%E7%90%86%E5%AA%92%E4%BD%93"><span class="toc-number">3.</span> <span class="toc-text">接入网和物理媒体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E7%BD%91"><span class="toc-number">3.1.</span> <span class="toc-text">接入网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%AA%92%E4%BD%93"><span class="toc-number">3.2.</span> <span class="toc-text">物理媒体</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83"><span class="toc-number">4.</span> <span class="toc-text">网络核心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="toc-number">4.1.</span> <span class="toc-text">电路交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="toc-number">4.2.</span> <span class="toc-text">分组交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">4.3.</span> <span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E7%BB%93%E6%9E%84%E5%92%8CISP"><span class="toc-number">5.</span> <span class="toc-text">互联网结构和ISP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E5%BB%B6%E6%97%B6%E3%80%81%E4%B8%A2%E5%A4%B1%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F"><span class="toc-number">6.</span> <span class="toc-text">分组延时、丢失和吞吐量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E5%92%8C%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="toc-number">7.</span> <span class="toc-text">协议层次和服务模型</span></a></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+    
+      <div class="sidebar-btn-wrapper" style="position:static">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer" class="wow fadeInUp">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      <div>
+        <span class="icon-copyright"></span>
+        2020-2024
+        <span class="footer-info-sep"></span>
+        kakie
+      </div>
+      
+        <div>
+          Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+          Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+        </div>
+      
+      
+        <div>
+          <span class="icon-brush"></span>
+          36.5k
+          &nbsp;|&nbsp;
+          <span class="icon-coffee"></span>
+          02:05
+        </div>
+      
+      
+        <div>
+          <span class="icon-eye"></span>
+          <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+          &nbsp;|&nbsp;
+          <span class="icon-user"></span>
+          <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+        </div>
+      
+    </div>
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BD%91%E7%BB%9C"><span class="toc-number">1.</span> <span class="toc-text">什么是网络</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E5%85%B7%E4%BD%93%E6%9E%84%E6%88%90%E8%A7%92%E5%BA%A6"><span class="toc-number">1.1.</span> <span class="toc-text">从具体构成角度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%9C%8D%E5%8A%A1%E8%A7%92%E5%BA%A6"><span class="toc-number">1.2.</span> <span class="toc-text">从服务角度</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%BE%B9%E7%BC%98"><span class="toc-number">2.</span> <span class="toc-text">网络边缘</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E7%BD%91%E5%92%8C%E7%89%A9%E7%90%86%E5%AA%92%E4%BD%93"><span class="toc-number">3.</span> <span class="toc-text">接入网和物理媒体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E7%BD%91"><span class="toc-number">3.1.</span> <span class="toc-text">接入网</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E5%AA%92%E4%BD%93"><span class="toc-number">3.2.</span> <span class="toc-text">物理媒体</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83"><span class="toc-number">4.</span> <span class="toc-text">网络核心</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="toc-number">4.1.</span> <span class="toc-text">电路交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="toc-number">4.2.</span> <span class="toc-text">分组交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94"><span class="toc-number">4.3.</span> <span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%92%E8%81%94%E7%BD%91%E7%BB%93%E6%9E%84%E5%92%8CISP"><span class="toc-number">5.</span> <span class="toc-text">互联网结构和ISP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E7%BB%84%E5%BB%B6%E6%97%B6%E3%80%81%E4%B8%A2%E5%A4%B1%E5%92%8C%E5%90%9E%E5%90%90%E9%87%8F"><span class="toc-number">6.</span> <span class="toc-text">分组延时、丢失和吞吐量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E8%AE%AE%E5%B1%82%E6%AC%A1%E5%92%8C%E6%9C%8D%E5%8A%A1%E6%A8%A1%E5%9E%8B"><span class="toc-number">7.</span> <span class="toc-text">协议层次和服务模型</span></a></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    <div class="site-search">
+      <div class="reimu-popup popup">
+        <div class="reimu-search">
+          <span class="reimu-search-input-icon"></span>
+          <div class="reimu-search-input" id="reimu-search-input"></div>
+        </div>
+        <div class="reimu-results">
+          <div id="reimu-stats"></div>
+          <div id="reimu-hits"></div>
+          <div id="reimu-pagination" class="reimu-pagination"></div>
+        </div>
+        <span class="popup-btn-close"></span>
+      </div>
+    </div>
+    
+<script src="https://npm.webcache.cn/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    firework(JSON.parse('{"excludeElements":["a"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.1.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+

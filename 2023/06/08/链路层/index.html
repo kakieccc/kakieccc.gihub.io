@@ -1,0 +1,893 @@
+
+  <!DOCTYPE html>
+  <html lang="zh"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <title>
+    计算机网络_链路层 |
+    
+    kakie の BLOG
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/regular.min.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/solid.min.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v5-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v4-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="/css/loader.css">
+
+  <meta name="description" content="计算机网络笔记第五章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络_链路层">
+<meta property="og:url" content="https://kakieccc.github.io/2023/06/08/%E9%93%BE%E8%B7%AF%E5%B1%82/index.html">
+<meta property="og:site_name" content="kakie の BLOG">
+<meta property="og:description" content="计算机网络笔记第五章">
+<meta property="og:locale">
+<meta property="og:image" content="https://kakieccc.github.io/2023/06/08/%E9%93%BE%E8%B7%AF%E5%B1%82/image-20230601203925714.png">
+<meta property="article:published_time" content="2023-06-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-06T06:18:40.961Z">
+<meta property="article:author" content="kakie">
+<meta property="article:tag" content="基础课程">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kakieccc.github.io/2023/06/08/%E9%93%BE%E8%B7%AF%E5%B1%82/image-20230601203925714.png">
+  
+    <link rel="alternate" href="/atom.xml" title="kakie の BLOG" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+  
+  
+  
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/wowjs@1.1.3/css/libs/animate.css">
+
+    
+<script src="https://npm.webcache.cn/wowjs@1.1.3/dist/wow.min.js"></script>
+
+    <script>
+      new WOW({
+        offset: 0,
+        mobile: true,
+        live: false
+      }).init();
+    </script>
+  
+  
+    <script src="/sw.js"></script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg"></div>
+    <div class="loading-right-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+          <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    const startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    const endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('load', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/friend">Friend</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="/images/banner.jpg" alt="计算机网络_链路层">
+  
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <div id="logo-wrap">
+        
+          
+          
+            <a href="/" id="logo">
+              <h1>计算机网络_链路层</h1>
+            </a>
+          
+        
+      </div>
+      
+        
+        <h2 id="subtitle-wrap">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="outer">
+          
+          <section id="main"><article id="post-链路层" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    <div class="article-meta">
+      <div class="article-date wow slideInLeft">
+  <a href="/2023/06/08/%E9%93%BE%E8%B7%AF%E5%B1%82/" class="article-date-link">
+    <time datetime="2023-06-07T16:00:00.000Z" itemprop="datePublished">2023-06-08</time>
+  </a>
+</div>
+
+      
+  <div class="article-category wow slideInLeft">
+    <a class="article-category-link" href="/categories/essay/">essay</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="链路层和局域网"><a href="#链路层和局域网" class="headerlink" title="链路层和局域网"></a>链路层和局域网</h2><p>一般来说, 广域网的链路层比较简单, 这章先介绍链路层基础后介绍广域网内容</p>
+<p>链路层主要包括链路层的检错纠错, 多点接入, 链路层寻址, LAN, 可靠数据传输</p>
+<p>网络层是按照子网为单位进行路由, 在子网内部节点之间, 子网之间某个节点到某个节点之间的通信具体是如何通信的需要链路层协议. 可以认为网络层实现了收到一个数据包后找到要从那个口出去, 发给那个路由节点, 链路层解决的是知道要发送到某个路由节点但是如何发送的问题</p>
+<p>链路有点到点的链路和<strong>多点接入</strong>的链路, 点到点的链路常用于广域网之间的通信, 例如海底光缆, 多点连接的链路常用于局域网使用一个交换介质进行管理, 例如一个无线路由器可以接入多个设备, 但是这种方式有存在发送数据的时候数据包冲突的问题</p>
+<p>如何标识网卡是一个<strong>编址</strong>的问题, 找一块网卡就是一个<strong>寻址</strong>的问题</p>
+<p><strong>术语</strong></p>
+<ul>
+<li><p>主机, 路由器等是节点</p>
+<p>adapter(网卡)实现了数据链路层和物理层的功能</p>
+</li>
+<li><p>沿着通信链路相邻的节点之间的信道是链路, 分为</p>
+<ul>
+<li>有线&#x2F;无线的链路</li>
+<li>点对点&#x2F;多点的链路</li>
+</ul>
+</li>
+<li><p><strong>帧</strong>: 链路层的PDU(协议数据单元, 向下传输的信息) 实现了将网络层传来的IP报以帧的形式在链路上传播</p>
+<p>出现帧的意义是, 要将统一的IP报根据不同的通信链路(无线网络, 光纤网络)封装成不同的帧, 物理层根据帧发送01</p>
+</li>
+</ul>
+<h3 id="服务"><a href="#服务" class="headerlink" title="服务"></a>服务</h3><blockquote>
+<p>成帧: 将IP数据报封装成帧(加入目标mac, 源mac…)<br>接入: 单点或者多点链路在连接之前都要进行接入, 获取链路访问权和试用权<br>可靠数据传输: 整体上实现可靠数据传输, 并不是所有的协议提供这种服务(例如以太网不重传, 无线链路不稳定又重传)<br>流量控制: 发送段网卡很快, 接受端很慢, 发送端会控制流量到接受端可修改的速率<br>纠错: 出错后修改错误&#x2F; 出错率不大时通过冗余数据纠错&#x2F; 出错后反馈出错进行重传&#x2F;<br>全双工&#x2F;半双工: 双工指的是可收可发, 半双工指的是收发不可以同时进行, 全双工指的是手法可以同时进行</p>
+</blockquote>
+<h3 id="差错检验与纠错"><a href="#差错检验与纠错" class="headerlink" title="差错检验与纠错"></a>差错检验与纠错</h3><p><strong>差错检验</strong></p>
+<ul>
+<li><p>D: 被保护的部分, 可以包含头部信息</p>
+<p>EDC: 差错检验纠正位(冗余位, 保护D)</p>
+<p>在数据传输后会查看D与EDC对应关系是否正确, 正确不一定传输无误, 错误一定传输出错</p>
+</li>
+<li><p>奇偶校验</p>
+<ul>
+<li>单Bit奇偶校验: 求和判奇偶, 只能<strong>检查是否有单Bit错误</strong></li>
+<li>2维及后校验: 将数据排成矩阵, 如果存在一个节点, 他的所在的行列的单Bit奇偶校验都没有通过, 那么就说明这个节点有问题, 可以<strong>检查和修正单Bit错误</strong>, 无法校验对偶错误</li>
+</ul>
+</li>
+<li><p>累加和校验: check-sum</p>
+</li>
+<li><p><strong>CRC循环冗余校验</strong></p>
+<ul>
+<li>模二运算: 与求余2不同, 模二运算相当于按位加, 但是不进位，<strong>可以将多项式的模二运算理解为二进制的除法</strong></li>
+<li>比特序列的表示方法</li>
+<li>生成多项式(一个r次方的多项式, 也就是有r+1位)</li>
+</ul>
+</li>
+</ul>
+<h3 id="多点访问协议"><a href="#多点访问协议" class="headerlink" title="多点访问协议"></a>多点访问协议</h3><p>在共享式信道上, 共享链路不能被同时使用, 需要使用媒体访问控制(MAC)对共享链路的使用进行调度</p>
+<p>特性:</p>
+<ul>
+<li>真正数据的传递与控制信息的传递要在同一个信道进行</li>
+<li>每个节点发送信息的时候必须以<strong>统一的速率</strong>R进行发送</li>
+<li>n个节点同时发送的时候, n个节点的平均速率应为R&#x2F;n</li>
+<li>完全分布式计算</li>
+</ul>
+<p>MAC的实现可以分为几种</p>
+<ul>
+<li>信道划分</li>
+<li>随机访问</li>
+<li>依次轮流</li>
+</ul>
+<p>信道划分</p>
+<ul>
+<li><p>TDMA时分复用</p>
+<p>轮流以固定时间使用信道, 如果站点无帧传输就会产生浪费(不同的人在不同的时候说话)</p>
+</li>
+<li><p>FDMA频分复用</p>
+<p>不同的站点被分成不同的频率(不同的人在普通的房间&#x2F;频率说话)</p>
+</li>
+<li><p>CDMA码分多路复用</p>
+<p>所有站点在整个频段上进行传输, 使用编码将数据区分(不同的人用不同的方言说话)</p>
+<p>在高负载的时候效率高, 低负载效率低</p>
+</li>
+</ul>
+<p>随机访问</p>
+<ul>
+<li><p>特性</p>
+<ul>
+<li>想发送的时候就以R的速度全速发出, 不需要预先协调</li>
+<li>允许发生冲突</li>
+<li>有能力检测到冲突, 从冲突中恢复(重传)</li>
+<li>在低负载效率高, 高负载效率低</li>
+<li>主要有ALOHA, 时隙ALOSHA, CSMA, CSMA&#x2F;CD, CSMA&#x2F;CA协议</li>
+</ul>
+</li>
+<li><p>时隙ALOSHA</p>
+<ul>
+<li><p>将时间分为等长时隙, 每个时隙可以发送一帧</p>
+</li>
+<li><p>节点必须在一个时隙的开始发送帧, 所有节点时间同步</p>
+</li>
+<li><p>如果多节点在一个时隙同时发送, 所有的节点都可以发现冲突(可以看到是因为两个数据包的能量&#x2F;震幅一定是大于一个节点的, 都可以看到是因为数据包的传输是广播的, 到了对方网卡对方才校验是不是自己的数据包进行保留)</p>
+</li>
+<li><p>通信发生冲突后源节点需要重新发送数据, 如果同时发送, 数据包会再次冲突, 所以再次发送的时候以概率p pp决定是否在这个时槽发送(如果运气不好的话可能永远没法成功发出, 没法保证延迟)</p>
+</li>
+<li><p><code>优点</code></p>
+<ul>
+<li>节点可以全速传播</li>
+<li>高度分布, 仅仅需要做时隙同步</li>
+<li>想什么时候发什么时候发(只有冲突过后才会按照概率发送)</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>存在冲突, 造成时隙的浪费</li>
+<li>有空闲时隙</li>
+<li>一个帧会在一个时隙结束的时候传晚完, 节点在半路就可以检测到冲突, 但是要等到时隙结束后才能进行下一次的传输</li>
+<li>要求时钟同步</li>
+</ul>
+</li>
+<li><p><code>效率</code></p>
+<p>传输成功的时槽占总时槽的百分比的上限: 约为37%</p>
+</li>
+</ul>
+</li>
+<li><p>纯ALOHA</p>
+<ul>
+<li>数据帧什么时候形成就什么时候发出</li>
+<li>发送冲突的概率比时隙ALOHA大的多(时隙ALOHA的帧全在时隙内,要碰全碰, 要么不碰, 纯ALOHA存在帧头帧尾等多种情况的碰撞)</li>
+<li>效率: 17.5%</li>
+</ul>
+</li>
+<li><p>CSMA载波侦听多路访问</p>
+<ul>
+<li>节点监听自己所在的信道是否使用, 使用就不发了</li>
+<li>冲突仍然存在, 节点只能帧听到自己所在信道的利用信息</li>
+<li>信道越长, 传播延迟越大, 冲突可能性越大</li>
+</ul>
+</li>
+<li><p>CSMA&#x2F;CD(应用于以太网)</p>
+<ul>
+<li><p>CSMA是在发送数据之间帧听</p>
+</li>
+<li><p>CS是边发送数据边帧听, 遇到冲突停止发送</p>
+</li>
+<li><p>CSMA与CS同时工作</p>
+</li>
+<li><p>冲突后</p>
+<ul>
+<li><p>所有监听到冲突的设备全部发送强化冲突电磁波信号(发生冲突的地方可能离源节点比较远,到达源节点的时候信号衰减到正常强度, 源节点检测不到, 所以监听到冲突的节点全部发送强化信号让其他节点发现)</p>
+</li>
+<li><p>使用二进制指数退避算法:</p>
+<p>定义k为连续发生冲突的次数, 在发送冲突后从0~2^k-1随机中选一个整数t, 等待5*512位时后重发, 当然, 选择到0就马上重发</p>
+</li>
+<li><p>载荷越大, 连续碰撞次数越多, 等待时间越长</p>
+</li>
+<li><p>比ALOHA廉价, 高效, 全分布</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>CSMA&#x2F;CA(应用于WLAN)</p>
+<ul>
+<li><p>WLAN有基站(AP), 无线链路, 移动主机节点组成</p>
+</li>
+<li><p>无线网络信号衰减大, 干扰情况严重, 难以做冲突检测</p>
+<p>在LAN中不冲突几乎相当于成功(当帧时长大于2τ), 在WLAN中冲突不相当于不成功</p>
+</li>
+<li><p>CSMA: 在发送之前线帧听</p>
+</li>
+<li><p>CD: 全速发送数据, 不做冲突检测, 在监听到信道忙的时候随机一个时间发送数据, 重发直到收到ACK</p>
+</li>
+<li><p>RTS-CTS冲突避免: 可选项, 提前发送请求预约</p>
+</li>
+</ul>
+</li>
+<li><p>线缆接入网络</p>
+<ul>
+<li>用户采用共享式线缆, 用于接受互联网电视信息, 只有用户到唯一服务商和唯一服务商到用户</li>
+<li>下行信道将所有的下行数据打包, 在线缆中发送, 谁需要谁拿走自己的一部分</li>
+<li>上行信道被分割为两种时隙<ul>
+<li>预约的时隙: 预约且头端允许后才可以使用</li>
+<li>竞争的时隙: 用于向上行信道预约时隙,</li>
+</ul>
+</li>
+<li>冲突: 当用户发现头端发回的预约结果没有自己, 就说明发生了冲突, 采用类似头端退避的方式重传</li>
+</ul>
+</li>
+</ul>
+<p>依次轮流</p>
+<ul>
+<li><p>轮询</p>
+<ul>
+<li><p>主节点依次邀请从节点发送请求</p>
+</li>
+<li><p>从节点比较被动</p>
+</li>
+<li><p>轮询开销大</p>
+</li>
+<li><p>刚刚问过的节点忽然有需求要等待较长时间</p>
+</li>
+<li><p>单点故障后果严重</p>
+</li>
+<li><p>效率高</p>
+</li>
+</ul>
+</li>
+<li><p>令牌传递</p>
+<ul>
+<li>定义一个特殊的令牌帧, 令牌帧给谁谁发信息, 令牌在节点之间轮转</li>
+<li>节点需要数据的时候就取下令牌, 打标记, 在令牌后面加入数据令牌继续轮转</li>
+<li>接受节点收到令牌后取下数据, 不取消标记, 放入响应和数据, 继续轮转令牌</li>
+<li>发送节点收到令牌后手下数据, 取消标记, 轮转一个无数据令牌</li>
+<li>令牌转一圈数据的收发依次, 目标节点收到令牌<strong>不能</strong>直接重置令牌为空令牌</li>
+</ul>
+</li>
+<li><p><strong>特点</strong></p>
+<ul>
+<li>分布式没有单点故障</li>
+<li>高低负载效率都好</li>
+<li>存在令牌丢失的问题, 丢失后要求分布式的指定一个设备成令牌, 比较复杂</li>
+</ul>
+</li>
+</ul>
+<h3 id="LANs"><a href="#LANs" class="headerlink" title="LANs"></a>LANs</h3><h4 id="地址与ARP"><a href="#地址与ARP" class="headerlink" title="地址与ARP"></a>地址与ARP</h4><ul>
+<li><p>IP是层次化的,用于子网之间的路由; Mac用于路由平面, 用于子网内部转发</p>
+</li>
+<li><p>IP数据包进行转发的时候, 在子网之间通过路由实体使用, 使用三层设备进行路由(网络层的IP), 最后在子网内部使用二层交换设备(数据链路层的Mac)进行数据交换</p>
+</li>
+<li><p>Mac地址是48Bit, 12个16进制数表示的, FF-FF-FF-FF-FF-FF(48为全1)表示广播Mac</p>
+<p>Mac地址保证了唯一性, 可以理解Mac是身份证号, IP理解为住址</p>
+</li>
+<li><p>ARP协议:</p>
+<ul>
+<li>作用: 通过IP获得Mac, 数据包在子网之间转发的时候就需要将下一跳IP转化为Mac</li>
+<li>在LAN上每个IP节点都有一个ARP表</li>
+<li>ARP表包括了LAN上IP与MAC的映射以及映射的TTL(映射失效时间)</li>
+<li><strong>在同一LAN下</strong>请求MAC的时候, 先查询ARP表. 若查询失败则向全网发送广播(FF-FF-FF-FF-FF-FF), 询问IP对应的MAC, 对应IP设备响应MAC, 将映射存入ARP表</li>
+<li><strong>在不同LAN下</strong>请求体先将数据发送到默认网关(DHCP获得), 网关查表决定是在子网内交换还是路由到其他子网, 网关将数据转发到对应端口, 对应端口修改源MAC, 目标MAC,重新封装帧格式(不修改IP)</li>
+</ul>
+</li>
+</ul>
+<h4 id="以太网"><a href="#以太网" class="headerlink" title="以太网"></a>以太网</h4><p>以太网是最主流的LAN技术</p>
+<p><strong>发展</strong></p>
+<ul>
+<li><p>以太网最初是:</p>
+<p>主机节点连接到网卡, 网卡通过收发器电缆连接到收发器上, 收发器连接到同轴电缆上.</p>
+<p>同轴电缆是一个铜线外部包覆着铜网, 接收器刺破铜网连接在铜线上, 连接在同轴电缆上的接收器相当于在一个总线上, 一个接收器发出电磁波其他设备都可以帧听到. 为了防止电磁波在同轴电缆两端反射, 又加上了终结器吸收到端的电磁波</p>
+<p>连接在同轴电缆上的主机都采用CSMA&#x2F;CD在发送数据前&#x2F;时进行帧听, 防止冲突</p>
+</li>
+<li><p>总线型的连接方式导致总线单点损坏, 所有设备都无法正常发送(破损处没有终结器, 破损的两边都无法工作)</p>
+<p>使用集线器代替同轴电缆, 集线器的端口接计算机, 集线器之间支持集联</p>
+<p>集线器的工作原理是: 接受一个端口发来的消息, 保持不变的速率发送到所有的端口. 本质上是一个物理层的中继器, 不提供冲突检测与帧缓存(都是数据链路层的东西)</p>
+<p>在集线器上的设备不能同时发送请求, 否则会出现冲突. 将集线器上的这些设备称为在一个碰撞域内</p>
+<p>虽然加入了集线器, 但是还是相当于是总线连接的结构, 只不过在物理上看起来像星形, 单点损坏的几率小</p>
+</li>
+<li><p>集线器如果连接过多节点, 冲突发生率过大, 网络效率变低, 于是引入了交换机</p>
+<p>交换机连接到机器, 机器发送信息后交换机暂存信息, 通过数据链路层协议获取目标MAC, 找到对应主机的端口, 进行数据链路层的转发. 发送给目标机器, 就好像端口之间有一个瞬间的切换开关. 交换机连接的设备之间是支持同时的数据传输的. 交换机工作在数据链路层, 所以每个交换机端口都有自己的MAC, 同时使用了CSMA&#x2F;CD 防止缓存&#x2F;发出时冲突</p>
+<p>由于是机器直接与交换机通信, 交换机暂存数据, 所以每个机器与交换机的对应网卡口组成一个冲突域, 相当于是点对点连接</p>
+</li>
+</ul>
+<p><strong>以太帧的结构</strong></p>
+<p>网卡将IP数据报封装成以太网帧</p>
+<img src="/2023/06/08/%E9%93%BE%E8%B7%AF%E5%B1%82/image-20230601203925714.png" class="" alt="image-20230601203925714">
+
+<blockquote>
+<p>preamble: 前导码, 7Byte的重复10101010和1个Byte的101010011. 用于同步收发双方的时钟频率. 让接受端可以按照发送端的速率传输帧<br>dest address,source address: 目标MAC地址, 源头MAC地址 分别为48bit, 用于接受端校验自己是不是接受者(还有可能是FF-FF-FF-FF-FF-FF的广播地址, 或者网卡开启混搭模式)<br>type: 上层协议类型(IP&#x2F;IPX…)<br>CRC: CRC校验, 写在最后, 网卡可以一边写入data, 一边计算CRC</p>
+</blockquote>
+<p><strong>以太网的服务模型</strong></p>
+<ul>
+<li>无连接的: 收发双方不握手</li>
+<li>不可靠的: 接收者不返回ACK&#x2F;NAK, 因为以太网是跑在LAN上的, 有线信道本身传输是较为可靠的, 如果需要保证可靠性需要在上层协议中实现(例如TCP)</li>
+<li>采用二进制退避的CSMA&#x2F;CD的MAC协议</li>
+</ul>
+<p><strong>以太网标准</strong></p>
+<p>以太网有不同的协议</p>
+<ul>
+<li>采用相同的MAC协议与帧结构</li>
+<li>具有不同的速率</li>
+<li>采取不同的物理层结构</li>
+<li>有不同的物理媒介: 光纤, 同轴电缆, 双绞线</li>
+</ul>
+<h4 id="网络设备"><a href="#网络设备" class="headerlink" title="网络设备"></a>网络设备</h4><p><strong>集线器</strong></p>
+<ul>
+<li><p>网段(LAN segments) :可以允许一个站点发送的网络范围</p>
+<ul>
+<li>在一个碰撞域,同时只允许一个站点在发送</li>
+<li>如果有2个节点同时发送,则会碰撞</li>
+<li>通常拥有相同的前缀,比IP子网更详细的前缀</li>
+</ul>
+</li>
+<li><p>所有以hub连到一起的站点处在一个网段,处在一个碰撞域</p>
+<ul>
+<li>骨干hub将所有网段连到了一起</li>
+</ul>
+</li>
+<li><p>通过hub可扩展节点之间的最大距离</p>
+</li>
+<li><p>通过HUB,不能将10BaseT和100BaseT的网络连接到一起</p>
+</li>
+</ul>
+<p><strong>交换机</strong></p>
+<ul>
+<li>链路层设备:扮演主动角色(端口执行以太网协议)<ul>
+<li>对帧进行存储和转发</li>
+<li>对于到来的帧,检查帧头,根据目标MAC地址进行选择性转发</li>
+<li>当帧需要向某个(些)网段进行转发,需要使用CSMA&#x2F;CD进行接入控制</li>
+<li>通常一个交换机端口一个独立网段</li>
+</ul>
+</li>
+<li>透明:主机对交换机的存在可以不关心<ul>
+<li>通过交换机相联的各节点好像这些站点是直接相联的一样</li>
+<li>有MAC 地址;无IP地址</li>
+</ul>
+</li>
+<li>即插即用,自学习:<ul>
+<li>交换机无需配置, 主机过自主学习知道哪些节点可达</li>
+<li>执行过滤、自学习和生成树算法防止成环</li>
+<li>当收到帧的时候记录发送方端口和MAC到映射表(转发表)中</li>
+<li>当收到帧的时候对帧进行转发, 如果不知道目标MAC的端口就<strong>直接泛洪这个帧</strong></li>
+</ul>
+</li>
+<li>支持级联: 交换机可以自学习自己连接的其他交换机下的设备MAC, 级联模式下CSMA&#x2F;CD显得尤为重要</li>
+</ul>
+<p><strong>路由器</strong></p>
+<ul>
+<li>路由器是三层设备, 按照IP工作</li>
+<li>与交换机一样, 路由器也是存储转发设备, 不过工作层级不同</li>
+<li>路由器维护路由表,执行路由算法<ul>
+<li>路由算法能够避免环路,无需执行生成树算法,可以以各种拓扑构建网络</li>
+<li>对广播分组做限制</li>
+<li>不是即插即用的,配置网络地址(子网前缀)</li>
+<li>三层设备,速率低</li>
+</ul>
+</li>
+</ul>
+<h4 id="VLAN"><a href="#VLAN" class="headerlink" title="VLAN"></a>VLAN</h4><p>虚拟局域网, 可以按照MAC, 端口号手动定义某些设备在一个广播域内</p>
+<h3 id="链路虚拟化与数据中心网络"><a href="#链路虚拟化与数据中心网络" class="headerlink" title="链路虚拟化与数据中心网络"></a>链路虚拟化与数据中心网络</h3><p><strong>MPLS多协议标记交换</strong></p>
+<p>按照定义的标签来交换分组, 而不是按照目标IP进行传法</p>
+<p><strong>数据中心网络</strong></p>
+<p>服务器与存储器要进行高带宽, 低延迟, 高可靠性的数据传输</p>
+<p>数据中心的流量分为内部的交流流量与向外的流量, 向外流量需要大量网关进行支撑, 向内流量则需要设计一个优秀的内部网络拓扑</p>
+<p>数据中心网络应该支持正反向代理与负载均衡, 具有一定的等级体系与冗余线路, 当有链路断开后重新执行最小生成树算法启用部分冗余链路构成新的网络</p>
+<p><strong>Web请求的流程</strong></p>
+<ol>
+<li>用户上线DHCP(调用了UDP, IP)</li>
+<li>请求URL与子网之间路由DNS, ARP, BGP</li>
+<li>子网内路由RIP, OSPF</li>
+<li>Web客户端交互: TCP&#x2F;HTTP</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kakieccc.github.io/2023/06/08/%E9%93%BE%E8%B7%AF%E5%B1%82/" data-id="cm0ucluwr0009ecfi9lxz78n3" data-title="计算机网络_链路层" class="article-share-link">Share</a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B/" rel="tag">基础课程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" class="wow fadeInUp">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/banner.jpg" data-sizes="auto" alt="Welcome to my bolg" class="lazyload">
+          
+        
+        <a href="/2024/02/24/hello/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            Welcome to my bolg
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="计算机网络_网络层" class="lazyload">
+        
+      
+      <a href="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          计算机网络_网络层
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrap wow fadeInRight wrap-sticky">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-number">1.</span> <span class="toc-text">链路层和局域网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.1.</span> <span class="toc-text">服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E9%AA%8C%E4%B8%8E%E7%BA%A0%E9%94%99"><span class="toc-number">1.2.</span> <span class="toc-text">差错检验与纠错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%82%B9%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.</span> <span class="toc-text">多点访问协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LANs"><span class="toc-number">1.4.</span> <span class="toc-text">LANs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E4%B8%8EARP"><span class="toc-number">1.4.1.</span> <span class="toc-text">地址与ARP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-number">1.4.2.</span> <span class="toc-text">以太网</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87"><span class="toc-number">1.4.3.</span> <span class="toc-text">网络设备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VLAN"><span class="toc-number">1.4.4.</span> <span class="toc-text">VLAN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B8%8E%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E7%BD%91%E7%BB%9C"><span class="toc-number">1.5.</span> <span class="toc-text">链路虚拟化与数据中心网络</span></a></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+    
+      <div class="sidebar-btn-wrapper" style="position:static">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer" class="wow fadeInUp">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      <div>
+        <span class="icon-copyright"></span>
+        2020-2024
+        <span class="footer-info-sep"></span>
+        kakie
+      </div>
+      
+        <div>
+          Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+          Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+        </div>
+      
+      
+        <div>
+          <span class="icon-brush"></span>
+          36.5k
+          &nbsp;|&nbsp;
+          <span class="icon-coffee"></span>
+          02:05
+        </div>
+      
+      
+        <div>
+          <span class="icon-eye"></span>
+          <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+          &nbsp;|&nbsp;
+          <span class="icon-user"></span>
+          <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+        </div>
+      
+    </div>
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-number">1.</span> <span class="toc-text">链路层和局域网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.1.</span> <span class="toc-text">服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%AE%E9%94%99%E6%A3%80%E9%AA%8C%E4%B8%8E%E7%BA%A0%E9%94%99"><span class="toc-number">1.2.</span> <span class="toc-text">差错检验与纠错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E7%82%B9%E8%AE%BF%E9%97%AE%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.3.</span> <span class="toc-text">多点访问协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#LANs"><span class="toc-number">1.4.</span> <span class="toc-text">LANs</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E4%B8%8EARP"><span class="toc-number">1.4.1.</span> <span class="toc-text">地址与ARP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-number">1.4.2.</span> <span class="toc-text">以太网</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87"><span class="toc-number">1.4.3.</span> <span class="toc-text">网络设备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#VLAN"><span class="toc-number">1.4.4.</span> <span class="toc-text">VLAN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%93%BE%E8%B7%AF%E8%99%9A%E6%8B%9F%E5%8C%96%E4%B8%8E%E6%95%B0%E6%8D%AE%E4%B8%AD%E5%BF%83%E7%BD%91%E7%BB%9C"><span class="toc-number">1.5.</span> <span class="toc-text">链路虚拟化与数据中心网络</span></a></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    <div class="site-search">
+      <div class="reimu-popup popup">
+        <div class="reimu-search">
+          <span class="reimu-search-input-icon"></span>
+          <div class="reimu-search-input" id="reimu-search-input"></div>
+        </div>
+        <div class="reimu-results">
+          <div id="reimu-stats"></div>
+          <div id="reimu-hits"></div>
+          <div id="reimu-pagination" class="reimu-pagination"></div>
+        </div>
+        <span class="popup-btn-close"></span>
+      </div>
+    </div>
+    
+<script src="https://npm.webcache.cn/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    firework(JSON.parse('{"excludeElements":["a"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.1.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+

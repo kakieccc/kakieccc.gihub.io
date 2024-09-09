@@ -1,0 +1,961 @@
+
+  <!DOCTYPE html>
+  <html lang="zh"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <title>
+    计算机网络_传输层 |
+    
+    kakie の BLOG
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/regular.min.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/solid.min.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v5-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v4-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="/css/loader.css">
+
+  <meta name="description" content="计算机网络笔记第三章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络_传输层">
+<meta property="og:url" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/index.html">
+<meta property="og:site_name" content="kakie の BLOG">
+<meta property="og:description" content="计算机网络笔记第三章">
+<meta property="og:locale">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607141856743.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607200917464.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607201042129.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607201718998.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607211608507.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607211348468.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607211705748.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607212028460.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607212529254.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607212656022.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607213402669.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607215201397.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607143349008.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607221410970.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230601193655612.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607224224865.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607224043595.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4Mjg5ODE1,size_16,color_FFFFFF,t_70.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4Mjg5ODE1,size_16,color_FFFFFF,t_70-1686194360210-6.png">
+<meta property="og:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230608123403658.png">
+<meta property="article:published_time" content="2023-05-29T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-06-08T04:34:47.868Z">
+<meta property="article:author" content="kakie">
+<meta property="article:tag" content="基础课程">
+<meta property="article:tag" content="计算机网络">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607141856743.png">
+  
+    <link rel="alternate" href="/atom.xml" title="kakie の BLOG" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+  
+  
+  
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/wowjs@1.1.3/css/libs/animate.css">
+
+    
+<script src="https://npm.webcache.cn/wowjs@1.1.3/dist/wow.min.js"></script>
+
+    <script>
+      new WOW({
+        offset: 0,
+        mobile: true,
+        live: false
+      }).init();
+    </script>
+  
+  
+    <script src="/sw.js"></script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg"></div>
+    <div class="loading-right-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+          <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    const startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    const endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('load', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/">Home</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/archives">Archives</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/friend">Friend</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="/images/banner.jpg" alt="计算机网络_传输层">
+  
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <div id="logo-wrap">
+        
+          
+          
+            <a href="/" id="logo">
+              <h1>计算机网络_传输层</h1>
+            </a>
+          
+        
+      </div>
+      
+        
+        <h2 id="subtitle-wrap">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="outer">
+          
+          <section id="main"><article id="post-计网第三章" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    <div class="article-meta">
+      <div class="article-date wow slideInLeft">
+  <a href="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/" class="article-date-link">
+    <time datetime="2023-05-29T16:00:00.000Z" itemprop="datePublished">2023-05-30</time>
+  </a>
+</div>
+
+      
+  <div class="article-category wow slideInLeft">
+    <a class="article-category-link" href="/categories/essay/">essay</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="概述与传输层服务"><a href="#概述与传输层服务" class="headerlink" title="概述与传输层服务"></a>概述与传输层服务</h2><p>传输层的服务: 为应用进程提供逻辑的通信服务, 实现了进程到进程之间的以报文为单位的传输Message的服务</p>
+<p><strong>因特网有两种传输层协议，即TCP和UDP</strong></p>
+<p><strong>传输层协议是在端系统中实现</strong>的而不是在路由器中实现的。</p>
+<p>传输层在接受到应用层传来的报文后, 将报文分解成若干个报文段, 添加传输层首部后传输, 对方实体收到后合并, 传给上层</p>
+<p>传输层实现了IP不具有的可靠通信，但是有些服务也是无法加强的, 例如延迟, 带宽</p>
+<p><strong>TCP和UDP的对比如下</strong></p>
+<p>TCP：</p>
+<ul>
+<li>提供字节流的服务</li>
+<li>提供多路复用解复用</li>
+<li>可靠的：支持确认与重传(不重复, 不遗漏, 不出错, 不失序)</li>
+<li>面向连接的：在通信之前先打招呼, 服务端准备资源, 建立连接, 在<strong>通信两段</strong>保持连接</li>
+<li>流量控制：发送方发送的数据包不会淹没接收方。<strong>流量控制是检测发送方的发送速度</strong></li>
+<li>拥塞控制：网络拥塞的时候降低传输速度。<strong>拥塞控制是检测链路拥塞程度</strong></li>
+</ul>
+<p>UDP：</p>
+<ul>
+<li>提供数据报的服务</li>
+<li>提供多路复用解复用</li>
+<li>不可靠</li>
+<li>无连接的：不打招呼直接发送请求</li>
+<li>无流量控制拥塞控制</li>
+<li>速度快，常用于音视频多媒体应用</li>
+</ul>
+<p>注意区分<strong>面向连接</strong>和<strong>有连接</strong></p>
+<ul>
+<li>面向连接: 在通信之前先打招呼, 服务端准备资源, 建立连接, 在<strong>通信两段</strong>保持连接</li>
+<li>有连接: 在面向连接的基础上让<strong>通信链路上的每个节点</strong>都维护通信的状态</li>
+</ul>
+<h2 id="多路复用与解复用"><a href="#多路复用与解复用" class="headerlink" title="多路复用与解复用"></a>多路复用与解复用</h2><p>网络层向上层提供服务是通过IP，是主机到主机之间的。到了传输层，需要实现将数据区分到不同的进程从而传输给应用层的不同实体。</p>
+<p>传输层和应用程序进程之间通过<strong>Socket（套接字）</strong>关联，这样通过Socket就可以区别同一主机上的不同应用进程，从而传输层提供服务变为可能。</p>
+<p>传输层从同一台主机上的不同Socket接收数据的过程称为多路复用；传输层向同一台主机上的不同Socket传输数据的过程称为多路解复用；为了实现多路复用和解复用，我们需要标记不同的socket，并将相关信息添加到报文段中。</p>
+<p>为了达到这个目的，我们引入了<strong>端口号</strong>。在传输层接收到来自应用程序的分组并通过添加传输层首部而形成报文段的过程中，该端口号被写入。端口号大小在0-65535之间，在创建Socket的时候由传输层为之分配端口号。</p>
+<h3 id="无连接的多路复用与解复用（UDP的socket）"><a href="#无连接的多路复用与解复用（UDP的socket）" class="headerlink" title="无连接的多路复用与解复用（UDP的socket）"></a>无连接的多路复用与解复用（UDP的socket）</h3><p>一个UDP的socket是<strong>由目的IP和目的端口的二元组</strong>来标志的。</p>
+<p>如果两个UDP报文段有不同的源IP地址或者源端口号，但是有相同的目的IP和目的端口号的话，它们将通过同一个Socket到达同一个应用程序</p>
+<h3 id="面向连接的多路复用与解复用（TCP的socket）"><a href="#面向连接的多路复用与解复用（TCP的socket）" class="headerlink" title="面向连接的多路复用与解复用（TCP的socket）"></a>面向连接的多路复用与解复用（TCP的socket）</h3><p>一个TCP的socket是由<strong>源IP、源端口号、目的IP、目的端口号的四元组</strong>来标志的。</p>
+<p>两个具有不同源IP地址或者源端口号，但有相同的目的IP地址和目的端口号的TCP报文段将通过两个不同的Socket进入同一应用进程。也就是说一个应用进程可以关联多个Socket，而一个Socket将只关联一个应用进程</p>
+<h3 id="传输过程详解（了解）"><a href="#传输过程详解（了解）" class="headerlink" title="传输过程详解（了解）"></a>传输过程详解（了解）</h3><p>传输过程：</p>
+<p>在传输数据时，源端口和目标端口被封装在报文段的头部，交给网络层的数据则包括了源IP、目的IP和报文段。</p>
+<p>有了源IP、目的IP和数据，在网络层就可以顺利地封装IP数据报并发送到另一台主机</p>
+<p>传送到了另一台主机，向上传送给运输层的部分包含了源IP、目的IP和报文段</p>
+<p>通过四元组（TCP）或二元组（UDP）的信息，就可以找到对应的socket，从而找到对应的端口，数据得以交给正确的进程</p>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607141856743.png" class="" alt="image-20230607141856743">
+
+<h2 id="可靠数据传输（RDT）原理"><a href="#可靠数据传输（RDT）原理" class="headerlink" title="可靠数据传输（RDT）原理"></a>可靠数据传输（RDT）原理</h2><p>可靠数据传输为上层实体提供的服务可以抽象为：数据通过一套可靠的信道进行传输，借助于可靠信道，传输数据就不会受到损坏，并且所有数据都可以按照其发送顺序进行交付。TCP提供的就是这种模型</p>
+<p>我们使用RDT保证传输的可靠性，RDT是原理，不一定是TCP所采用的协议，其他的网络也采用了RDT的原理。</p>
+<p>RDT的底层协议可能是不可靠的，就比如TCP，它下面的IP就是不可靠的，RDT面临的主要问题就是当下层是不可靠的时候，该依靠那些机制来实现向上层提供可靠数据传输服务。我们采用循环渐进的方式，从简到难，首先假设下层是绝对可靠的，然后逐步去掉下层的可靠性，进而来逐步完善RDT</p>
+<p>❗我们只考虑单向的数据传输，但控制信息是双向流动的。双向的数据传输问题实际就是两个单向数据传输的结合</p>
+<h3 id="RDT协议"><a href="#RDT协议" class="headerlink" title="RDT协议"></a>RDT协议</h3><ul>
+<li><p>RDT1.0: 下层完全可靠(不出错, 不丢失)</p>
+<p>这就是最简单的情况，RDT下层的协议是完全可靠的，那么只需要将数据简单封装解封装就行了，但是这种情况现实中是不存在的</p>
+</li>
+<li><p>RDT2.0: 下层在传输的时候可能出现比特错误</p>
+<ul>
+<li><p>下层信道可能会出错，将分组中的比特反转（0变1，1变0）</p>
+</li>
+<li><p>解决方法：增加了3种新机制</p>
+<ul>
+<li>错误检验</li>
+<li>接收者反馈接受信息（ACK,NAK）</li>
+<li>重传机制</li>
+</ul>
+</li>
+<li><p>在运输层对应用层的数据进行打包处理时，新增checksum（校验和），从而接收端可以对其数据包进行检验，如果正确，返回ACK，发送者继续发送下一个数据包；如果不正确，返回NAK，发送者重传数据，直到返回ACK为止。</p>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607200917464.png" class="" alt="image-20230607200917464">
+
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607201042129.png" class="" alt="image-20230607201042129">
+</li>
+<li><p>发送方必须确信接收方正确接收当前分组后才会发下一个数据，我们把这种协议称为<strong>停等协议</strong></p>
+</li>
+</ul>
+</li>
+<li><p>RDT2.1: ACK&#x2F;NAK传输出错</p>
+<ul>
+<li><p>RDT2.0有个致命的缺点，那就是如果ACK&#x2F;NAK发生了比特翻转该怎么办？那么发送方就不知道这到底是ACK还是NAK，是该重传还是继续发。</p>
+</li>
+<li><p>解决办法：发送方在打包数据时给每个分组添加了0或者1<strong>序号</strong>，交替排列。</p>
+</li>
+<li><p>假设发送端发送0号数据包，接收端期待接收的也是0号数据包。假设正常接收，那么接收端就会返回ACK，然后期待下一个数据包，也就是1号数据包</p>
+</li>
+<li><p>❗假设返回ACK的时候发生了比特翻转，ACK变成NAK了，发送端认为出错了，重传0号数据包，接收端发现发过来的不是想要的1号数据包，那接收端就重新发送一个ACK传回给发送端</p>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607201718998.png" class="" alt="image-20230607201718998">
+
+<p>返回NAK的情况与这个类似，这里不再赘述</p>
+</li>
+</ul>
+</li>
+<li><p>RDT2.2: 无NAK协议</p>
+<ul>
+<li>返回ACK&#x2F;NAK两种状态还是太麻烦了，干脆只返回ACK，只是在返回的时候顺便返回个序号。这个序号就是数据包的序号</li>
+<li>假设发送方向接收方发送0号数据包，如果接收方接收到0号数据包，返回（ACK，1），那发送方就知道该接着发送1号数据包。如果接收方接收到0号数据包出现错误，返回（ACK，0），发送方就重传0号数据包。</li>
+</ul>
+</li>
+<li><p>RDT3.0: 具有比特差错与分组丢失</p>
+<p>解决了比特差错的问题，我们再来点更难的。rdt2.2之前的版本都没有考虑数据包丢失问题，</p>
+<p>若发生丢包，接收方收不到数据, 发送方收不到ACK&#x2F;NAK, 就会产生死锁</p>
+<ul>
+<li>RDT3.0引入<strong>超时重传机制</strong>，设置超时时间为比正常传输往返时间略长的时间，发送方检测到超时后自动重新传输</li>
+<li>三种情况讨论<ul>
+<li>过程中未丢包，但是数据比特出错或者不符合序号，此时发送方就会直接开摆，没动静了，等到时间间隔一到，当做超时处理，重发数据</li>
+<li>真发生丢包了，时间一到重新发送</li>
+<li>啥事没有，美滋滋发下一个包</li>
+</ul>
+</li>
+<li>因为分组序号在 0 和 1 之间交替，因此RDT3.0 有时被称为 <strong>比特交替协议</strong></li>
+<li>RDT3.0可以工作，但性能很差<ul>
+<li>效率太慢，由于停等方式的存在，一个包没处理好，发送端会一直等着。</li>
+<li>超时机制的时间间隔怎么确定？长了不行，太慢，短了又会经常有重复发包的情况。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="流水线协议"><a href="#流水线协议" class="headerlink" title="流水线协议"></a>流水线协议</h3><p>RDT3.0 是一个功能正确的协议，但是由于它是一个<strong>停等协议</strong>，大部分的时间都浪费在等待确认上面，所以性能不好。<br>解决这种特殊性能问题的一个简单的方法是：不使用停等方式运行，允许发送方<strong>一次发送多个分组</strong>而无需等待确认。这种技术被称为流水线协议。</p>
+<p>主要有两类流水线协议: </p>
+<ul>
+<li>​    回退 N 步（GBN）</li>
+<li>​    选择重传（SR）</li>
+</ul>
+<p>这两种协议都用到了滑动窗口协议</p>
+<h4 id="滑动窗口协议"><a href="#滑动窗口协议" class="headerlink" title="滑动窗口协议"></a>滑动窗口协议</h4><ul>
+<li><p>发送窗口</p>
+<p>我们知道在滑动窗口协议中发送方可以一次发送多个分组而无需等待确认。那么最多可以一次性发送多少分组呢？规定把发送的数据包的数量称为<strong>窗口大小</strong></p>
+<p>来看以下情景，一开始没有发送任何分组，后沿跟前沿重合，每发送一个分组，前沿就前移一个单位。直到前后沿的距离跟窗口大小一样，这时候就不能再发送分组了</p>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607211608507.png" class="" alt="image-20230607211608507">
+
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607211348468.png" class="" alt="image-20230607211348468">
+
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607211705748.png" class="" alt="image-20230607211705748">
+
+<p>后沿在收到了老分组的确认后就可以向前滑动，这样一来就可以看成是一个窗口在滑动了。</p>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607212028460.png" class="" alt="image-20230607212028460">
+</li>
+<li><p>接收窗口</p>
+<p>接收窗口实际就是接收缓冲区，只有收到的分组序号落入接收窗口内</p>
+<p>接收窗口的尺寸&#x3D;1，只能顺序接收，接收窗口的尺寸大于1则可以乱序接收</p>
+<p>例如窗口大小&#x3D;1，在0的位置，那么只有0号分组可以被接收，向前滑动一个，窗口罩在了1的位置，如果这时候来了二号分组就会被丢弃</p>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607212529254.png" class="" alt="image-20230607212529254"></li>
+</ul>
+<p>对于停止等待协议，其实就是发送窗口和接收窗口大小全为1，例如RDT；</p>
+<p>流水线协议是发送窗口大小&gt;1的滑动窗口协议。GBN和SR的区别在于接收窗口的大小</p>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607212656022.png" class="" alt="image-20230607212656022">
+
+<h4 id="GBN协议（回退N步重传协议）"><a href="#GBN协议（回退N步重传协议）" class="headerlink" title="GBN协议（回退N步重传协议）"></a>GBN协议（回退N步重传协议）</h4><p>接受缓冲区大小为1, 如果收到的分组不是滑动窗口罩着的分组就拒收。</p>
+<p>GBN发送方：</p>
+<ul>
+<li><p>上层要发送数据时,发送方先检查发送窗口是否已满。</p>
+<p>如果未满,则产生一个帧并将其发送;如果窗口已满,发送方只需将数据返回给上层,暗示窗口已满</p>
+</li>
+<li><p>GBN协议中,对n号帧的确认采用<strong>累计确认</strong>,标明接收方已经收到n号帧和它之前的全部帧</p>
+</li>
+<li><p>若出现丢失和时延过长帧时,发送方将重传所有已发送但未收到确认的帧</p>
+</li>
+</ul>
+<p>GBN接收方：</p>
+<ul>
+<li>若正确收到n号帧,并且按序,那么接收方为n帧返回一个ACK,并将该帧中的数据部分交给上层</li>
+<li>其余情况都丢弃帧,并从最近按序接收的帧重新发送ACK。发送方维护expectedseqnum（下一个按序接收的帧序号）</li>
+</ul>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607213402669.png" class="" alt="image-20230607213402669">
+
+<p>在上例中，发送窗口大小为4，0帧和1帧顺利发送并接收，返回了累计确认的ACK。发送第二帧的时候发生了丢失，窗口滑动继续发送帧3，4，5，此时包2超时重传，发送方重新发送数据包2，3，4，5。这里可以看出数据包重复了。</p>
+<p>再举一个例子，发送方已经发送了编号为0～7的帧。当计时器超时时，若发送方只收到0、2、3号帧的确认，则发送方需要重发的帧数是多少？</p>
+<p>由于GBN采取的是<strong>累计确认</strong>，返回ACK3的确认的时候默认3帧及之前的帧都被正常接收了，所以会重发4~7号共四个帧。其中丢失的1号帧不会管</p>
+<p>GBN的缺点：<strong>累积确认会导致批量重传, 不能只重传出错的帧</strong></p>
+<h4 id="SR协议（选择重传协议）"><a href="#SR协议（选择重传协议）" class="headerlink" title="SR协议（选择重传协议）"></a>SR协议（选择重传协议）</h4><p>接收窗口大于1，有接收缓存来缓存乱序到达的帧</p>
+<p>SR是对数据帧逐一确认, 收一个确认一个</p>
+<p>SR发送方：</p>
+<ul>
+<li>检查下一个可用于该帧的序号，若在发送方的窗口内，则将数据打包发送。否则就会像GBN一样, 要么将数据缓存, 要么返回给上层之后再传输</li>
+<li>如果收到ACK, 加入该帧序号在窗口内,则SR发送方将那个确认的帧标记为已接收<br>如果该帧序号是窗口的下界, 则窗口向前移动到具有最小序号的未确认帧处<br>如果窗口移动了并且有序号在窗口内的未发送帧, 则发送这些帧</li>
+</ul>
+<p>SR接收方：</p>
+<ul>
+<li>SR接收方将确认一个正确接收的帧而不管其是否乱序, 失序的帧将被缓存, 并返回给发送方一个该帧的确认帧, 直到所有帧皆被收到为止, 这时才可以将这一批帧按序交付给上层, 然后向前移动滑动窗口</li>
+<li>如果收到窗口序号外的帧, 就返回一个ACK</li>
+</ul>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607215201397.png" class="" alt="image-20230607215201397">
+
+<p>还是举例说明，首先发送方发送了0~3号帧，其中二号帧发生了丢失，但SR不会一直返回ACK1，而是正常返回ACK3、4、5。接收到ACK0、1后，4、5号帧正常发送。返回的3、4、5因为乱序了，所以会先被缓存，当2号帧超时重传并被接收后，滑动窗口后移，发送方继续发送数据包。</p>
+<p><strong>SR只重传丢失的帧，乱序到达的帧缓存起来</strong></p>
+<h2 id="UDP（用户数据报协议）"><a href="#UDP（用户数据报协议）" class="headerlink" title="UDP（用户数据报协议）"></a>UDP（用户数据报协议）</h2><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>UDP在IP提供服务的基础上只新增了复用与解复用的服务</p>
+<p>UDP仅提供尽力而为的服务, 不保证可靠性</p>
+<p>UDP连接之前不需要握手, 一般用于流媒体传输&#x2F;DNS&#x2F;SNMP等事务性应用</p>
+<h3 id="UDP数据报格式"><a href="#UDP数据报格式" class="headerlink" title="UDP数据报格式"></a>UDP数据报格式</h3><img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607143349008.png" class="" alt="image-20230607143349008">
+
+<p>UDP的首部有四个字段，每个字段占用两个字节16位。</p>
+<ul>
+<li>源端口号</li>
+<li>目的端口号</li>
+<li>长度：<strong>包含首部在内的UDP报文段长度</strong></li>
+<li>校验和：计算报文段在传输的过程中是否出现了差错。在源端做校验和计算, 目标段检验</li>
+</ul>
+<h3 id="UDP的优点"><a href="#UDP的优点" class="headerlink" title="UDP的优点"></a>UDP的优点</h3><p>不建立连接，所以不会增加额外的时延，这可能是DNS采用UDP而不采用TCP最大的原因</p>
+<p>简单，在发送端和接收端没有连接状态，所以也不需要维护连接相关的参数</p>
+<p>报文段的头部很小，开销小<strong>（只有8个字节）</strong></p>
+<p>UDP可以尽可能快的发送报文段，这在一些实时应用中很实用</p>
+<p>需要注意的是，UDP同样可以实现可靠数据传输，但是这需要在应用层靠应用程序去实现</p>
+<h3 id="UDP校验和"><a href="#UDP校验和" class="headerlink" title="UDP校验和"></a>UDP校验和</h3><p>使用简单的加法计算校验和</p>
+<p>发送端将报文段的内容划分为16比特一组的整数, 对报文段进行加法求和, 将校验和放在UDP的校验和字段，然后接收端收到数据之后计算校验和, 进行比较, 校验和不通过一定有问题, 不通过不一定没问题</p>
+<p>简单记忆就是<strong>加反加判，溢出回卷</strong></p>
+<p>加反：在发送端先十六位为一组全部加起来，然后取反码作为校验和</p>
+<p>加判：在接收端十六个为一组全部加起来，如果数据传输没有出错那么最后的结果应该是全为1</p>
+<p>溢出回卷：如果在进行加法时发生了溢出，需要把溢出的1加在最后面</p>
+<p>举个简单的例子加深理解：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">假设UDP报文段为</span><br><span class="line">1 1 1 0 0 1 1 0 0 1 1 0 0 1 1 0</span><br><span class="line">1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1</span><br><span class="line">1 0 1 1 0 1 1 0 0 0 1 0 1 1 0 1</span><br><span class="line">先对前两组数进行计算：</span><br><span class="line">   1 1 1 0 0 1 1 0 0 1 1 0 0 1 1 0</span><br><span class="line">   1 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1</span><br><span class="line">-------------------------------------</span><br><span class="line"> 1 1 0 1 1 1 0 1 1 1 0 1 1 1 0 1 1</span><br><span class="line">发生了进位，需要回卷，在结果的最后补上溢出的1，就变成了:</span><br><span class="line">1 0 1 1 1 0 1 1 1 0 1 1 1 1 0 0</span><br><span class="line">再与第三组相加:</span><br><span class="line">  1 0 1 1 1 0 1 1 1 0 1 1 1 1 0 0</span><br><span class="line">  1 0 1 1 0 1 1 0 0 0 1 0 1 1 0 1</span><br><span class="line">------------------------------------</span><br><span class="line">1 0 1 1 1 0 0 0 1 1 1 1 0 1 0 0 1</span><br><span class="line">又发生了溢出，再次回卷得到:</span><br><span class="line">0 1 1 1 0 0 0 1 1 1 1 0 1 0 1 0</span><br><span class="line">对最后的结果进行取反，得到校验和为:</span><br><span class="line">1 0 0 0 1 1 1 0 0 0 0 1 0 1 0 1</span><br><span class="line"></span><br><span class="line">然后在接收端把包括校验和在内的四组数相加，如果没出差错的话那么前三组的和仍然为：</span><br><span class="line">0 1 1 1 0 0 0 1 1 1 1 0 1 0 1 0</span><br><span class="line">把这个数同算出来的校验和相加，得到：</span><br><span class="line">1 0 0 0 1 1 1 0 0 0 0 1 0 1 0 1</span><br><span class="line">0 1 1 1 0 0 0 1 1 1 1 0 1 0 1 0</span><br><span class="line">---------------------------------</span><br><span class="line">1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="TCP（传输控制协议）"><a href="#TCP（传输控制协议）" class="headerlink" title="TCP（传输控制协议）"></a>TCP（传输控制协议）</h2><h3 id="TCP特点"><a href="#TCP特点" class="headerlink" title="TCP特点"></a>TCP特点</h3><ul>
+<li><p>面向连接的传输层协议。在通信之前需要先<strong>握手</strong></p>
+</li>
+<li><p>点对点的，每一条 TCP 连接只能有两个端点，</p>
+</li>
+<li><p><strong>可靠</strong>的交付服务，保证传送的数据无差错、不丢失、不重复且有序</p>
+</li>
+<li><p>全双工通信，TCP 允许通信双方的应用进程在任何时候都能发送数据。</p>
+</li>
+<li><p>设有发送缓存和接收缓存，用来临时存放双向通信的数据。</p>
+<ul>
+<li>发送缓存存放的数据：<ul>
+<li>发送方 TCP 准备发送的数据</li>
+<li>TCP 已发送出但尚未收到的确认的数据。</li>
+</ul>
+</li>
+<li>接收缓存存放的数据<ul>
+<li>按序到达的但尚未被接收应用程序读取的数据</li>
+<li>不按序到达的数据</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>面向字节流</strong>的，TCP 把应用程序交下来的数据看成一连串的无结构的字节流。</p>
+</li>
+</ul>
+<h3 id="TCP报文段"><a href="#TCP报文段" class="headerlink" title="TCP报文段"></a>TCP报文段</h3><img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607221410970.png" class="" alt="image-20230607221410970">
+
+<p>整体上来讲TCP报文由首部+数据字段构成，其中数据字段来自应用层，其长度不能大于MSS（Maximum Segment Size，可发送的最大数据长度）；首部的<strong>常规长度为20字节</strong>，但是值得注意的是，<strong>TCP首部是可变长的</strong></p>
+<ul>
+<li><p>源端口号和目的端口号：这两个数据用于TCP的多路复用和多路分解，分别为2字节16位</p>
+</li>
+<li><p><strong>序号</strong>: 占四个字节，是报文段发送的数据的第一个字节的序号。序号确保了TCP传输的有序性。</p>
+</li>
+<li><p><strong>确认号</strong>:占四个字节，指明下一个期待收到的字节序号，表明该序号之前的所有数据已经正确无误的收到。</p>
+</li>
+<li><p><strong>标志位U&#x2F;A&#x2F;P&#x2F;R&#x2F;S&#x2F;F</strong>: 表示状态</p>
+<ul>
+<li>UGR： 紧急指针标志，为 1 时表示紧急指针有效，为 0 则忽略紧急指针</li>
+<li><strong>ACK</strong>： 确认序号标志，为 1 时表示确认序号有效，TCP 规定<strong>在连接建立后所有传送的报文段都必须把 ACK 置为1</strong></li>
+<li>PSH： push标志，为 1 表示是带有push标志的数据，指示接收方在接收到数据以后，应尽快的将这个报文交付到应用程序，而不是在缓冲区缓冲</li>
+<li>RST： 重置连接标志，用于由主机崩溃或者其他原因而出现错误的连接，或者用于拒绝非法的报文段和拒绝连接请求</li>
+<li><strong>SYN</strong>： 同步序号。SYN&#x3D;1,ACK&#x3D;0时表明是一个连接请求报文，若同意连接则在响应报文中返回SYN&#x3D;1，ACK&#x3D;1</li>
+<li><strong>FIN</strong>： 断开连接标志，为1表示数据发送完毕，并要求关闭连接</li>
+</ul>
+</li>
+<li><p>接收窗口：占两个字节，表示允许对方发送的字节数量</p>
+</li>
+<li><p>校验和:占两个字节， 同UDP的校验和</p>
+</li>
+</ul>
+<h3 id="可靠数据传输"><a href="#可靠数据传输" class="headerlink" title="可靠数据传输"></a>可靠数据传输</h3><p>TCP 的任务是在 IP 层的不可靠、尽力而为服务的基础上建立一种可靠数据传输服务。为了达到这一目的，TCP使用<strong>超时重传和冗余确认</strong>技术来处理超时、丢失等情况；使用<strong>确认、序号</strong>等技术来保证按序到达；使用<strong>校验和</strong>来检验是否报文段在传输过程中是否发生了错误。</p>
+<ul>
+<li><p>校验和</p>
+<p>TCP的校验和与UDP的校验和计算方法一致，都是<strong>加反加判，溢出回卷</strong>。这里不再赘述</p>
+</li>
+<li><p>序号</p>
+<p>TCP 首部的序号字段用来保证数据能有序提交给应用层。TCP是<strong>面向字节流的</strong>，每一个字节一个序号，TCP报文段中序号字段的值是本报文段所发送的数据的第一个字节的序号。</p>
+<p>例如：一个报文段的序号为300，此报文段数据部分共有100字节，则下一个报文段的序号为400。</p>
+</li>
+<li><p>确认</p>
+<p>TCP 报文段中的确认字段是期望收到对方的下一个报文段的数据的第一个字节的序号。TCP 默认使用<strong>累计确认</strong>，这一点与GBN十分相似，也就是说TCP只确认数据流中至第一个丢失字节为止的字节。</p>
+<p>例如，接收方 B 收到了发送方 A 发送的包含字节 0<del>2 和 6</del>7 的报文段。由于某些原因，B 还没有收到字节 3~5 的报文段，此时 B 仍在等待字节 3和其后面的字节，因此，B 到 A 的下一个报文段将确认号字段设置为 3。</p>
+<p>值得注意的是，服务端对接收端发来的报文段的确认被装载到一个从服务端发往到接收端的报文段中，这种确认被称为<strong>捎带</strong></p>
+</li>
+<li><p>重传</p>
+<p>有两种事件会导致 TCP 对报文段进行重传：<strong>超时</strong>和<strong>冗余 ACK</strong></p>
+<ul>
+<li><p>超时</p>
+<p>TCP 每发送一个报文段，就对这个报文段设置一次计时器。只要计时器设置的重传时间到期但还没有收到确认，就要重传这一报文段。当检测到接收数据有错误时，会采取直接丢弃出错的数据，发送端等待接收端的确认超时后，会自动重发该报文段。</p>
+</li>
+<li><p>冗余ACK</p>
+<p>发送方通常可在超时事件发生之前通过注意冗余 ACK 来较好地检测丢包情况</p>
+<p>例如，发送方 A 发送了序号为 1、2、3、4、5 的 TCP 报文段，其中 2 号报文段丢失了，它将无法到达接收方 B。因此，3、4、5 号报文段对于 B 来说就成了失序报文段。TCP 规定<strong>每当比期望序号大的失序报文段到达时，发送冗余 ACK，指明下一个期望字节的序号</strong></p>
+<p>3、4、5 号报文到达 B，但它们不是 B 所期待的下一个报文，于是 B 就发送 3 个对 1 号报文段的冗余 ACK，表示自己期望接收 2 号报文段。TCP 规定<strong>当发送方收到对同一个报文段的 3 个冗余 ACK 时，就可以认为跟在这个被确认报文段之后的报文段已经丢失</strong></p>
+<p>当 A 收到对于 1 号报文段的 3 个冗余 ACK 时，则它可以认为 2 号报文段已经丢失。这时发送方 A 可以立即对 2 号报文执行重传，这种技术被称为<strong>快速重传</strong>。</p>
+<p>TCP同GBN，采用的是<strong>累计确认</strong>，也就是说若接收了某一失序到达的分组，那么接收方发送的ACK将是对最后接收的按序到达的分组的确认，而不是对刚刚接收的分组的确认。但是快速重传只是重传了丢失的数据包，后面正常到达的数据包没有重传，这一点又与SR十分相似，所以说<strong>TCP差错恢复协议是GBN和SR协议的混合体</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="往返时间估计和超时"><a href="#往返时间估计和超时" class="headerlink" title="往返时间估计和超时"></a>往返时间估计和超时</h3><p>超时重传是个很棒的机制，但问题在于如何确定超时时间？如果超时时间设定长了，效率低；短了的话又很容易出现重复发包，为此需要系统性的确认超时时间间隔。</p>
+<h4 id="往返时间（RTT）"><a href="#往返时间（RTT）" class="headerlink" title="往返时间（RTT）"></a>往返时间（RTT）</h4><p>TCP的通信环境在一天中变化很大, 应该动态测量往返延迟</p>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230601193655612.png" class="" alt="image-20230601193655612">
+
+<p>一般取α &#x3D; 0.125</p>
+<p><code>这次RTT = 上次计算的RTT*0.875 + 样本RTT*0.125</code>，样本RTT一般是在某个时刻测量得出的</p>
+<p>DevRTT：用于表示样本RTT偏离估计RTT的程度</p>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607224224865.png" class="" alt="image-20230607224224865">
+
+<p>一般取β &#x3D; 0.25</p>
+<p><code>这次DevRTT = 上次计算的DevRtt*0.75 + 0.25*（样本RTT-估计RTT的绝对值）</code></p>
+<h4 id="超时间隔"><a href="#超时间隔" class="headerlink" title="超时间隔"></a>超时间隔</h4><img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230607224043595.png" class="" alt="image-20230607224043595">
+
+<p>推荐的初始超时间隔为1s，当出现超时后，超时间隔的值就会加倍。只要EstimatedRTT更新，就会用上述公式重新计算超时间隔</p>
+<h3 id="连接管理"><a href="#连接管理" class="headerlink" title="连接管理"></a>连接管理</h3><h4 id="连接建立-三次握手"><a href="#连接建立-三次握手" class="headerlink" title="连接建立: 三次握手"></a>连接建立: 三次握手</h4><p>起初，服务器和客户端都为CLOSED状态。在通信开始前，双方都得创建各自的传输控制块（TCB）。<br>服务器创建完TCB后进入LISTEN状态，此时准备接收客户端发来的连接请求。</p>
+<ul>
+<li>客户端设置TCP报文SYN&#x3D;1，ACK&#x3D;0表示请求建立连接，同时设置序号&#x3D;x。请求发送后，客户端便进入SYN-SENT状态。</li>
+<li>服务器同意建立请求, 设置TCP报文SYN&#x3D;1, ACK&#x3D;1表示建立连接，设置序号为y，确认号为x+1表示期待下一个数据到来</li>
+<li>客户端收到同意连接的应答后，还要向服务器发送一个确认报文段，表示服务器发来的应答成功收到了。该报文段的头部为：ACK&#x3D;1，序号&#x3D;x+1，确认好&#x3D;y+1</li>
+</ul>
+<p>客户端发完这个报文段后便进入ESTABLISHED状态，服务端收到这个应答后也进入ESTABLISHED状态，此时连接的建立完成</p>
+<p>❗为什么需要三次握手？第三次握手的目的是什么？</p>
+<p>防止<strong>失效的连接</strong>请求报文段被服务端接收，从而产生错误。</p>
+<p>失效的连接请求：若客户端向服务端发送的连接请求丢失，客户端等待应答超时后就会再次发送连接请求，此时，上一个连接请求就是失效的</p>
+<h4 id="连接释放-四次挥手"><a href="#连接释放-四次挥手" class="headerlink" title="连接释放:四次挥手"></a>连接释放:四次挥手</h4><p>TCP 是全双工的，即可以想象成是一条 TCP 连接上有两条数据通路。当发送 FIN 报文时，发送 FIN 的一端就不能再发送数据，也就是关闭了其中一条数据通路，但另一条没有关闭的数据通路仍可以发送数据。因此在四次挥手中，前两次挥手用于断开一个方向的连接，后两次挥手用于断开另一方向的连接。</p>
+<ul>
+<li>若客户端打算关闭连接，就向其服务器发送一个连接释放报文段，并停止再发送数据，主动关闭 TCP 连接，该报文段的 FIN 标志位被置为 1，序号&#x3D; u，它等于前面已传送过的数据的最后一个字节的序号加 1</li>
+<li>服务器收到连接释放报文段后就会发出确认，确认号 &#x3D; u+1，而这个报文段自己的序号是 v，等于它前面已传送过的数据的最后一个字节的序号加 1。此时，从客户端到服务器这个方向的连接就释放了，TCP 连接处于半关闭状态。</li>
+<li>若服务器已经没有要向客户端发送的数据，就释放连接，此时发出 FIN &#x3D; 1 的连接释放报文段</li>
+<li>客户端收到连接释放报文段后，必须发出确认。在确认报文段中，ACK 字段被置为 1，确认号 &#x3D; w+1，序号 &#x3D; u+1。此时 TCP 连接还没有释放掉，必须经过 2MSL 后，客户端才进入连接关闭状态。</li>
+</ul>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4Mjg5ODE1,size_16,color_FFFFFF,t_70.png" class="" alt="img">
+
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4Mjg5ODE1,size_16,color_FFFFFF,t_70-1686194360210-6.png" class="" alt="img">
+
+<h3 id="TCP流量控制"><a href="#TCP流量控制" class="headerlink" title="TCP流量控制"></a>TCP流量控制</h3><p>流量控制是一个<strong>速度匹配</strong>服务：TCP连接的发送方和接收方都各自维护一个缓存，因此两者的数据交换应该在一个合理的速度范围内，不让对方发生数据溢出。 <strong>TCP 流量控制是为了匹配发送方的发送速率与接收方的读取速率</strong></p>
+<p>TCP 提供一种基于滑动窗口协议的流量控制机制。其原理是：在通信过程中，接收方根据自己接收缓存的大小，这就是接收窗口 <strong>rwnd</strong>动态地调整发送方的发送窗口大小，即调整 TCP 报文段首部中的 “窗口” 字段的值来限制发送方向网络注入报文的速率。同时，发送方根据其对当前网络拥塞程度的估计而确定窗口值，称为拥塞窗口 <strong>cwnd</strong>，其大小与网络的带宽和时延密切相关</p>
+<p>例如，在通信中，有效数据只从 A 发往 B，而 B 仅向 A 发送确认报文，这时，B 就可以通过设置确认报文段首部的窗口字段来将<code>rwnd</code>值来限制自己发送窗口的大小，这样可以将未确认的数据量控制在<code>rwnd</code>大小之内，保证了 A 不会使 B 得接收缓存溢出。A 的发送窗口的实际大小取的是 <code>rwnd </code>和 <code>cwnd </code>中的最小值。</p>
+<h3 id="拥塞控制原理"><a href="#拥塞控制原理" class="headerlink" title="拥塞控制原理"></a>拥塞控制原理</h3><p>计算机网络拥塞的原因是因为网络中的分组太多，而链路带宽和路由器缓存容量都是有限的</p>
+<h4 id="网络拥塞代价"><a href="#网络拥塞代价" class="headerlink" title="网络拥塞代价"></a>网络拥塞代价</h4><ul>
+<li>传输速率接近链路速率比会导致排队延迟增大</li>
+<li>队列溢出导致分组丢失</li>
+<li>排队延迟增大导致重传</li>
+<li>队列溢出导致被抛弃的分组的上游传输能力也被浪费了</li>
+</ul>
+<h4 id="拥塞控制方法"><a href="#拥塞控制方法" class="headerlink" title="拥塞控制方法"></a>拥塞控制方法</h4><p>我们可以根据网络层是否为传输层拥塞控制提供了显式帮助来区分拥塞控制方法：<strong>端到端拥塞控制和网络辅助拥塞控制</strong></p>
+<ul>
+<li><p>端到端拥塞控制</p>
+<p>网络层没有向传输层拥塞控制提供显式支持，即便网络中存在拥塞，端系统也必须通过对网络行为的观察（如分组丢失与时延）来判断</p>
+</li>
+<li><p>在网络辅助的拥塞控制方法里，网络层会向发送方提供关于网络中拥塞状态的显式反馈消息；比如使用一个比特位来指示网络是否拥塞</p>
+</li>
+</ul>
+<h4 id="网络辅助的拥塞控制"><a href="#网络辅助的拥塞控制" class="headerlink" title="网络辅助的拥塞控制"></a>网络辅助的拥塞控制</h4><ul>
+<li><p>以ATM网络为代表, ATM网络以信元为传输的最小单位</p>
+</li>
+<li><p>ATM中有两种信元: 数据信元与资源管理信元, 管理信元通过设置标志位值告诉端系统当前网络速率</p>
+</li>
+<li><p>ATM网络使用ABR拥塞控制, 如果网络不拥塞, 允许设备瞬时超过分配带宽传输, 如果网络拥塞, 限制发送方的发送速率到一个最小保证速率上</p>
+</li>
+</ul>
+<h3 id="TCP的拥塞控制"><a href="#TCP的拥塞控制" class="headerlink" title="TCP的拥塞控制"></a>TCP的拥塞控制</h3><p>TCP使用的是端到端的拥塞控制, 不需要网络提供信息</p>
+<p>TCP所采用的方法是让每一个发送方根据其所感知的网络拥塞程度来限制其能向连接发送流量的速率；如果TCP判断网络通畅，那么它会提高发送速率，如果TCP判断网络拥塞，那么它会限制发送速率。需要解决三个问题：TCP如何限制发送速率？TCP如何感知网络拥塞程度？TCP该以何种算法改变其发送速率？</p>
+<p>有以下四种算法：<strong>慢开始、拥塞避免、快恢复</strong>。发送方在确定发送报文段的速率时，既要根据接收方的接收能力，又要从全局考虑不要使网络发生拥塞。因此，TCP 协议要求发送方维护以下两个窗口：</p>
+<ul>
+<li><p>接收窗口 rwnd，接收方根据目前接收缓存大小所许诺的最新的窗口值，反映了接收方的容量。有接收方根据其放在 TCP 报文的首部的 “窗口” 字段通知发送方。</p>
+</li>
+<li><p>拥塞窗口 cwnd，发送方根据自己估算的网络拥塞程度而设置的窗口值，反映了网络当前容量。只要网络没有出现拥塞，拥塞窗口就再增大一些，以便把更多的分组发送出去。但只要网络出现拥塞，拥塞窗口就减少一些，以减少注入网络中的分组数。<strong>发送窗口的上限值应当取接收窗口 rwnd 和拥塞窗口 cwnd 中较小的一个</strong></p>
+</li>
+</ul>
+<h4 id="慢开始和拥塞避免"><a href="#慢开始和拥塞避免" class="headerlink" title="慢开始和拥塞避免"></a>慢开始和拥塞避免</h4><ul>
+<li><p>慢开始</p>
+<p>开始发送 TCP 报文段时，先让拥塞窗口 cwnd &#x3D; 1。在每收到一个ACK后，将 cwnd 加倍。用这样的方法逐步增大发送方的拥塞窗口 cwnd</p>
+<p>例如，A 向 B 发送数据，当发送时 A 的拥塞窗口为 2，那么 A 一次可以发送两个 TCP 报文段，当经过一个 RTT 后，A 收到 B 对刚才两个报文的确认，于是就把拥塞窗口调整为 4，即下一次发送时就可以发送 4 个报文段</p>
+<p>使用慢开始算法，cwnd 的大小呈指数形式增长（1，2，4，8…）。慢开始一直把拥塞窗口 cwnd 增大到一个规定的慢开始门限 ssthresh（阈值），然后改用拥塞避免算法</p>
+<p>在慢启动阶段，如果发生了超时事件，那么ssthresh就被设置为当前cwnd的一半，然后将cwnd置为1重新开始慢启动</p>
+</li>
+<li><p>拥塞避免算法</p>
+<p>发送端的拥塞窗口 cwnd 每经过一个RTT就增加一个MSS的大小，而不是加倍，使 cwnd 按线性规律缓慢增长</p>
+<p>当出现一次超时后，会令ssthresh等于当前 cwnd 的一半，然后将cwnd置为1，重新执行慢开始算法</p>
+</li>
+</ul>
+<h4 id="快速恢复和快重传"><a href="#快速恢复和快重传" class="headerlink" title="快速恢复和快重传"></a>快速恢复和快重传</h4><p>有时会发生报文段丢失，但网络实际上并未发生拥塞。拥塞避免算法会误认为发生了拥塞，重新开始慢启动，降低了效率，为此诞生了快重传和快恢复</p>
+<ul>
+<li><p>快重传</p>
+<p>TCP 可靠传输机制中，快速重传技术使用了冗余 ACK 来检测丢包的发生。同样，冗余 ACK 也用于网络拥塞的检测。</p>
+<p>快重传要求立即发送确认而不是在发送数据的时候才捎带确认</p>
+<p>一旦收到三个连续的重复确认，就会<strong>立即重传</strong>相应的报文段，而不是等到超时后再重传</p>
+</li>
+<li><p>快恢复</p>
+<p>“快速恢复” 算法是在上述的 “快速重传” 算法后添加的，当收到 3 个重复 ACK 时，TCP 进入快速恢复阶段。快速恢复的思想是 “数据包守恒” 原则，即同一个时刻在网络中的数据包数量是恒定的，只有当 “老” 数据包离开了网络后，才能向网络中发送一个 “新” 的数据包</p>
+<p>快恢复操作为：</p>
+<ul>
+<li>当收到 3 个重复ACK时，把 ssthresh 设置当前 cwnd 的一半，然后把 cwnd 设置为 ssthresh 的值（加 3），然后重传丢失的报文段，加 3 的原因是因为收到 3 个重复的ACK，表明有 3 个 “老” 的数据包离开了网络</li>
+<li>再收到重复的 ACK 时，拥塞窗口增加 1</li>
+<li>当收到新的数据包的 ACK 时，把 cwnd 设置为第一步中的 ssthresh 的值。原因是因为该 ACK 确认了新的数据，说明从重复 ACK 时的数据都已收到，该恢复过程已经结束，可以回到恢复之前的状态了，也就是再次进入拥塞避免状态。</li>
+</ul>
+</li>
+</ul>
+<img src="/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/image-20230608123403658.png" class="" alt="image-20230608123403658">
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kakieccc.github.io/2023/05/30/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%B8%89%E7%AB%A0/" data-id="cm0ucluwp0006ecfi5l69fjn6" data-title="计算机网络_传输层" class="article-share-link">Share</a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B/" rel="tag">基础课程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" class="wow fadeInUp">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/images/banner.jpg" data-sizes="auto" alt="计算机网络_网络层" class="lazyload">
+          
+        
+        <a href="/2023/06/02/%E7%BD%91%E7%BB%9C%E5%B1%82/"></a>
+        <div class="article-nav-caption">Newer</div>
+        <h3 class="article-nav-title">
+          
+            计算机网络_网络层
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="计算机网络_应用层" class="lazyload">
+        
+      
+      <a href="/2023/05/24/%E8%AE%A1%E7%BD%91%E7%AC%AC%E4%BA%8C%E7%AB%A0/"></a>
+      <div class="article-nav-caption">Older</div>
+      <h3 class="article-nav-title">
+        
+          计算机网络_应用层
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrap wow fadeInRight wrap-sticky">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0%E4%B8%8E%E4%BC%A0%E8%BE%93%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">概述与传输层服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E8%A7%A3%E5%A4%8D%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">多路复用与解复用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E8%A7%A3%E5%A4%8D%E7%94%A8%EF%BC%88UDP%E7%9A%84socket%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">无连接的多路复用与解复用（UDP的socket）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E8%A7%A3%E5%A4%8D%E7%94%A8%EF%BC%88TCP%E7%9A%84socket%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">面向连接的多路复用与解复用（TCP的socket）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">传输过程详解（了解）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%88RDT%EF%BC%89%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">可靠数据传输（RDT）原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDT%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.1.</span> <span class="toc-text">RDT协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.2.</span> <span class="toc-text">流水线协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.2.1.</span> <span class="toc-text">滑动窗口协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GBN%E5%8D%8F%E8%AE%AE%EF%BC%88%E5%9B%9E%E9%80%80N%E6%AD%A5%E9%87%8D%E4%BC%A0%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">3.2.2.</span> <span class="toc-text">GBN协议（回退N步重传协议）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SR%E5%8D%8F%E8%AE%AE%EF%BC%88%E9%80%89%E6%8B%A9%E9%87%8D%E4%BC%A0%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">3.2.3.</span> <span class="toc-text">SR协议（选择重传协议）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP%EF%BC%88%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">UDP（用户数据报协议）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">4.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">UDP数据报格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">4.3.</span> <span class="toc-text">UDP的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E6%A0%A1%E9%AA%8C%E5%92%8C"><span class="toc-number">4.4.</span> <span class="toc-text">UDP校验和</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%EF%BC%88%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">TCP（传输控制协议）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E7%89%B9%E7%82%B9"><span class="toc-number">5.1.</span> <span class="toc-text">TCP特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E6%8A%A5%E6%96%87%E6%AE%B5"><span class="toc-number">5.2.</span> <span class="toc-text">TCP报文段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="toc-number">5.3.</span> <span class="toc-text">可靠数据传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%80%E8%BF%94%E6%97%B6%E9%97%B4%E4%BC%B0%E8%AE%A1%E5%92%8C%E8%B6%85%E6%97%B6"><span class="toc-number">5.4.</span> <span class="toc-text">往返时间估计和超时</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%80%E8%BF%94%E6%97%B6%E9%97%B4%EF%BC%88RTT%EF%BC%89"><span class="toc-number">5.4.1.</span> <span class="toc-text">往返时间（RTT）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E9%97%B4%E9%9A%94"><span class="toc-number">5.4.2.</span> <span class="toc-text">超时间隔</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86"><span class="toc-number">5.5.</span> <span class="toc-text">连接管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">5.5.1.</span> <span class="toc-text">连接建立: 三次握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E9%87%8A%E6%94%BE-%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-number">5.5.2.</span> <span class="toc-text">连接释放:四次挥手</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">5.6.</span> <span class="toc-text">TCP流量控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E5%8E%9F%E7%90%86"><span class="toc-number">5.7.</span> <span class="toc-text">拥塞控制原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%8B%A5%E5%A1%9E%E4%BB%A3%E4%BB%B7"><span class="toc-number">5.7.1.</span> <span class="toc-text">网络拥塞代价</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="toc-number">5.7.2.</span> <span class="toc-text">拥塞控制方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%BE%85%E5%8A%A9%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">5.7.3.</span> <span class="toc-text">网络辅助的拥塞控制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">5.8.</span> <span class="toc-text">TCP的拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%85%A2%E5%BC%80%E5%A7%8B%E5%92%8C%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="toc-number">5.8.1.</span> <span class="toc-text">慢开始和拥塞避免</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%81%A2%E5%A4%8D%E5%92%8C%E5%BF%AB%E9%87%8D%E4%BC%A0"><span class="toc-number">5.8.2.</span> <span class="toc-text">快速恢复和快重传</span></a></li></ol></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+    
+      <div class="sidebar-btn-wrapper" style="position:static">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer" class="wow fadeInUp">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      <div>
+        <span class="icon-copyright"></span>
+        2020-2024
+        <span class="footer-info-sep"></span>
+        kakie
+      </div>
+      
+        <div>
+          Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+          Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+        </div>
+      
+      
+        <div>
+          <span class="icon-brush"></span>
+          36.5k
+          &nbsp;|&nbsp;
+          <span class="icon-coffee"></span>
+          02:05
+        </div>
+      
+      
+        <div>
+          <span class="icon-eye"></span>
+          <span id="busuanzi_container_site_pv">Number of visits&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+          &nbsp;|&nbsp;
+          <span class="icon-user"></span>
+          <span id="busuanzi_container_site_uv">Number of visitors&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+        </div>
+      
+    </div>
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">Contents</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A6%82%E8%BF%B0%E4%B8%8E%E4%BC%A0%E8%BE%93%E5%B1%82%E6%9C%8D%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">概述与传输层服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E8%A7%A3%E5%A4%8D%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">多路复用与解复用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E8%A7%A3%E5%A4%8D%E7%94%A8%EF%BC%88UDP%E7%9A%84socket%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">无连接的多路复用与解复用（UDP的socket）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B8%8E%E8%A7%A3%E5%A4%8D%E7%94%A8%EF%BC%88TCP%E7%9A%84socket%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">面向连接的多路复用与解复用（TCP的socket）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E8%BE%93%E8%BF%87%E7%A8%8B%E8%AF%A6%E8%A7%A3%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">传输过程详解（了解）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%88RDT%EF%BC%89%E5%8E%9F%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">可靠数据传输（RDT）原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RDT%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.1.</span> <span class="toc-text">RDT协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.2.</span> <span class="toc-text">流水线协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.2.1.</span> <span class="toc-text">滑动窗口协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#GBN%E5%8D%8F%E8%AE%AE%EF%BC%88%E5%9B%9E%E9%80%80N%E6%AD%A5%E9%87%8D%E4%BC%A0%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">3.2.2.</span> <span class="toc-text">GBN协议（回退N步重传协议）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SR%E5%8D%8F%E8%AE%AE%EF%BC%88%E9%80%89%E6%8B%A9%E9%87%8D%E4%BC%A0%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">3.2.3.</span> <span class="toc-text">SR协议（选择重传协议）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UDP%EF%BC%88%E7%94%A8%E6%88%B7%E6%95%B0%E6%8D%AE%E6%8A%A5%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">UDP（用户数据报协议）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E7%82%B9"><span class="toc-number">4.1.</span> <span class="toc-text">特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E6%95%B0%E6%8D%AE%E6%8A%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">UDP数据报格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">4.3.</span> <span class="toc-text">UDP的优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UDP%E6%A0%A1%E9%AA%8C%E5%92%8C"><span class="toc-number">4.4.</span> <span class="toc-text">UDP校验和</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCP%EF%BC%88%E4%BC%A0%E8%BE%93%E6%8E%A7%E5%88%B6%E5%8D%8F%E8%AE%AE%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">TCP（传输控制协议）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E7%89%B9%E7%82%B9"><span class="toc-number">5.1.</span> <span class="toc-text">TCP特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E6%8A%A5%E6%96%87%E6%AE%B5"><span class="toc-number">5.2.</span> <span class="toc-text">TCP报文段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="toc-number">5.3.</span> <span class="toc-text">可靠数据传输</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BE%80%E8%BF%94%E6%97%B6%E9%97%B4%E4%BC%B0%E8%AE%A1%E5%92%8C%E8%B6%85%E6%97%B6"><span class="toc-number">5.4.</span> <span class="toc-text">往返时间估计和超时</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%80%E8%BF%94%E6%97%B6%E9%97%B4%EF%BC%88RTT%EF%BC%89"><span class="toc-number">5.4.1.</span> <span class="toc-text">往返时间（RTT）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E6%97%B6%E9%97%B4%E9%9A%94"><span class="toc-number">5.4.2.</span> <span class="toc-text">超时间隔</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E7%AE%A1%E7%90%86"><span class="toc-number">5.5.</span> <span class="toc-text">连接管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%BB%BA%E7%AB%8B-%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B"><span class="toc-number">5.5.1.</span> <span class="toc-text">连接建立: 三次握手</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E9%87%8A%E6%94%BE-%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-number">5.5.2.</span> <span class="toc-text">连接释放:四次挥手</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E6%B5%81%E9%87%8F%E6%8E%A7%E5%88%B6"><span class="toc-number">5.6.</span> <span class="toc-text">TCP流量控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E5%8E%9F%E7%90%86"><span class="toc-number">5.7.</span> <span class="toc-text">拥塞控制原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%8B%A5%E5%A1%9E%E4%BB%A3%E4%BB%B7"><span class="toc-number">5.7.1.</span> <span class="toc-text">网络拥塞代价</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6%E6%96%B9%E6%B3%95"><span class="toc-number">5.7.2.</span> <span class="toc-text">拥塞控制方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E8%BE%85%E5%8A%A9%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">5.7.3.</span> <span class="toc-text">网络辅助的拥塞控制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP%E7%9A%84%E6%8B%A5%E5%A1%9E%E6%8E%A7%E5%88%B6"><span class="toc-number">5.8.</span> <span class="toc-text">TCP的拥塞控制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%85%A2%E5%BC%80%E5%A7%8B%E5%92%8C%E6%8B%A5%E5%A1%9E%E9%81%BF%E5%85%8D"><span class="toc-number">5.8.1.</span> <span class="toc-text">慢开始和拥塞避免</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E6%81%A2%E5%A4%8D%E5%92%8C%E5%BF%AB%E9%87%8D%E4%BC%A0"><span class="toc-number">5.8.2.</span> <span class="toc-text">快速恢复和快重传</span></a></li></ol></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>Posts</div>
+    <div class="sidebar-state-number">6</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>Categories</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>Tags</div>
+    <div class="sidebar-state-number">3</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="Home"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Home</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="Archives"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Archives</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="Friend"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">Friend</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    <div class="site-search">
+      <div class="reimu-popup popup">
+        <div class="reimu-search">
+          <span class="reimu-search-input-icon"></span>
+          <div class="reimu-search-input" id="reimu-search-input"></div>
+        </div>
+        <div class="reimu-results">
+          <div id="reimu-stats"></div>
+          <div id="reimu-hits"></div>
+          <div id="reimu-pagination" class="reimu-pagination"></div>
+        </div>
+        <span class="popup-btn-close"></span>
+      </div>
+    </div>
+    
+<script src="https://npm.webcache.cn/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    firework(JSON.parse('{"excludeElements":["a"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.1.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+
