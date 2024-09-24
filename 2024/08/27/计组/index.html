@@ -1,0 +1,718 @@
+
+  <!DOCTYPE html>
+  <html lang="zh"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <title>
+    计算机组成原理——第一章 |
+    
+    kakie の BLOG
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/regular.min.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/solid.min.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v5-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v4-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="/css/loader.css">
+
+  <meta name="description" content="计算机组成原理笔记第一章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机组成原理——第一章">
+<meta property="og:url" content="https://kakieccc.github.io/2024/08/27/%E8%AE%A1%E7%BB%84/index.html">
+<meta property="og:site_name" content="kakie の BLOG">
+<meta property="og:description" content="计算机组成原理笔记第一章">
+<meta property="og:locale">
+<meta property="article:published_time" content="2024-08-26T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-09-24T06:29:33.282Z">
+<meta property="article:author" content="kakie">
+<meta property="article:tag" content="基础课程">
+<meta property="article:tag" content="计算机组成原理">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="kakie の BLOG" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+  
+  
+  
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/wowjs@1.1.3/css/libs/animate.css">
+
+    
+<script src="https://npm.webcache.cn/wowjs@1.1.3/dist/wow.min.js"></script>
+
+    <script>
+      new WOW({
+        offset: 0,
+        mobile: true,
+        live: false
+      }).init();
+    </script>
+  
+  
+    <script src="/sw.js"></script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg"></div>
+    <div class="loading-right-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+          <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    const startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    const endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('load', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/">首页</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/archives">归档</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/friend">友链</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="/images/banner.jpg" alt="计算机组成原理——第一章">
+  
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <div id="logo-wrap">
+        
+          
+          
+            <a href="/" id="logo">
+              <h1>计算机组成原理——第一章</h1>
+            </a>
+          
+        
+      </div>
+      
+        
+        <h2 id="subtitle-wrap">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="outer">
+          
+          <section id="main"><article id="post-计组" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    <div class="article-meta">
+      <div class="article-date wow slideInLeft">
+  <a href="/2024/08/27/%E8%AE%A1%E7%BB%84/" class="article-date-link">
+    <time datetime="2024-08-26T16:00:00.000Z" itemprop="datePublished">2024-08-27</time>
+  </a>
+</div>
+
+      
+  <div class="article-category wow slideInLeft">
+    <a class="article-category-link" href="/categories/essay/">essay</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>[toc]</p>
+<h1 id="第一章、计算机系统概述"><a href="#第一章、计算机系统概述" class="headerlink" title="第一章、计算机系统概述"></a>第一章、计算机系统概述</h1><h2 id="1-1-计算机发展历程"><a href="#1-1-计算机发展历程" class="headerlink" title="1.1 计算机发展历程"></a>1.1 计算机发展历程</h2><h3 id="1-1-1-计算机硬件的发展"><a href="#1-1-1-计算机硬件的发展" class="headerlink" title="1.1.1 计算机硬件的发展"></a>1.1.1 计算机硬件的发展</h3><p>计算机硬件一共经历了四次迭代变化：</p>
+<ol>
+<li>第一代计算机：<strong>电子管时代</strong>，逻辑元件采用电子管，使用机器语言进行编程，体积大、容量小、成本高、速度慢</li>
+<li>第二代计算机：<strong>晶体管时代</strong>，逻辑元件采用晶体管，高级语言和编译程序出现</li>
+<li>第三代计算机：<strong>中小规模集成电路时代</strong>，逻辑元件采用中小规模集成电路；半导体存储器开始取代磁芯存储器；开始有了分时操作系统</li>
+<li>第四代计算机：<strong>超大规模集成电路时代</strong>，逻辑元件采用大规模和超大规模集成电路；产生了微处理器（CPU）；Cache，并行，流水线，虚拟存储器等概念出现并运用</li>
+</ol>
+<h2 id="1-2-计算机系统层次结构"><a href="#1-2-计算机系统层次结构" class="headerlink" title="1.2 计算机系统层次结构"></a>1.2 计算机系统层次结构</h2><h3 id="1-2-1-计算机系统的组成"><a href="#1-2-1-计算机系统的组成" class="headerlink" title="1.2.1 计算机系统的组成"></a>1.2.1 计算机系统的组成</h3><p>计算机 &#x3D; 软件 + 硬件</p>
+<p>计算机性能的好坏取决于软硬件功能的总和</p>
+<h3 id="1-2-2-计算机硬件"><a href="#1-2-2-计算机硬件" class="headerlink" title="1.2.2 计算机硬件"></a>1.2.2 计算机硬件</h3><hr>
+<h4 id="冯诺依曼计算机的特点"><a href="#冯诺依曼计算机的特点" class="headerlink" title="冯诺依曼计算机的特点"></a>冯诺依曼计算机的特点</h4><ul>
+<li>采用“存储程序”的工作方式：将事先编制好的程序和数据送入主存再执行。一旦程序开始执行就不需要操作人员干预，可以自动逐条执行指令</li>
+<li>计算机由<strong>运算器、存储器、控制器、输入设备、输出设备</strong>五大部件组成</li>
+<li><strong>指令和数据以同等地位存放于存储器内</strong>；均以二进制数表示，形式上没有区别，但计算机应该能加以区分</li>
+<li>指令由操作码和地址码组成，操作码指出操作类型，地址码指出操作数的地址</li>
+<li>指令在存储器内按顺序存放</li>
+<li><strong>机器以运算器为中心</strong>，IO设备和存储器之间的数据传送必须先经过运算器</li>
+</ul>
+
+
+<hr>
+<h4 id="计算机的功能部件"><a href="#计算机的功能部件" class="headerlink" title="计算机的功能部件"></a>计算机的功能部件</h4><ol>
+<li><p>输入设备</p>
+</li>
+<li><p>输出设备</p>
+</li>
+<li><p>存储器：用于存放数据和程序</p>
+<p> 分为主存储器（内存&#x2F;主存）和辅助存储器（外存储器&#x2F;外存）</p>
+<p> CPU能直接访问的存储器是主存储器，辅助存储器中的信息必须调入主存储器后才能被CPU所访问</p>
+<p> 主存储器中包含了存储体、各种逻辑部件及控制电路等：</p>
+ 
+
+<ul>
+<li><p>存储体：由许多<strong>存储单元</strong>组成，每个存储单元又包含若干个<strong>存储元件</strong>，每个存储元件都可以存一个0或1。那么一个存储单元可存储一串二进制代码，这串二进制代码为一个存储字，其位数称为存储字长</p>
+</li>
+<li><p>MAR：存储器地址寄存器，存放欲访问的存储单元的地址</p>
+<p>  MAR的位数对应了存储单元的最大个数，例如MAR为10位，则有<code>2^10=1024</code>个存储单元</p>
+</li>
+<li><p>MDR：存储器数据寄存器，用来存放从存储单元中取出的代码或者准备向某存储单元写入的代码</p>
+<p>  通常情况下MDR位数与字长相同</p>
+</li>
+<li><p>❗MAR和MDR虽然是存储器的一部分，但是在现代计算机中却是存在于CPU中，此外，Cache也存在于CPU中</p>
+</li>
+</ul>
+</li>
+<li><p>运算器：完成算术运算和逻辑运算，并将运算的中间结果暂存在运算器内</p>
+<p> 运算器最少包括三个寄存器（ACC累加器，MQ乘商寄存器，X操作数寄存器）和一个ALU（算术逻辑单元）</p>
+<p> 运算器内还有程序状态寄存器（PSW），也叫标志寄存器，用来寄存ALU运算得到的标志信息（结果是否溢出、有无进位、借位、结果是否为负等等）</p>
+ 
+</li>
+<li><p>控制器：控制、指挥程序和数据的输入、运行以及处理运算结果。</p>
+<p> 控制器由PC程序计数器、IR指令寄存器和CU控制单元组成。</p>
+<p> 完成一条指令需要三步：取指令（PC）、分析指令（IR）、执行指令（CU）</p>
+ 
+
+<ul>
+<li>PC：存放当前欲执行指令的地址，具有计数和自动加“1”的功能，可以自动形成下一条指令的地址</li>
+<li>IR：存放当前的指令，IR的内容来自MDR，指令的操作码被送至CU，地址码送至MAR用于取操作数</li>
+<li>CU：分析当前指令所需完成的操作并发出微操作命令序列</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="当代计算机的特点"><a href="#当代计算机的特点" class="headerlink" title="当代计算机的特点"></a>当代计算机的特点</h4><p>当代计算机建立在冯诺依曼计算机的基础上，<strong>将五大件的中心从运算器改为了存储器</strong>。</p>
+
+
+<p>现代计算机可以认为由三大部分组成：</p>
+<ul>
+<li>CPU：运算器和控制器</li>
+<li>IO设备：输入设备和输出设备</li>
+<li>主存储器</li>
+</ul>
+
+
+<p>其中CPU和主存储器合起来又可称为主机，IO设备又可称为外部设备。</p>
+
+
+<h3 id="1-2-3-计算机软件"><a href="#1-2-3-计算机软件" class="headerlink" title="1.2.3 计算机软件"></a>1.2.3 计算机软件</h3><hr>
+<h4 id="系统软件和应用软件"><a href="#系统软件和应用软件" class="headerlink" title="系统软件和应用软件"></a>系统软件和应用软件</h4><p>系统软件：保证计算机系统运行的基础软件，通常作为系统资源提供给用户使用。主要包括操作系统（OS）、数据库管理系统（DBMS）、语言处理程序、分布式软件系统等</p>
+<p>应用软件：用户为解决某个应用领域中的各类问题而编制的程序。</p>
+<hr>
+<h4 id="三个级别的语言"><a href="#三个级别的语言" class="headerlink" title="三个级别的语言"></a>三个级别的语言</h4><p>机器语言：也称二进制代码语言，是计算机<strong>唯一</strong>可以直接识别和执行的语言</p>
+<p>汇编语言：用助记符代替二进制的指令代码。汇编语言需要先经过汇编程序进行翻译成机器语言才能执行</p>
+<p>高级语言：为方便程序设计人员编写的程序。高级语言需要经过编译程序编译成汇编语言程序，然后经过汇编程序进行翻译成机器语言才能执行；也可以直接由高级语言程序翻译成机器语言程序。</p>
+<p>翻译程序分类：</p>
+<ul>
+<li>汇编程序（汇编器）：将汇编语言程序翻译成机器语言程序</li>
+<li>解释程序（解释器）：将源程序中的语句按执行顺序逐条翻译成机器指令并执行</li>
+<li>编译程序（编译器）：将高级语言程序翻译成汇编语言或机器语言程序</li>
+</ul>
+<p>❗编译器是将高级语言编写的源程序一次性全部翻译成机器语言程序，解释器是将源程序的一条语句翻译成机器语言并执行，每次执行语句都要翻译。一般来讲解释型语言的效率要更低</p>
+
+
+<hr>
+<h4 id="软-硬件逻辑的等价性"><a href="#软-硬件逻辑的等价性" class="headerlink" title="软&#x2F;硬件逻辑的等价性"></a>软&#x2F;硬件逻辑的等价性</h4><p>对某一功能来说，即可由硬件实现，也可由软件实现。从用户的角度来看，它们在功能上是等价的，被称为软&#x2F;硬件逻辑的等价性。</p>
+<h3 id="1-2-4-计算机系统的层次结构"><a href="#1-2-4-计算机系统的层次结构" class="headerlink" title="1.2.4 计算机系统的层次结构"></a>1.2.4 计算机系统的层次结构</h3>
+
+
+
+<p>软件和硬件之间的界面就是指令集体系结构（ISA），ISA定义了一台计算机可执行的所有指令的集合，以及每条指令的作用是什么、每条指令的用法是什么</p>
+<h3 id="1-2-5-计算机系统的工作原理"><a href="#1-2-5-计算机系统的工作原理" class="headerlink" title="1.2.5 计算机系统的工作原理"></a>1.2.5 计算机系统的工作原理</h3><hr>
+<h4 id="一条指令的执行过程"><a href="#一条指令的执行过程" class="headerlink" title="一条指令的执行过程"></a>一条指令的执行过程</h4><p>从主存中取指 -&gt; 对指令进行译码 -&gt; 计算下条指令地址 -&gt; 取操作数并执行 -&gt; 将结果送回主存</p>
+<hr>
+<h4 id="从源程序到可执行文件"><a href="#从源程序到可执行文件" class="headerlink" title="从源程序到可执行文件"></a>从源程序到可执行文件</h4><p>以C++为例。</p>
+<ol>
+<li>预处理阶段：预处理器对源程序<code>hello.c</code>进行处理，处理为<code>hello.i</code></li>
+<li>编译阶段：编译器对于处理后的源程序<code>hello.i</code>进行编译，生成汇编语言源程序<code>hello.s</code></li>
+<li>汇编阶段：汇编器将生成的汇编语言源程序<code>hello.s</code>翻译成机器指令，生成可重定位目标文件<code>hello.o</code></li>
+<li>链接阶段：链接器将多个可重定位目标文件<code>.o</code>和标准库函数合并为一个可执行文件</li>
+</ol>
+<hr>
+<h4 id="完整的指令执行过程"><a href="#完整的指令执行过程" class="headerlink" title="完整的指令执行过程"></a>完整的指令执行过程</h4><p>下面我们按照完整的取指令、分析指令、执行指令的过程来走一遍取数指令执行过程</p>
+
+
+<ul>
+<li>取指令：1-4步。<ul>
+<li>首先PC取指令（地址）并送入到MAR中：<code>PC -&gt; MAR</code></li>
+<li>存储器读MAR内容（地址），在存储体中按地址找到对应内容</li>
+<li>存储体找到对应内容后送到MDR</li>
+<li>MDR将指令的具体内容送给IR：<code>MDR -&gt; IR</code></li>
+</ul>
+</li>
+<li>分析指令：第5步。<ul>
+<li>IR将指令的操作码送到CU进行分析：<code>OP(IR) -&gt; CU</code>，CU分析完指令后，知道这是一条取数指令</li>
+</ul>
+</li>
+<li>执行指令：第6-9步。<ul>
+<li>IR中的地址码送到MAR：<code>Ad(IR) -&gt; MAR</code></li>
+<li>存储体接收MAR中的地址并在其内部找到对应内容</li>
+<li>存储体将查到的内容送到MDR中</li>
+<li>最后MDR将取出来的数传给ACC：<code>MDR -&gt; ACC</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-6-计算机组成和计算机体系结构"><a href="#1-2-6-计算机组成和计算机体系结构" class="headerlink" title="1.2.6 计算机组成和计算机体系结构"></a>1.2.6 计算机组成和计算机体系结构</h3><p>计算机体系结构：<strong>计算机体系结构是程序员眼中能见到的的计算机系统的属性</strong>和功能特性。例如指令集、数据类型、寻址技术等。只要两个计算机指令集、数据类型、寻址类型等相等，就说这两个计算机体系结构相同</p>
+<p>计算机组成：<strong>计算机组成是体系结构的具体实现形式</strong>。是指如何实现计算机体系结构所体现的属性</p>
+<p>例如，计算机是否有乘法指令是体系结构设计的问题；而这条指令是由特定的乘法单元实现，还是通过重复使用系统的加法单元来实现，则是组成的问题</p>
+<h2 id="1-3-计算机硬件的主要技术指标"><a href="#1-3-计算机硬件的主要技术指标" class="headerlink" title="1.3 计算机硬件的主要技术指标"></a>1.3 计算机硬件的主要技术指标</h2><h3 id="1-3-1-计算机的主要性能指标"><a href="#1-3-1-计算机的主要性能指标" class="headerlink" title="1.3.1 计算机的主要性能指标"></a>1.3.1 计算机的主要性能指标</h3><hr>
+<h4 id="机器字长"><a href="#机器字长" class="headerlink" title="机器字长"></a>机器字长</h4><p>机器字长指CPU一次能处理数据的位数，简称字长。通常来说机器字长与CPU中寄存器位数相同。字长越长数的表示范围越大，精度越高，性能越高</p>
+<p>❗区分存储字长，存储字长指的是一个存储单元中能存储的二进制位数，一般与MDR位数相同。</p>
+<hr>
+<h4 id="数据通路带宽"><a href="#数据通路带宽" class="headerlink" title="数据通路带宽"></a>数据通路带宽</h4><p>数据总线一次所能并行传送信息的位数。</p>
+<hr>
+<h4 id="存储容量"><a href="#存储容量" class="headerlink" title="存储容量"></a>存储容量</h4><p>存储容量包括主存容量和辅存容量</p>
+<p>主存容量指主存中存放二进制代码的总位数。<code>存储容量 = 存储单元个数 * 存储字长</code></p>
+<hr>
+<h4 id="运算速度"><a href="#运算速度" class="headerlink" title="运算速度"></a>运算速度</h4><p><strong>吞吐量和响应时间</strong></p>
+<ul>
+<li><p>吞吐量：系统在单位时间内处理请求的数量</p>
+</li>
+<li><p>响应时间：用户向计算机发送一个请求到系统对该请求做出响应并获得结果的等待时间</p>
+</li>
+</ul>
+<p><strong>主频和CPU时钟周期</strong></p>
+<ul>
+<li><p>时钟周期：CPU中最小的时间单位，每个动作都至少需要一个时钟周期</p>
+</li>
+<li><p>CPU主频（时钟频率）：CPU每秒能执行的时钟周期数，数值上等于时钟周期的倒数</p>
+</li>
+</ul>
+<p><strong>CPI</strong>：执行一条指令所需的时钟周期数。<code>执行一条指令的耗时 = CPI * 时钟周期</code></p>
+<p><strong>CPU执行时间</strong>：运行一个程序所花费的时间。<code>CPU执行时间 = CPU时钟周期数 / 主频 = （指令条数 * CPI）/主频</code></p>
+<p><strong>IPS</strong>：每秒执行多少条指令。<code>IPS = 主频 / 平均CPI</code></p>
+<p><strong>FLOPS</strong>：每秒执行多少次浮点运算</p>
+<p>❗IPS和FLOPS前可以加修饰来表示数量级：</p>
+<ul>
+<li>K：千 10^3</li>
+<li>M：百万级 10^6</li>
+<li>G：十亿 10^ 9</li>
+<li>T：万亿 10^12</li>
+<li>P：千万亿 10^15</li>
+<li>E：百京 10^18</li>
+<li>Z：十万京 10^21</li>
+</ul>
+<p><strong>基准程序</strong>：专门用来进行性能评价的一组程序。</p>
+<hr>
+<h3 id="1-3-2-几个专业术语"><a href="#1-3-2-几个专业术语" class="headerlink" title="1.3.2 几个专业术语"></a>1.3.2 几个专业术语</h3><ol>
+<li>系列机：具有基本相同体系结构，使用基本相同指令系统的多个不同型号计算机组成的一个系列产品</li>
+<li>兼容：软件或硬件的通用性</li>
+<li>固件：将程序固化在ROM中组成的部件</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kakieccc.github.io/2024/08/27/%E8%AE%A1%E7%BB%84/" data-id="cm1g260d20000g0ficw7xhbxw" data-title="计算机组成原理——第一章" class="article-share-link">分享</a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B/" rel="tag">基础课程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" rel="tag">计算机组成原理</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" class="wow fadeInUp">
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="Welcome to my bolg" class="lazyload">
+        
+      
+      <a href="/2024/02/24/hello/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          Welcome to my bolg
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrap wow fadeInRight wrap-sticky">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">第一章、计算机系统概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 计算机发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1.1 计算机硬件的发展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 计算机系统层次结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.2.1 计算机系统的组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2.2 计算机硬件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">冯诺依曼计算机的特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%8A%9F%E8%83%BD%E9%83%A8%E4%BB%B6"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">计算机的功能部件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93%E4%BB%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">当代计算机的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BD%AF%E4%BB%B6"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.2.3 计算机软件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%92%8C%E5%BA%94%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">系统软件和应用软件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E7%BA%A7%E5%88%AB%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">三个级别的语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF-%E7%A1%AC%E4%BB%B6%E9%80%BB%E8%BE%91%E7%9A%84%E7%AD%89%E4%BB%B7%E6%80%A7"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">软&#x2F;硬件逻辑的等价性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.4.</span> <span class="toc-text">1.2.4 计算机系统的层次结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-5-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.5.</span> <span class="toc-text">1.2.5 计算机系统的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E6%9D%A1%E6%8C%87%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">一条指令的执行过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">从源程序到可执行文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%8C%87%E4%BB%A4%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.5.3.</span> <span class="toc-text">完整的指令执行过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-6-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%92%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.6.</span> <span class="toc-text">1.2.6 计算机组成和计算机体系结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%9A%84%E4%B8%BB%E8%A6%81%E6%8A%80%E6%9C%AF%E6%8C%87%E6%A0%87"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 计算机硬件的主要技术指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E4%B8%BB%E8%A6%81%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1 计算机的主要性能指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%97%E9%95%BF"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">机器字长</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF%E5%B8%A6%E5%AE%BD"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">数据通路带宽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%AE%B9%E9%87%8F"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">存储容量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E9%80%9F%E5%BA%A6"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">运算速度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E5%87%A0%E4%B8%AA%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.3.2 几个专业术语</span></a></li></ol></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">7</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">首页</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">归档</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">友链</div>
+    </div>
+  
+</div>
+</div>
+    
+    
+      <div class="sidebar-btn-wrapper" style="position:static">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer" class="wow fadeInUp">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      <div>
+        <span class="icon-copyright"></span>
+        2020-2024
+        <span class="footer-info-sep"></span>
+        kakie
+      </div>
+      
+        <div>
+          基于&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+          Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+        </div>
+      
+      
+        <div>
+          <span class="icon-brush"></span>
+          39.5k
+          &nbsp;|&nbsp;
+          <span class="icon-coffee"></span>
+          02:15
+        </div>
+      
+      
+        <div>
+          <span class="icon-eye"></span>
+          <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+          &nbsp;|&nbsp;
+          <span class="icon-user"></span>
+          <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+        </div>
+      
+    </div>
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0%E3%80%81%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-number">1.</span> <span class="toc-text">第一章、计算机系统概述</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 计算机发展历程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1.1 计算机硬件的发展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 计算机系统层次结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.2.1 计算机系统的组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2.2 计算机硬件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%AF%E8%AF%BA%E4%BE%9D%E6%9B%BC%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">冯诺依曼计算机的特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%8A%9F%E8%83%BD%E9%83%A8%E4%BB%B6"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">计算机的功能部件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%93%E4%BB%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">当代计算机的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%BD%AF%E4%BB%B6"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.2.3 计算机软件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%92%8C%E5%BA%94%E7%94%A8%E8%BD%AF%E4%BB%B6"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">系统软件和应用软件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E4%B8%AA%E7%BA%A7%E5%88%AB%E7%9A%84%E8%AF%AD%E8%A8%80"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">三个级别的语言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF-%E7%A1%AC%E4%BB%B6%E9%80%BB%E8%BE%91%E7%9A%84%E7%AD%89%E4%BB%B7%E6%80%A7"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">软&#x2F;硬件逻辑的等价性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.4.</span> <span class="toc-text">1.2.4 计算机系统的层次结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-5-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.5.</span> <span class="toc-text">1.2.5 计算机系统的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E6%9D%A1%E6%8C%87%E4%BB%A4%E7%9A%84%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.5.1.</span> <span class="toc-text">一条指令的执行过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8E%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%88%B0%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.5.2.</span> <span class="toc-text">从源程序到可执行文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E6%8C%87%E4%BB%A4%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B"><span class="toc-number">1.2.5.3.</span> <span class="toc-text">完整的指令执行过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-6-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%92%8C%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.6.</span> <span class="toc-text">1.2.6 计算机组成和计算机体系结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A1%AC%E4%BB%B6%E7%9A%84%E4%B8%BB%E8%A6%81%E6%8A%80%E6%9C%AF%E6%8C%87%E6%A0%87"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 计算机硬件的主要技术指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E4%B8%BB%E8%A6%81%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1 计算机的主要性能指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%97%E9%95%BF"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">机器字长</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%80%9A%E8%B7%AF%E5%B8%A6%E5%AE%BD"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">数据通路带宽</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%AE%B9%E9%87%8F"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">存储容量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E7%AE%97%E9%80%9F%E5%BA%A6"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">运算速度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E5%87%A0%E4%B8%AA%E4%B8%93%E4%B8%9A%E6%9C%AF%E8%AF%AD"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.3.2 几个专业术语</span></a></li></ol></li></ol></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">7</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">首页</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">归档</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">友链</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    <div class="site-search">
+      <div class="reimu-popup popup">
+        <div class="reimu-search">
+          <span class="reimu-search-input-icon"></span>
+          <div class="reimu-search-input" id="reimu-search-input"></div>
+        </div>
+        <div class="reimu-results">
+          <div id="reimu-stats"></div>
+          <div id="reimu-hits"></div>
+          <div id="reimu-pagination" class="reimu-pagination"></div>
+        </div>
+        <span class="popup-btn-close"></span>
+      </div>
+    </div>
+    
+<script src="https://npm.webcache.cn/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    firework(JSON.parse('{"excludeElements":["a"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.1.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+
