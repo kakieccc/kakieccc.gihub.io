@@ -1,0 +1,603 @@
+
+  <!DOCTYPE html>
+  <html lang="zh"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <title>
+    计算机组成原理——数制和编码 |
+    
+    kakie の BLOG
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic%7CUbuntu%20Mono:400,400italic,700,700italic&display=swap&subset=latin,latin-ext" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/regular.min.css">
+<link rel="stylesheet" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/solid.min.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/brands.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v5-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;"><link rel="preload" href="https://npm.webcache.cn/@fortawesome/fontawesome-free@6.5.1/css/v4-font-face.min.css" as="style" onload="this.onload&#x3D;null;this.rel&#x3D;&#39;stylesheet&#39;">
+  
+<link rel="stylesheet" href="/css/loader.css">
+
+  <meta name="description" content="计算机组成原理笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机组成原理——数制和编码">
+<meta property="og:url" content="https://kakieccc.github.io/2024/08/29/%E8%AE%A1%E7%BB%84-%E6%95%B0%E5%88%B6%E5%92%8C%E7%BC%96%E7%A0%81/index.html">
+<meta property="og:site_name" content="kakie の BLOG">
+<meta property="og:description" content="计算机组成原理笔记">
+<meta property="og:locale">
+<meta property="article:published_time" content="2024-08-28T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-10-01T03:55:42.122Z">
+<meta property="article:author" content="kakie">
+<meta property="article:tag" content="基础课程">
+<meta property="article:tag" content="计算机组成原理">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="kakie の BLOG" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+  
+  
+  
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/wowjs@1.1.3/css/libs/animate.css">
+
+    
+<script src="https://npm.webcache.cn/wowjs@1.1.3/dist/wow.min.js"></script>
+
+    <script>
+      new WOW({
+        offset: 0,
+        mobile: true,
+        live: false
+      }).init();
+    </script>
+  
+  
+    <script src="/sw.js"></script>
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg"></div>
+    <div class="loading-right-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff6e6b" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z" fill="#fd0d00" />
+          <path d="M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95" fill="#fd0d00" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    const startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    const endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('load', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/">ホーム</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/archives">アーカイブ</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <span class="main-nav-icon"></span>
+        <a class="main-nav-link" href="/friend">フレンド</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSSフィード"></a>
+    
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    <img fetchpriority="high" src="/images/banner.jpg" alt="计算机组成原理——数制和编码">
+  
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <div id="logo-wrap">
+        
+          
+          
+            <a href="/" id="logo">
+              <h1>计算机组成原理——数制和编码</h1>
+            </a>
+          
+        
+      </div>
+      
+        
+        <h2 id="subtitle-wrap">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content" class="outer">
+          
+          <section id="main"><article id="post-计组-数制和编码" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    <div class="article-meta">
+      <div class="article-date wow slideInLeft">
+  <a href="/2024/08/29/%E8%AE%A1%E7%BB%84-%E6%95%B0%E5%88%B6%E5%92%8C%E7%BC%96%E7%A0%81/" class="article-date-link">
+    <time datetime="2024-08-28T16:00:00.000Z" itemprop="datePublished">2024-08-29</time>
+  </a>
+</div>
+
+      
+  <div class="article-category wow slideInLeft">
+    <a class="article-category-link" href="/categories/essay/">essay</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="数制"><a href="#数制" class="headerlink" title="数制"></a>数制</h2><h3 id="计算机采用二进制的原因"><a href="#计算机采用二进制的原因" class="headerlink" title="计算机采用二进制的原因"></a>计算机采用二进制的原因</h3><ul>
+<li>二进制只有两种状态，制造成本低</li>
+<li>1和0正好对应逻辑判断中的真与假，便于逻辑运算</li>
+<li>二进制编码和运算规则都很简单</li>
+</ul>
+<h3 id="四种进制"><a href="#四种进制" class="headerlink" title="四种进制"></a>四种进制</h3><ul>
+<li>二进制：只有0、1。用后缀B表示这是一个二进制数。</li>
+<li>八进制：0-7表示。用后缀O表示这是一个八进制数。</li>
+<li>十进制：0-9表示。用后缀D表示这是一个十进制数。</li>
+<li>十六进制：0-9，A-F表示。用后缀H表示这是一个十六进制数，也可以用前缀0X表示。</li>
+</ul>
+<h3 id="进制之间的转换"><a href="#进制之间的转换" class="headerlink" title="进制之间的转换"></a>进制之间的转换</h3><ul>
+<li>二进制转八（十六）进制：以小数点为分界，向左、右三（四）位为一组化为八（十六）进制数，遇到不够的情况在两端补0</li>
+<li>八（十六）进制转二进制：将每一位化成二进制的三（四）位即可</li>
+<li>其余进制转十进制：将每一位乘以其位权再相加</li>
+<li>十进制转其余进制：整数部分采用除基取余，得到的结果是低位在前，高位在后；小数部分采用乘基取整，结果为1或满足精度时结束，得到的结果是高位在前，低位在后</li>
+</ul>
+<h2 id="真值和机器数"><a href="#真值和机器数" class="headerlink" title="真值和机器数"></a>真值和机器数</h2><ul>
+<li>真值：即日常生活中使用的数，用“+”，“-”来表示正负</li>
+<li>机器数：将符号数字化，用0来表示正，1表示负</li>
+</ul>
+<h2 id="定点数和浮点数"><a href="#定点数和浮点数" class="headerlink" title="定点数和浮点数"></a>定点数和浮点数</h2><h3 id="定点数"><a href="#定点数" class="headerlink" title="定点数"></a>定点数</h3><p>定点数指的是小数点位置固定的数，可分为定点整数和定点小数。</p>
+<ul>
+<li>定点整数：小数点默认在最低有效位的后面</li>
+<li>定点小数：定点小数是纯小数，小数点默认在符号位后面，数值最高位前面。</li>
+</ul>
+<p>对于定点小数来说，其能表示的范围很小，所以一般都是用浮点数来表示带小数的数</p>
+<h3 id="浮点数"><a href="#浮点数" class="headerlink" title="浮点数"></a>浮点数</h3><p>浮点数指的是小数点位置不固定的数，一般由符号位、阶码、尾数三部分组成。其基本格式类似于科学计数法：$(-1)^{符号位} * 尾数 * 基^{阶码}$。类比$-1 * 1.14514 * 10^5$。</p>
+<p>一般用原码表示尾数，移码来表示阶码</p>
+<p>尾数与阶码的位数是人为规定的，为了统一现在都采用IEEE754标准</p>
+<h2 id="四种编码格式"><a href="#四种编码格式" class="headerlink" title="四种编码格式"></a>四种编码格式</h2><h3 id="原码"><a href="#原码" class="headerlink" title="原码"></a>原码</h3><p>原码用机器数的最高位表示符号，其余位表示数的绝对值</p>
+<p>以字长8位为例，数<code>+1100</code>可表示为<code>0000 1100</code>，数<code>-1100</code>可表示为<code>1000 1100</code>，不难看出其数值能表示的范围是从$-2^7 + 1$到$2^7 - 1$。</p>
+<p>若字长为n位，那么其能表示的范围为$-2^{n-1} + 1$到$2^{n-1} - 1$</p>
+<p>原码表示有两个缺点：</p>
+<ul>
+<li>对于0有+0和-0两种表示方法</li>
+<li>计算机若采用原码计算，需要单独设计加法电路和减法电路</li>
+</ul>
+<p>为此设计出了补码，将加法和减法进行了统一</p>
+<h3 id="补码"><a href="#补码" class="headerlink" title="补码"></a>补码</h3><p>对于正数，其补码与其原码表示相同</p>
+<p>对于负数，其补码等于模加上该负数计算后的值</p>
+<p>以字长8位为例，数<code>+1100</code>可表示为<code>0000 1100</code>，数<code>-1100</code>经过如下计算：</p>
+<p>$2^8 + (-12) &#x3D; 244$，化成二进制的结果为<code>1111 0100</code>。</p>
+<p>对于补码来讲，0只有一种表示方法，即<code>0000 0000</code>。</p>
+<p>对于负数，其数值位越小说明负的越多，例如<code>-128</code>加上模<code>256</code>后得到的结果为<code>128</code>，其补码为<code>1000 0000</code>，<code>-1</code>加上模<code>256</code>后得到的结果为<code>255</code>，其补码为<code>1111 1111</code></p>
+<p>由此不难看出补码能表示的范围为$-2^{n-1}$到$2^{n-1} - 1$。</p>
+<p>✨✨✨如上的方法为求补码的通解，也可以用简便方法对负数补码进行求解：符号位不变，数值位各位取反再加1。但是这种方法得不出-128的补码，-128的补码需要根据补码的定义得出。</p>
+<p>✨✨✨如何通过x的补码快速求-x的补码：连同符号位一起各位取反末尾+1</p>
+<h3 id="反码"><a href="#反码" class="headerlink" title="反码"></a>反码</h3><p>反码更多的是作为原码和补码的中间桥梁。</p>
+<p>对于正数，其反码等于其原码。</p>
+<p>对于负数，其反码计算如下：符号位不变，数值位取反。</p>
+<h3 id="移码"><a href="#移码" class="headerlink" title="移码"></a>移码</h3><p>移码就是在真值的基础上加上一个偏置量X，通常取$2^{n - 1}$。</p>
+<p>当X取$2^{n - 1}$时移码有以下性质：</p>
+<ul>
+<li>0的表示唯一</li>
+<li>移码和补码符号位相反，其余位相同</li>
+<li>移码保持了原有数据的大小</li>
+<li>移码表示范围为$-2^{n-1}$（全0）到$2^{n-1} - 1$（全1）</li>
+</ul>
+<h2 id="无符号数和有符号数"><a href="#无符号数和有符号数" class="headerlink" title="无符号数和有符号数"></a>无符号数和有符号数</h2><p>无符号数顾名思义，将最高位也当作数值位进行计算</p>
+<p>有符号数将最高位作为符号位进行计算</p>
+<h2 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h2><p>在C语言中，char类型默认为无符号数，其余类型都是有符号数</p>
+<ul>
+<li>同字长转换：同字长数据类型一般是通过<code>signed</code>和<code>unsigned</code>关键字进行无符号数和有符号数之间的相互转换。转换后其数据不会发生改变，只是会改变对这个数的解释方式。</li>
+<li>低字长类型转高字长类型：需要向高位进行扩展，对于有符号数，需要进行符号扩展以保持其正负不变；对于无符号数，进行零扩展</li>
+<li>高字长类型转低字长类型：直接将高位进行截断处理</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kakieccc.github.io/2024/08/29/%E8%AE%A1%E7%BB%84-%E6%95%B0%E5%88%B6%E5%92%8C%E7%BC%96%E7%A0%81/" data-id="cm1q441560000hgfi6thtdc5g" data-title="计算机组成原理——数制和编码" class="article-share-link">共有</a>
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9F%BA%E7%A1%80%E8%AF%BE%E7%A8%8B/" rel="tag">基础课程</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" rel="tag">计算机组成原理</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" class="wow fadeInUp">
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/images/banner.jpg" data-sizes="auto" alt="计算机组成原理——运算电路" class="lazyload">
+        
+      
+      <a href="/2024/08/29/%E8%AE%A1%E7%BB%84-%E8%BF%90%E7%AE%97%E9%83%A8%E4%BB%B6/"></a>
+      <div class="article-nav-caption">前の記事</div>
+      <h3 class="article-nav-title">
+        
+          计算机组成原理——运算电路
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrap wow fadeInRight wrap-sticky">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">見出し</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">数制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%87%87%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.1.</span> <span class="toc-text">计算机采用二进制的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E8%BF%9B%E5%88%B6"><span class="toc-number">1.2.</span> <span class="toc-text">四种进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%88%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.3.</span> <span class="toc-text">进制之间的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%9F%E5%80%BC%E5%92%8C%E6%9C%BA%E5%99%A8%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">真值和机器数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">定点数和浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">定点数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">浮点数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">四种编码格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">原码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81"><span class="toc-number">4.2.</span> <span class="toc-text">补码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E7%A0%81"><span class="toc-number">4.3.</span> <span class="toc-text">反码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E7%A0%81"><span class="toc-number">4.4.</span> <span class="toc-text">移码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%92%8C%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">无符号数和有符号数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">6.</span> <span class="toc-text">数据类型转换</span></a></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>投稿</div>
+    <div class="sidebar-state-number">9</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>カテゴリ</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>タグ</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="ホーム"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">ホーム</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="アーカイブ"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">アーカイブ</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="フレンド"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">フレンド</div>
+    </div>
+  
+</div>
+</div>
+    
+    
+      <div class="sidebar-btn-wrapper" style="position:static">
+        <div class="sidebar-toc-btn current"></div>
+        <div class="sidebar-common-btn"></div>
+      </div>
+    
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer" class="wow fadeInUp">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      <div>
+        <span class="icon-copyright"></span>
+        2020-2024
+        <span class="footer-info-sep"></span>
+        kakie
+      </div>
+      
+        <div>
+          Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>&nbsp;
+          Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" target="_blank">Reimu</a>
+        </div>
+      
+      
+        <div>
+          <span class="icon-brush"></span>
+          41.4k
+          &nbsp;|&nbsp;
+          <span class="icon-coffee"></span>
+          02:20
+        </div>
+      
+      
+        <div>
+          <span class="icon-eye"></span>
+          <span id="busuanzi_container_site_pv">総閲覧数&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+          &nbsp;|&nbsp;
+          <span class="icon-user"></span>
+          <span id="busuanzi_container_site_uv">総閲覧者数&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+        </div>
+      
+    </div>
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">見出し</h3>
+  <div class="sidebar-toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E5%88%B6"><span class="toc-number">1.</span> <span class="toc-text">数制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E9%87%87%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.1.</span> <span class="toc-text">计算机采用二进制的原因</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E8%BF%9B%E5%88%B6"><span class="toc-number">1.2.</span> <span class="toc-text">四种进制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9B%E5%88%B6%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.3.</span> <span class="toc-text">进制之间的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9C%9F%E5%80%BC%E5%92%8C%E6%9C%BA%E5%99%A8%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">真值和机器数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E6%95%B0%E5%92%8C%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-number">3.</span> <span class="toc-text">定点数和浮点数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%82%B9%E6%95%B0"><span class="toc-number">3.1.</span> <span class="toc-text">定点数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-number">3.2.</span> <span class="toc-text">浮点数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E7%A7%8D%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">四种编码格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8E%9F%E7%A0%81"><span class="toc-number">4.1.</span> <span class="toc-text">原码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E7%A0%81"><span class="toc-number">4.2.</span> <span class="toc-text">补码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E7%A0%81"><span class="toc-number">4.3.</span> <span class="toc-text">反码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E7%A0%81"><span class="toc-number">4.4.</span> <span class="toc-text">移码</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E6%95%B0%E5%92%8C%E6%9C%89%E7%AC%A6%E5%8F%B7%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">无符号数和有符号数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">6.</span> <span class="toc-text">数据类型转换</span></a></li></ol></div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.jpg" data-sizes="auto" alt="kakie" class="lazyload">
+  <div class="sidebar-author-name">kakie</div>
+  <div class="sidebar-description">kakie的个人博客</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>投稿</div>
+    <div class="sidebar-state-number">9</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>カテゴリ</div>
+    <div class="sidebar-state-number">1</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>タグ</div>
+    <div class="sidebar-state-number">4</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+    <div class=icon-github>
+      <a href=https://github.com/kakieccc itemprop="url" target="_blank" aria-label="github"></a>
+    </div>
+  
+    <div class=icon-zhihu>
+      <a href=https://www.zhihu.com/people/bei-dui-ji-feng-ba-27 itemprop="url" target="_blank" aria-label="zhihu"></a>
+    </div>
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="ホーム"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">ホーム</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="アーカイブ"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">アーカイブ</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="フレンド"></a>
+      <span class="sidebar-menu-icon"></span>
+      <div class="sidebar-menu-link">フレンド</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    <div class="site-search">
+      <div class="reimu-popup popup">
+        <div class="reimu-search">
+          <span class="reimu-search-input-icon"></span>
+          <div class="reimu-search-input" id="reimu-search-input"></div>
+        </div>
+        <div class="reimu-results">
+          <div id="reimu-stats"></div>
+          <div id="reimu-hits"></div>
+          <div id="reimu-pagination" class="reimu-pagination"></div>
+        </div>
+        <span class="popup-btn-close"></span>
+      </div>
+    </div>
+    
+<script src="https://npm.webcache.cn/jquery@3.7.1/dist/jquery.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    firework(JSON.parse('{"excludeElements":["a"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.1.0' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+
